@@ -157,6 +157,32 @@ function initHeaderScroll() {
 }
 
 // ============================================
+// Decorative Frames Scroll Behavior
+// ============================================
+function initDecorativeFramesScroll() {
+    const decorativeFrames = document.querySelectorAll('.decorative-frame');
+    const hero = document.querySelector('.hero');
+    
+    if (decorativeFrames.length > 0 && hero) {
+        window.addEventListener('scroll', function() {
+            const heroHeight = hero.offsetHeight;
+            const scrollPosition = window.scrollY;
+            
+            // Hide frames when scrolling past 80% of hero section
+            if (scrollPosition > heroHeight * 0.8) {
+                decorativeFrames.forEach(frame => {
+                    frame.classList.add('hidden');
+                });
+            } else {
+                decorativeFrames.forEach(frame => {
+                    frame.classList.remove('hidden');
+                });
+            }
+        });
+    }
+}
+
+// ============================================
 // Apple-like Smooth Parallax Scroll
 // ============================================
 function initParallaxScroll() {
