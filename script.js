@@ -63,23 +63,20 @@ function initDarkMode() {
 }
 
 // ============================================
-// Photo Slideshow - Fullscreen Background
+// Photo Slideshow - Instant Changes
 // ============================================
 function initPhotoSlideshow() {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
+    const mainPhoto = document.getElementById('mainPhoto');
+    if (!mainPhoto) return;
     
     let currentIndex = 0;
     
-    // Set initial background
-    hero.style.setProperty('--bg-image', `url('${PHOTOS[0]}')`);
-    
     function changePhoto() {
         currentIndex = (currentIndex + 1) % PHOTOS.length;
-        hero.style.setProperty('--bg-image', `url('${PHOTOS[currentIndex]}')`);
+        mainPhoto.src = PHOTOS[currentIndex];
     }
     
-    // Change background photo every interval
+    // Change photo every interval (instant, no transition)
     setInterval(changePhoto, PHOTO_CHANGE_INTERVAL);
 }
 
