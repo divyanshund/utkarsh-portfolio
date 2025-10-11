@@ -154,6 +154,11 @@ body.dark-mode .decorative-frame {
     justify-content: center;
     padding: 60px 40px;
     background: linear-gradient(180deg, #f7f7f9 0%, var(--white) 100%);
+    transition: background 0.3s ease;
+}
+
+body.dark-mode .hero {
+    background: linear-gradient(180deg, #0f0f0f 0%, var(--white) 100%);
 }
 
 /* Photo Frame */
