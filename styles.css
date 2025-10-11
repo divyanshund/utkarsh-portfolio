@@ -92,6 +92,50 @@ body {
     line-height: 1.8;
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+}
+
+/* Decorative Photo Frames */
+.decorative-frame {
+    position: fixed;
+    z-index: 1;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.decorative-frame:hover {
+    opacity: 0.8;
+}
+
+.frame-top-left {
+    top: 80px;
+    left: 40px;
+    width: 140px;
+    height: auto;
+}
+
+.frame-bottom-left {
+    bottom: 120px;
+    left: 60px;
+    width: 120px;
+    height: auto;
+}
+
+.frame-right {
+    top: 50%;
+    right: 80px;
+    transform: translateY(-50%);
+    width: 160px;
+    height: auto;
+}
+
+body.dark-mode .decorative-frame {
+    opacity: 0.3;
+}
+
+body.dark-mode .decorative-frame:hover {
+    opacity: 0.5;
 }
 
 /* Hero Section */
@@ -599,6 +643,11 @@ body.dark-mode .photo-frame::after {
     
     .toggle-text {
         font-size: 0.85rem;
+    }
+    
+    /* Hide decorative frames on mobile */
+    .decorative-frame {
+        display: none;
     }
     
     .artist-name {
