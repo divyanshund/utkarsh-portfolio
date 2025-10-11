@@ -26,63 +26,52 @@ body {
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.hero-video {
+/* Slideshow Container */
+.slideshow-container {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    object-fit: cover;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    top: 0;
+    left: 0;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 1;
+}
+
+.slide.active {
+    opacity: 1;
     z-index: 2;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 3;
-    text-align: center;
-    animation: fadeInUp 1.5s ease-out;
+/* Corner Title */
+.corner-title {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+    z-index: 1000;
+    animation: fadeInDown 1s ease-out;
 }
 
-.hero-title {
+.corner-title h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 6rem;
+    font-size: 1.8rem;
     font-weight: 400;
-    letter-spacing: 8px;
+    letter-spacing: 4px;
     color: var(--accent-white);
     margin: 0;
     text-transform: uppercase;
-    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    animation: float 6s ease-in-out infinite;
-}
-
-.hero-subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 300;
-    letter-spacing: 6px;
-    color: var(--accent-white);
-    margin-top: 20px;
-    text-transform: lowercase;
-    opacity: 0.9;
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+    mix-blend-mode: difference;
 }
 
 @keyframes float {
@@ -98,6 +87,17 @@ body {
     from {
         opacity: 0;
         transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
     }
     to {
         opacity: 1;
@@ -433,14 +433,14 @@ body {
 }
 
 @media (max-width: 768px) {
-    .hero-title {
-        font-size: 3rem;
-        letter-spacing: 4px;
+    .corner-title {
+        top: 20px;
+        left: 20px;
     }
     
-    .hero-subtitle {
-        font-size: 1rem;
-        letter-spacing: 3px;
+    .corner-title h1 {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
     }
     
     .card-title {

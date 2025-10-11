@@ -1,14 +1,49 @@
-// Smooth Scroll Animation Observer
+// ============================================
+// CONFIGURATION - Easily adjustable settings
+// ============================================
+const SLIDESHOW_INTERVAL = 2000; // Time between slides in milliseconds (2000 = 2 seconds)
+const SLIDESHOW_TRANSITION = 1500; // Fade transition duration in milliseconds
+
+// ============================================
+// Main Initialization
+// ============================================
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize slideshow
+    initSlideshow();
+    
     // Initialize scroll animations
     initScrollAnimations();
     
-    // Add parallax effect to hero video
+    // Add parallax effect
     initParallaxEffect();
     
     // Add header scroll effect for gallery pages
     initHeaderScroll();
 });
+
+// ============================================
+// Slideshow Functionality
+// ============================================
+function initSlideshow() {
+    const slides = document.querySelectorAll('.slide');
+    if (slides.length === 0) return; // Exit if no slides found
+    
+    let currentSlide = 0;
+    
+    function nextSlide() {
+        // Remove active class from current slide
+        slides[currentSlide].classList.remove('active');
+        
+        // Move to next slide (loop back to 0 if at end)
+        currentSlide = (currentSlide + 1) % slides.length;
+        
+        // Add active class to new slide
+        slides[currentSlide].classList.add('active');
+    }
+    
+    // Start the slideshow
+    setInterval(nextSlide, SLIDESHOW_INTERVAL);
+}
 
 // Scroll Animations
 function initScrollAnimations() {
@@ -46,24 +81,19 @@ function initScrollAnimations() {
     });
 }
 
-// Parallax Effect for Hero Video
+// Parallax Effect for Hero Section
 function initParallaxEffect() {
     const hero = document.querySelector('.hero');
     if (!hero) return;
 
     window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
-        const heroVideo = document.querySelector('.hero-video');
-        const heroContent = document.querySelector('.hero-content');
+        const slideshow = document.querySelector('.slideshow-container');
         const scrollIndicator = document.querySelector('.scroll-indicator');
         
-        if (heroVideo) {
-            heroVideo.style.transform = `translate(-50%, -50%) scale(${1 + scrolled * 0.0005})`;
-        }
-        
-        if (heroContent) {
-            heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
-            heroContent.style.opacity = 1 - (scrolled * 0.002);
+        if (slideshow) {
+            // Subtle zoom effect on scroll
+            slideshow.style.transform = `scale(${1 + scrolled * 0.0003})`;
         }
         
         if (scrollIndicator) {
@@ -186,14 +216,6 @@ document.querySelectorAll('.gallery-item').forEach(item => {
 window.addEventListener('load', function() {
     // Add loaded class to body for CSS animations
     document.body.classList.add('loaded');
-    
-    // Preload hero video
-    const heroVideo = document.querySelector('.hero-video');
-    if (heroVideo) {
-        heroVideo.play().catch(function(error) {
-            console.log('Video autoplay was prevented:', error);
-        });
-    }
 });
 
 // Performance optimization - Debounce scroll events
