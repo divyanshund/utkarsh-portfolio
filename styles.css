@@ -625,9 +625,26 @@ body.dark-mode .photo-frame::after {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .works-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    .recent-works {
+        padding: 80px 40px;
+    }
+    
+    .works-container {
+        gap: 80px;
+    }
+    
+    .work-item {
+        flex-direction: column !important;
         gap: 40px;
+    }
+    
+    .work-image {
+        width: 100%;
+    }
+    
+    .work-details {
+        padding: 0;
+        text-align: center;
     }
 }
 
