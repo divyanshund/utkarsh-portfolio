@@ -168,11 +168,10 @@ function initDecorativeFramesScroll() {
     
     if (decorativeFrames.length > 0 && hero) {
         window.addEventListener('scroll', function() {
-            const heroHeight = hero.offsetHeight;
             const scrollPosition = window.scrollY;
             
-            // Hide frames when scrolling past 80% of hero section
-            if (scrollPosition > heroHeight * 0.8) {
+            // Hide frames quickly after just a bit of scrolling
+            if (scrollPosition > 100) {
                 decorativeFrames.forEach(frame => {
                     frame.classList.add('hidden');
                 });
