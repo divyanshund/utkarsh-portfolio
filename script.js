@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize scroll animations for gallery items
     initScrollAnimations();
     
+    // Add smooth parallax scroll effects
+    initParallaxScroll();
+    
     // Add header scroll effect for gallery pages
     initHeaderScroll();
 });
@@ -119,6 +122,54 @@ function initHeaderScroll() {
         }
         
         lastScroll = currentScroll;
+    });
+}
+
+// ============================================
+// Apple-like Smooth Parallax Scroll
+// ============================================
+function initParallaxScroll() {
+    let ticking = false;
+    
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                const scrolled = window.pageYOffset;
+                
+                // Parallax effect on hero section
+                const hero = document.querySelector('.hero');
+                if (hero && scrolled < window.innerHeight) {
+                    const photoFrame = document.querySelector('.photo-frame');
+                    const artistInfo = document.querySelector('.artist-info');
+                    
+                    if (photoFrame) {
+                        photoFrame.style.transform = `translateY(${scrolled * 0.3}px) scale(${1 - scrolled * 0.0001})`;
+                        photoFrame.style.opacity = 1 - (scrolled * 0.001);
+                    }
+                    
+                    if (artistInfo) {
+                        artistInfo.style.transform = `translateY(${scrolled * 0.5}px)`;
+                        artistInfo.style.opacity = 1 - (scrolled * 0.0015);
+                    }
+                }
+                
+                // Fade in works on scroll
+                const workItems = document.querySelectorAll('.work-item');
+                workItems.forEach(item => {
+                    const rect = item.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    
+                    if (rect.top < windowHeight * 0.85) {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }
+                });
+                
+                ticking = false;
+            });
+            
+            ticking = true;
+        }
     });
 }
 
