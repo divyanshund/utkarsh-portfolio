@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize decorative frames scroll behavior
     initDecorativeFramesScroll();
+    
+    // Hide scroll indicator on scroll
+    initScrollIndicatorHide();
 });
 
 // ============================================
@@ -177,6 +180,23 @@ function initDecorativeFramesScroll() {
                 decorativeFrames.forEach(frame => {
                     frame.classList.remove('hidden');
                 });
+            }
+        });
+    }
+}
+
+// ============================================
+// Hide Scroll Indicator on Scroll
+// ============================================
+function initScrollIndicatorHide() {
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    
+    if (scrollIndicator) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                scrollIndicator.classList.add('hidden');
+            } else {
+                scrollIndicator.classList.remove('hidden');
             }
         });
     }
