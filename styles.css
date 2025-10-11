@@ -319,7 +319,6 @@ body.dark-mode .photo-frame::after {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
     opacity: 0.6;
     transition: opacity 0.3s ease;
     animation: scrollBounce 2s ease-in-out infinite;
@@ -338,13 +337,7 @@ body.dark-mode .photo-frame::after {
 }
 
 .scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(
-        to bottom,
-        var(--text-light),
-        transparent
-    );
+    display: none;
 }
 
 @keyframes scrollBounce {
