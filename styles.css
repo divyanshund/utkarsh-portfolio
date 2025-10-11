@@ -33,18 +33,70 @@ body {
     background: linear-gradient(180deg, var(--off-white) 0%, var(--white) 100%);
 }
 
-/* Photo Frame */
+/* Photo Frame with Stacked Effect */
 .photo-frame {
     width: 100%;
     max-width: 650px;
     aspect-ratio: 4/3;
     margin-bottom: 50px;
     position: relative;
-    overflow: hidden;
     background: var(--white);
     box-shadow: 
-        0 10px 40px rgba(0, 0, 0, 0.1),
-        0 2px 8px rgba(0, 0, 0, 0.06);
+        0 10px 40px rgba(0, 0, 0, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateZ(0);
+    transition: transform 0.4s ease;
+}
+
+/* Photo Stack Behind - Second Layer */
+.photo-frame::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--white);
+    top: -8px;
+    left: -6px;
+    z-index: -1;
+    transform: rotate(-1.5deg);
+    box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.12),
+        0 3px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+/* Photo Stack Behind - Third Layer */
+.photo-frame::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fafafa;
+    top: -14px;
+    left: 8px;
+    z-index: -2;
+    transform: rotate(2deg);
+    box-shadow: 
+        0 6px 24px rgba(0, 0, 0, 0.1),
+        0 2px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Hover Effect on Stack */
+.photo-frame:hover {
+    transform: translateY(-4px) rotate(0.5deg);
+}
+
+.photo-frame:hover::before {
+    transform: rotate(-2deg);
+    top: -10px;
+    left: -8px;
+}
+
+.photo-frame:hover::after {
+    transform: rotate(2.5deg);
+    top: -16px;
+    left: 10px;
 }
 
 .main-photo {
@@ -52,6 +104,8 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
+    position: relative;
+    z-index: 1;
 }
 
 /* Artist Info */
@@ -412,9 +466,18 @@ body {
         max-width: 100%;
         margin-bottom: 30px;
         aspect-ratio: 4/3;
-        box-shadow: 
-            0 8px 30px rgba(0, 0, 0, 0.1),
-            0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+    
+    .photo-frame::before {
+        top: -6px;
+        left: -4px;
+        transform: rotate(-1deg);
+    }
+    
+    .photo-frame::after {
+        top: -10px;
+        left: 6px;
+        transform: rotate(1.5deg);
     }
     
     .artist-name {
