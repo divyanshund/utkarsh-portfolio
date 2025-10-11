@@ -18,6 +18,9 @@ const PHOTOS = [
 // Main Initialization
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize dark mode
+    initDarkMode();
+    
     // Initialize photo slideshow
     initPhotoSlideshow();
     
@@ -30,6 +33,31 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add header scroll effect for gallery pages
     initHeaderScroll();
 });
+
+// ============================================
+// Dark Mode Toggle
+// ============================================
+function initDarkMode() {
+    const themeToggle = document.getElementById('themeToggle');
+    
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+    
+    // Toggle theme on button click
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            
+            // Save preference
+            const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+        });
+    }
+}
 
 // ============================================
 // Photo Slideshow - Instant Changes
