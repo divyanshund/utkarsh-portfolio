@@ -1,15 +1,17 @@
 // ============================================
 // CONFIGURATION - Easily adjustable settings
 // ============================================
-const SLIDESHOW_INTERVAL = 2000; // Time between slides in milliseconds (2000 = 2 seconds)
-const SLIDESHOW_TRANSITION = 1500; // Fade transition duration in milliseconds
+// Note: Individual bento box intervals are set in HTML via data-interval attribute
+// You can adjust them there or change the defaults below:
+
+const DEFAULT_INTERVAL = 3000; // Default time between slides in milliseconds
 
 // ============================================
 // Main Initialization
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize slideshow
-    initSlideshow();
+    // Initialize bento grid slideshows
+    initBentoSlideshows();
     
     // Initialize scroll animations
     initScrollAnimations();
@@ -22,27 +24,34 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================
-// Slideshow Functionality
+// Bento Grid Slideshow Functionality
 // ============================================
-function initSlideshow() {
-    const slides = document.querySelectorAll('.slide');
-    if (slides.length === 0) return; // Exit if no slides found
+function initBentoSlideshows() {
+    const bentoBoxes = document.querySelectorAll('.bento-box');
     
-    let currentSlide = 0;
-    
-    function nextSlide() {
-        // Remove active class from current slide
-        slides[currentSlide].classList.remove('active');
+    bentoBoxes.forEach(box => {
+        const slides = box.querySelectorAll('.bento-slide');
+        if (slides.length === 0) return;
         
-        // Move to next slide (loop back to 0 if at end)
-        currentSlide = (currentSlide + 1) % slides.length;
+        // Get interval from data attribute or use default
+        const interval = parseInt(box.getAttribute('data-interval')) || DEFAULT_INTERVAL;
         
-        // Add active class to new slide
-        slides[currentSlide].classList.add('active');
-    }
-    
-    // Start the slideshow
-    setInterval(nextSlide, SLIDESHOW_INTERVAL);
+        let currentSlide = 0;
+        
+        function nextSlide() {
+            // Remove active class from current slide
+            slides[currentSlide].classList.remove('active');
+            
+            // Move to next slide (loop back to 0 if at end)
+            currentSlide = (currentSlide + 1) % slides.length;
+            
+            // Add active class to new slide
+            slides[currentSlide].classList.add('active');
+        }
+        
+        // Start the slideshow for this specific box
+        setInterval(nextSlide, interval);
+    });
 }
 
 // Scroll Animations
@@ -88,12 +97,12 @@ function initParallaxEffect() {
 
     window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
-        const slideshow = document.querySelector('.slideshow-container');
+        const bentoGrid = document.querySelector('.bento-grid');
         const scrollIndicator = document.querySelector('.scroll-indicator');
         
-        if (slideshow) {
-            // Subtle zoom effect on scroll
-            slideshow.style.transform = `scale(${1 + scrolled * 0.0003})`;
+        if (bentoGrid) {
+            // Subtle zoom effect on scroll for artistic feel
+            bentoGrid.style.transform = `scale(${1 + scrolled * 0.0002})`;
         }
         
         if (scrollIndicator) {

@@ -10,20 +10,50 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Hero Section with Slideshow -->
+    <!-- Hero Section with Bento Grid -->
     <section class="hero">
-        <!-- Photo Slideshow -->
-        <div class="slideshow-container">
-            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1920&q=80');"></div>
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=80');"></div>
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&q=80');"></div>
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80');"></div>
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80');"></div>
+        <!-- Left Sidebar with Name -->
+        <div class="sidebar-name">
+            <h1 class="name-line">Utkarsh</h1>
+            <h1 class="name-line">Singh</h1>
         </div>
         
-        <!-- Corner Title -->
-        <div class="corner-title">
-            <h1>Utkarsh Singh</h1>
+        <!-- Bento Grid Container -->
+        <div class="bento-grid">
+            <!-- Bento Box 1 - Large (2 second interval) -->
+            <div class="bento-box box-1" data-interval="2000">
+                <div class="bento-slide active" style="background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200&q=80');"></div>
+                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80');"></div>
+                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&q=80');"></div>
+            </div>
+            
+            <!-- Bento Box 2 - Medium (3 second interval) -->
+            <div class="bento-box box-2" data-interval="3000">
+                <div class="bento-slide active" style="background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80');"></div>
+                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80');"></div>
+                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&q=80');"></div>
+            </div>
+            
+            <!-- Bento Box 3 - Small (2.5 second interval) -->
+            <div class="bento-box box-3" data-interval="2500">
+                <div class="bento-slide active" style="background-image: url('https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600&q=80');"></div>
+                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600&q=80');"></div>
+                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=600&q=80');"></div>
+            </div>
+            
+            <!-- Bento Box 4 - Medium Tall (3.5 second interval) -->
+            <div class="bento-box box-4" data-interval="3500">
+                <div class="bento-slide active" style="background-image: url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=800&q=80');"></div>
+                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=800&q=80');"></div>
+                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1485470733090-0aae1788d5af?w=800&q=80');"></div>
+            </div>
+            
+            <!-- Bento Box 5 - Wide (4 second interval) -->
+            <div class="bento-box box-5" data-interval="4000">
+                <div class="bento-slide active" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1000&q=80');"></div>
+                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80');"></div>
+                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1000&q=80');"></div>
+            </div>
         </div>
         
         <div class="scroll-indicator">
