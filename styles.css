@@ -294,18 +294,64 @@ body.dark-mode .photo-frame::after {
     font-size: 2.2rem;
     font-weight: 400;
     letter-spacing: 1px;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
     color: var(--text-gray);
     text-transform: lowercase;
 }
 
 .artist-bio {
     font-size: 1rem;
-    line-height: 1.8;
+    line-height: 1.7;
     color: var(--text-light);
     font-weight: 300;
     max-width: 550px;
     margin: 0 auto;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    animation: scrollBounce 2s ease-in-out infinite;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+}
+
+.scroll-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    color: var(--text-light);
+    text-transform: lowercase;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(
+        to bottom,
+        var(--text-light),
+        transparent
+    );
+}
+
+@keyframes scrollBounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
 }
 
 /* Recent Works Section */
@@ -673,12 +719,24 @@ body.dark-mode .photo-frame::after {
     
     .artist-name {
         font-size: 1.8rem;
-        margin-bottom: 20px;
+        margin-bottom: 12px;
     }
     
     .artist-bio {
         font-size: 0.95rem;
-        line-height: 1.7;
+        line-height: 1.6;
+    }
+    
+    .scroll-indicator {
+        bottom: 30px;
+    }
+    
+    .scroll-text {
+        font-size: 0.75rem;
+    }
+    
+    .scroll-line {
+        height: 30px;
     }
     
     .recent-works {
