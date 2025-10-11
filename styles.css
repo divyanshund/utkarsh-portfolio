@@ -117,17 +117,18 @@ body {
     box-shadow: 
         0 10px 40px rgba(0, 0, 0, 0.1),
         0 2px 8px rgba(0, 0, 0, 0.06);
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 1.2s cubic-bezier(0.4, 0, 0.2, 1), border 1.2s ease;
 }
 
 body.dark-mode .photo-frame {
     box-shadow: 
         0 10px 40px rgba(0, 0, 0, 0.5),
         0 2px 8px rgba(0, 0, 0, 0.3),
-        0 0 80px rgba(255, 255, 255, 0.15),
-        0 0 160px rgba(255, 255, 255, 0.08),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+        0 0 100px 20px rgba(255, 255, 255, 0.2),
+        0 0 200px 40px rgba(255, 255, 255, 0.12),
+        0 0 300px 60px rgba(255, 255, 255, 0.06),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 body.dark-mode .photo-frame::before {
@@ -143,24 +144,47 @@ body.dark-mode .photo-frame::before {
         rgba(255, 255, 255, 0.08) 100%
     );
     border-radius: inherit;
-    opacity: 1;
+    opacity: 0;
     pointer-events: none;
     z-index: 10;
     mix-blend-mode: overlay;
+    transition: opacity 1.2s ease 0.3s;
+}
+
+body.dark-mode .photo-frame::before {
+    opacity: 1;
 }
 
 body.dark-mode .photo-frame::after {
     content: '';
     position: absolute;
-    inset: -40px;
+    inset: -80px;
     background: radial-gradient(
         ellipse at center,
-        rgba(255, 255, 255, 0.12) 0%,
-        rgba(255, 255, 255, 0.06) 40%,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0.08) 30%,
+        rgba(255, 255, 255, 0.04) 50%,
         transparent 70%
     );
     pointer-events: none;
     z-index: -1;
+    opacity: 0;
+    animation: glowFadeIn 1.5s ease-out forwards;
+}
+
+/* Light Turn On Animation */
+@keyframes glowFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .main-photo {
