@@ -32,6 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add header scroll effect for gallery pages
     initHeaderScroll();
+    
+    // Initialize decorative frames scroll behavior
+    initDecorativeFramesScroll();
 });
 
 // ============================================
