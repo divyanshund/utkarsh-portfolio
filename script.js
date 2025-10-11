@@ -164,32 +164,21 @@ function initHeaderScroll() {
 // ============================================
 function initDecorativeFramesScroll() {
     const decorativeFrames = document.querySelectorAll('.decorative-frame');
-    const artistInfo = document.querySelector('.artist-info');
     const hero = document.querySelector('.hero');
     
-    if (hero) {
+    if (hero && decorativeFrames.length > 0) {
         window.addEventListener('scroll', function() {
             const scrollPosition = window.scrollY;
             
-            // Hide frames and text quickly after just a bit of scrolling
+            // Hide frames quickly after just a bit of scrolling
             if (scrollPosition > 100) {
-                if (decorativeFrames.length > 0) {
-                    decorativeFrames.forEach(frame => {
-                        frame.classList.add('hidden');
-                    });
-                }
-                if (artistInfo) {
-                    artistInfo.classList.add('hidden');
-                }
+                decorativeFrames.forEach(frame => {
+                    frame.classList.add('hidden');
+                });
             } else {
-                if (decorativeFrames.length > 0) {
-                    decorativeFrames.forEach(frame => {
-                        frame.classList.remove('hidden');
-                    });
-                }
-                if (artistInfo) {
-                    artistInfo.classList.remove('hidden');
-                }
+                decorativeFrames.forEach(frame => {
+                    frame.classList.remove('hidden');
+                });
             }
         });
     }
