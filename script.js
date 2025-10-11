@@ -1,60 +1,54 @@
 // ============================================
-// CONFIGURATION - Easily adjustable settings
+// CONFIGURATION
 // ============================================
-// Note: Individual bento box intervals are set in HTML via data-interval attribute
-// You can adjust them there or change the defaults below:
+const PHOTO_CHANGE_INTERVAL = 1000; // 1 second - easily adjustable
 
-const DEFAULT_INTERVAL = 3000; // Default time between slides in milliseconds
+// Photo URLs for the main slideshow
+const PHOTOS = [
+    'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200&q=80',
+    'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80',
+    'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&q=80',
+    'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80',
+    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80',
+    'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=1200&q=80',
+    'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=1200&q=80'
+];
 
 // ============================================
 // Main Initialization
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize bento grid slideshows
-    initBentoSlideshows();
+    // Initialize photo slideshow
+    initPhotoSlideshow();
     
-    // Initialize scroll animations
+    // Initialize scroll animations for gallery items
     initScrollAnimations();
-    
-    // Add parallax effect
-    initParallaxEffect();
     
     // Add header scroll effect for gallery pages
     initHeaderScroll();
 });
 
 // ============================================
-// Bento Grid Slideshow Functionality
+// Photo Slideshow - Instant Changes
 // ============================================
-function initBentoSlideshows() {
-    const bentoBoxes = document.querySelectorAll('.bento-box');
+function initPhotoSlideshow() {
+    const mainPhoto = document.getElementById('mainPhoto');
+    if (!mainPhoto) return;
     
-    bentoBoxes.forEach(box => {
-        const slides = box.querySelectorAll('.bento-slide');
-        if (slides.length === 0) return;
-        
-        // Get interval from data attribute or use default
-        const interval = parseInt(box.getAttribute('data-interval')) || DEFAULT_INTERVAL;
-        
-        let currentSlide = 0;
-        
-        function nextSlide() {
-            // Remove active class from current slide
-            slides[currentSlide].classList.remove('active');
-            
-            // Move to next slide (loop back to 0 if at end)
-            currentSlide = (currentSlide + 1) % slides.length;
-            
-            // Add active class to new slide
-            slides[currentSlide].classList.add('active');
-        }
-        
-        // Start the slideshow for this specific box
-        setInterval(nextSlide, interval);
-    });
+    let currentIndex = 0;
+    
+    function changePhoto() {
+        currentIndex = (currentIndex + 1) % PHOTOS.length;
+        mainPhoto.src = PHOTOS[currentIndex];
+    }
+    
+    // Change photo every interval (instant, no transition)
+    setInterval(changePhoto, PHOTO_CHANGE_INTERVAL);
 }
 
+// ============================================
 // Scroll Animations
+// ============================================
 function initScrollAnimations() {
     const observerOptions = {
         threshold: 0.1,
@@ -69,7 +63,7 @@ function initScrollAnimations() {
         });
     }, observerOptions);
 
-    // Observe section cards on homepage
+    // Observe section cards
     const sectionCards = document.querySelectorAll('.section-card');
     sectionCards.forEach(card => {
         observer.observe(card);
@@ -78,7 +72,6 @@ function initScrollAnimations() {
     // Observe gallery items
     const galleryItems = document.querySelectorAll('.gallery-item');
     galleryItems.forEach((item, index) => {
-        // Add staggered delay
         item.style.transitionDelay = `${index * 0.1}s`;
         observer.observe(item);
     });
@@ -88,30 +81,21 @@ function initScrollAnimations() {
     fadeElements.forEach(element => {
         observer.observe(element);
     });
-}
-
-// Parallax Effect for Hero Section
-function initParallaxEffect() {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const bentoGrid = document.querySelector('.bento-grid');
-        const scrollIndicator = document.querySelector('.scroll-indicator');
-        
-        if (bentoGrid) {
-            // Subtle zoom effect on scroll for artistic feel
-            bentoGrid.style.transform = `scale(${1 + scrolled * 0.0002})`;
-        }
-        
-        if (scrollIndicator) {
-            scrollIndicator.style.opacity = 1 - (scrolled * 0.003);
-        }
+    
+    // Observe work items
+    const workItems = document.querySelectorAll('.work-item');
+    workItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        item.style.transitionDelay = `${index * 0.2}s`;
+        observer.observe(item);
     });
 }
 
-// Header Scroll Effect
+// ============================================
+// Header Scroll Effect for Gallery Pages
+// ============================================
 function initHeaderScroll() {
     const header = document.querySelector('.gallery-header');
     if (!header) return;
@@ -122,11 +106,9 @@ function initHeaderScroll() {
         const currentScroll = window.pageYOffset;
         
         if (currentScroll > 100) {
-            header.style.background = 'rgba(0, 0, 0, 0.95)';
-            header.style.backdropFilter = 'blur(10px)';
+            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
         } else {
-            header.style.background = 'linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent)';
-            header.style.backdropFilter = 'none';
+            header.style.boxShadow = 'none';
         }
         
         // Hide/show header on scroll
@@ -140,27 +122,26 @@ function initHeaderScroll() {
     });
 }
 
-// Lazy Loading for Images
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                }
-                observer.unobserve(img);
+// ============================================
+// Gallery Item Click Handlers
+// ============================================
+document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', function() {
+        const video = this.querySelector('video');
+        
+        if (video) {
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
             }
-        });
+        }
     });
+});
 
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
-
-// Smooth scroll for anchor links
+// ============================================
+// Smooth Scroll for Anchor Links
+// ============================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -174,75 +155,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Cursor effect for enhanced UX
-document.addEventListener('mousemove', function(e) {
-    const cards = document.querySelectorAll('.section-card');
-    cards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / 30;
-            const rotateY = (centerX - x) / 30;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        } else {
-            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-        }
-    });
-});
-
-// Reset card transform when mouse leaves
-document.querySelectorAll('.section-card').forEach(card => {
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-    });
-});
-
-// Gallery Item Click - Full Screen View (Optional Enhancement)
-document.querySelectorAll('.gallery-item').forEach(item => {
-    item.addEventListener('click', function() {
-        const img = this.querySelector('img');
-        const video = this.querySelector('video');
-        
-        if (img) {
-            // You can implement a lightbox/modal here
-            console.log('Image clicked:', img.src);
-        } else if (video) {
-            if (video.paused) {
-                video.play();
-            } else {
-                video.pause();
-            }
-        }
-    });
-});
-
-// Preload critical assets
+// ============================================
+// Preload Images
+// ============================================
 window.addEventListener('load', function() {
-    // Add loaded class to body for CSS animations
-    document.body.classList.add('loaded');
+    // Preload slideshow images for smooth transitions
+    PHOTOS.forEach(url => {
+        const img = new Image();
+        img.src = url;
+    });
 });
-
-// Performance optimization - Debounce scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Add resize handler with debounce
-window.addEventListener('resize', debounce(function() {
-    // Recalculate animations on resize if needed
-    initScrollAnimations();
-}, 250));
-

@@ -10,56 +10,70 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Hero Section with Bento Grid -->
+    <!-- Hero Section -->
     <section class="hero">
-        <!-- Left Sidebar with Name -->
-        <div class="sidebar-name">
-            <h1 class="name-line">Utkarsh</h1>
-            <h1 class="name-line">Singh</h1>
-            <p class="tagline">Visual Storyteller</p>
+        <!-- Central Photo Display -->
+        <div class="photo-frame">
+            <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200&q=80" alt="Photography" class="main-photo active" id="mainPhoto">
         </div>
         
-        <!-- Bento Grid Container -->
-        <div class="bento-grid">
-            <!-- Bento Box 1 - Large (2 second interval) -->
-            <div class="bento-box box-1" data-interval="2000">
-                <div class="bento-slide active" style="background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200&q=80');"></div>
-                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80');"></div>
-                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&q=80');"></div>
-            </div>
-            
-            <!-- Bento Box 2 - Medium (3 second interval) -->
-            <div class="bento-box box-2" data-interval="3000">
-                <div class="bento-slide active" style="background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80');"></div>
-                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80');"></div>
-                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&q=80');"></div>
-            </div>
-            
-            <!-- Bento Box 3 - Small (2.5 second interval) -->
-            <div class="bento-box box-3" data-interval="2500">
-                <div class="bento-slide active" style="background-image: url('https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600&q=80');"></div>
-                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600&q=80');"></div>
-                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=600&q=80');"></div>
-            </div>
-            
-            <!-- Bento Box 4 - Medium Tall (3.5 second interval) -->
-            <div class="bento-box box-4" data-interval="3500">
-                <div class="bento-slide active" style="background-image: url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=800&q=80');"></div>
-                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=800&q=80');"></div>
-                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1485470733090-0aae1788d5af?w=800&q=80');"></div>
-            </div>
-            
-            <!-- Bento Box 5 - Wide (4 second interval) -->
-            <div class="bento-box box-5" data-interval="4000">
-                <div class="bento-slide active" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1000&q=80');"></div>
-                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80');"></div>
-                <div class="bento-slide" style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1000&q=80');"></div>
-            </div>
+        <!-- Artist Info -->
+        <div class="artist-info">
+            <h1 class="artist-name">Utkarsh Singh</h1>
+            <p class="artist-bio">
+                A visual artist exploring the intersection of light, emotion, and narrative through photography. 
+                My work focuses on capturing authentic moments that tell compelling stories, 
+                blending documentary style with fine art sensibility.
+            </p>
         </div>
+    </section>
+
+    <!-- Recent Works Section -->
+    <section class="recent-works">
+        <h2 class="section-title">Recent Work</h2>
         
-        <div class="scroll-indicator">
-            <span>Scroll to explore</span>
-            <div class="scroll-line"></div>
+        <div class="works-grid">
+            <!-- Work 1 -->
+            <article class="work-item">
+                <div class="work-image">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80" alt="Whispers of Dawn">
+                </div>
+                <div class="work-details">
+                    <h3 class="work-title">Whispers of Dawn</h3>
+                    <p class="work-description">
+                        An exploration of early morning light filtering through mountain mist, 
+                        capturing the ephemeral beauty of nature's quiet moments.
+                    </p>
+                </div>
+            </article>
+            
+            <!-- Work 2 -->
+            <article class="work-item">
+                <div class="work-image">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80" alt="Urban Solitude">
+                </div>
+                <div class="work-details">
+                    <h3 class="work-title">Urban Solitude</h3>
+                    <p class="work-description">
+                        A study of isolation within crowded spaces, examining how individuals 
+                        create personal sanctuaries in metropolitan environments.
+                    </p>
+                </div>
+            </article>
+            
+            <!-- Work 3 -->
+            <article class="work-item">
+                <div class="work-image">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="Echoes of Heritage">
+                </div>
+                <div class="work-details">
+                    <h3 class="work-title">Echoes of Heritage</h3>
+                    <p class="work-description">
+                        Documenting traditional craftsmanship and cultural practices, 
+                        preserving stories of artisans who keep centuries-old traditions alive.
+                    </p>
+                </div>
+            </article>
         </div>
     </section>
 
