@@ -147,12 +147,12 @@ body.dark-mode .decorative-frame {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 120px 40px 60px 40px;
+    padding: 120px 40px 120px 40px;
     background: linear-gradient(180deg, #f7f7f9 0%, var(--white) 100%);
     transition: background 0.3s ease;
     position: relative;
