@@ -115,9 +115,27 @@ body {
     overflow: hidden;
     background: var(--white);
     box-shadow: 
-        0 10px 40px rgba(0, 0, 0, 0.1),
-        0 2px 8px rgba(0, 0, 0, 0.06);
+        0 15px 50px rgba(0, 0, 0, 0.12),
+        0 8px 20px rgba(0, 0, 0, 0.08),
+        0 3px 8px rgba(0, 0, 0, 0.06);
     transition: box-shadow 1.2s cubic-bezier(0.4, 0, 0.2, 1), border 1.2s ease;
+}
+
+.photo-frame::after {
+    content: '';
+    position: absolute;
+    inset: -60px;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 0, 0, 0.06) 0%,
+        rgba(0, 0, 0, 0.03) 30%,
+        rgba(0, 0, 0, 0.015) 50%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    animation: shadowFadeIn 1.5s ease-out forwards;
 }
 
 body.dark-mode .photo-frame {
@@ -172,8 +190,23 @@ body.dark-mode .photo-frame::after {
     animation: glowFadeIn 1.5s ease-out forwards;
 }
 
-/* Light Turn On Animation */
+/* Light Turn On Animation (Dark Mode Glow) */
 @keyframes glowFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Shadow Fade In Animation (Light Mode) */
+@keyframes shadowFadeIn {
     0% {
         opacity: 0;
         transform: scale(0.8);
