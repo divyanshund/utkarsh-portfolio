@@ -140,11 +140,9 @@ body {
 }
 
 body.dark-mode .decorative-frame {
-    opacity: 0.3;
-}
-
-body.dark-mode .decorative-frame:hover {
-    opacity: 0.5;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 /* Hero Section */
