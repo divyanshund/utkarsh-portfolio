@@ -24,14 +24,13 @@ body.dark-mode {
     --accent-line: #2a2a2a;
 }
 
-/* Theme Toggle Button */
+/* Elegant Theme Toggle Button */
 .theme-toggle {
     position: fixed;
     top: 30px;
     right: 30px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    padding: 12px 24px;
+    border-radius: 30px;
     border: 1px solid var(--accent-line);
     background: var(--white);
     cursor: pointer;
@@ -39,40 +38,45 @@ body.dark-mode {
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    transition: var(--transition);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
 }
 
 .theme-toggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    border-color: var(--text-gray);
 }
 
-.theme-toggle .sun-icon,
-.theme-toggle .moon-icon {
-    position: absolute;
-    font-size: 1.5rem;
+.toggle-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
     transition: all 0.3s ease;
+    white-space: nowrap;
+    position: absolute;
 }
 
-.theme-toggle .sun-icon {
+.toggle-text.light-text {
     opacity: 1;
-    transform: rotate(0deg) scale(1);
+    transform: translateY(0);
 }
 
-.theme-toggle .moon-icon {
+.toggle-text.dark-text {
     opacity: 0;
-    transform: rotate(180deg) scale(0);
+    transform: translateY(10px);
 }
 
-body.dark-mode .theme-toggle .sun-icon {
+body.dark-mode .toggle-text.light-text {
     opacity: 0;
-    transform: rotate(-180deg) scale(0);
+    transform: translateY(-10px);
 }
 
-body.dark-mode .theme-toggle .moon-icon {
+body.dark-mode .toggle-text.dark-text {
     opacity: 1;
-    transform: rotate(0deg) scale(1);
+    transform: translateY(0);
 }
 
 body {
@@ -113,7 +117,27 @@ body {
 body.dark-mode .photo-frame {
     box-shadow: 
         0 10px 40px rgba(0, 0, 0, 0.5),
-        0 2px 8px rgba(0, 0, 0, 0.3);
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        0 0 60px rgba(255, 255, 255, 0.05),
+        0 0 120px rgba(255, 255, 255, 0.03);
+}
+
+body.dark-mode .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.05) 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.05) 75%,
+        rgba(255, 255, 255, 0.1) 100%
+    );
+    border-radius: inherit;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 10;
 }
 
 .main-photo {
@@ -489,13 +513,11 @@ body.dark-mode .photo-frame {
     .theme-toggle {
         top: 20px;
         right: 20px;
-        width: 44px;
-        height: 44px;
+        padding: 10px 20px;
     }
     
-    .theme-toggle .sun-icon,
-    .theme-toggle .moon-icon {
-        font-size: 1.3rem;
+    .toggle-text {
+        font-size: 0.8rem;
     }
     
     .artist-name {
