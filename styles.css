@@ -116,7 +116,7 @@ body {
 .frame-top-left {
     top: 0;
     left: 0;
-    width: 180px;
+    width: 270px;
     height: auto;
 }
 
@@ -155,7 +155,7 @@ body.dark-mode .decorative-frame:hover {
     align-items: center;
     justify-content: center;
     padding: 60px 40px;
-    background: linear-gradient(180deg, var(--off-white) 0%, var(--white) 100%);
+    background: linear-gradient(180deg, #f7f7f9 0%, var(--white) 100%);
 }
 
 /* Photo Frame */
