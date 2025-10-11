@@ -152,7 +152,8 @@ body.dark-mode .decorative-frame {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 40px;
+    padding: 60px 40px 60px 40px;
+    padding-top: 100px;
     background: linear-gradient(180deg, #f7f7f9 0%, var(--white) 100%);
     transition: background 0.3s ease;
     position: relative;
@@ -313,39 +314,32 @@ body.dark-mode .photo-frame::after {
 /* Scroll Indicator */
 .scroll-indicator {
     position: absolute;
-    bottom: 30px;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    flex-direction: column;
     align-items: center;
-    opacity: 0.6;
+    justify-content: center;
+    opacity: 0.5;
     transition: opacity 0.3s ease;
-    animation: scrollBounce 2s ease-in-out infinite;
+    cursor: pointer;
 }
 
 .scroll-indicator:hover {
-    opacity: 1;
+    opacity: 0.8;
 }
 
-.scroll-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    color: var(--text-light);
-    text-transform: lowercase;
+.scroll-chevron {
+    color: var(--text-gray);
+    animation: chevronBounce 2s ease-in-out infinite;
 }
 
-.scroll-line {
-    display: none;
-}
-
-@keyframes scrollBounce {
+@keyframes chevronBounce {
     0%, 100% {
-        transform: translateX(-50%) translateY(0);
+        transform: translateY(0);
     }
     50% {
-        transform: translateX(-50%) translateY(10px);
+        transform: translateY(8px);
     }
 }
 
@@ -727,15 +721,12 @@ body.dark-mode .photo-frame::after {
     }
     
     .scroll-indicator {
-        bottom: 20px;
+        bottom: 30px;
     }
     
-    .scroll-text {
-        font-size: 0.75rem;
-    }
-    
-    .scroll-line {
-        height: 30px;
+    .scroll-chevron {
+        width: 20px;
+        height: 20px;
     }
     
     .recent-works {
