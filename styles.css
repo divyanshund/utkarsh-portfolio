@@ -237,8 +237,8 @@ body.dark-mode .hero {
 /* Photo Frame */
 .photo-frame {
     width: 100%;
-    max-width: 700px;
-    aspect-ratio: 3/4;
+    max-width: 650px;
+    aspect-ratio: 1/1;
     margin-bottom: 50px;
     position: relative;
     overflow: hidden;
