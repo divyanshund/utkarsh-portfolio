@@ -24,11 +24,81 @@ body.dark-mode {
     --accent-line: #2a2a2a;
 }
 
+/* Navigation */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .nav {
+    background: rgba(10, 10, 10, 0.85);
+}
+
+.nav.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid var(--accent-line);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .nav.scrolled {
+    background: rgba(10, 10, 10, 0.95);
+}
+
+.nav-content {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+.nav-link {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    color: var(--text-gray);
+    text-decoration: none;
+    text-transform: lowercase;
+    position: relative;
+    padding: 5px 0;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: var(--text-gray);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover {
+    color: var(--text-gray);
+    opacity: 0.7;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
 /* Elegant Theme Toggle Button */
 .theme-toggle {
     position: fixed;
     top: 30px;
-    right: 30px;
+    right: 60px;
     padding: 10px 24px;
     min-height: 40px;
     border-radius: 30px;
@@ -448,6 +518,73 @@ body.dark-mode .photo-frame::after {
     margin-top: 10px;
 }
 
+/* Contact Section */
+.contact-section {
+    padding: 120px 60px;
+    background-color: var(--off-white);
+    border-top: 1px solid var(--accent-line);
+}
+
+.contact-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-section .section-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.contact-intro {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-light);
+    font-weight: 300;
+    margin-bottom: 60px;
+    text-transform: lowercase;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.contact-link {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 25px 35px;
+    background: var(--white);
+    border: 1px solid var(--accent-line);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.contact-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-color: var(--text-gray);
+}
+
+.contact-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    color: var(--text-light);
+    text-transform: uppercase;
+}
+
+.contact-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    letter-spacing: 0.5px;
+}
 
 .fade-in.visible {
     opacity: 1;
@@ -680,18 +817,16 @@ body.dark-mode .photo-frame::after {
 }
 
 @media (max-width: 768px) {
-    .hero {
-        padding: 40px 20px;
-        height: 100vh;
+    .nav {
+        padding: 20px 20px;
     }
     
-    .photo-frame {
-        max-width: 100%;
-        margin-bottom: 30px;
-        aspect-ratio: 4/3;
-        box-shadow: 
-            0 8px 30px rgba(0, 0, 0, 0.1),
-            0 2px 6px rgba(0, 0, 0, 0.06);
+    .nav-content {
+        gap: 30px;
+    }
+    
+    .nav-link {
+        font-size: 0.9rem;
     }
     
     .theme-toggle {
@@ -703,6 +838,32 @@ body.dark-mode .photo-frame::after {
     
     .toggle-text {
         font-size: 0.85rem;
+    }
+    
+    .contact-section {
+        padding: 80px 20px;
+    }
+    
+    .contact-links {
+        gap: 20px;
+    }
+    
+    .contact-link {
+        padding: 20px 25px;
+    }
+    
+    .hero {
+        padding: 100px 20px 80px;
+        height: 100vh;
+    }
+    
+    .photo-frame {
+        max-width: 100%;
+        margin-bottom: 30px;
+        aspect-ratio: 4/3;
+        box-shadow: 
+            0 8px 30px rgba(0, 0, 0, 0.1),
+            0 2px 6px rgba(0, 0, 0, 0.06);
     }
     
     /* Hide decorative frames on mobile */

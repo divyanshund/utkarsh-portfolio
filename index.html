@@ -10,6 +10,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#home" class="nav-link">home</a>
+            <a href="#work" class="nav-link">work</a>
+            <a href="#contact" class="nav-link">contact me</a>
+        </div>
+    </nav>
+
     <!-- Dark Mode Toggle -->
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
         <span class="toggle-text light-text">turn lights off</span>
@@ -22,7 +31,7 @@
     <img src="rsmall.png" alt="" class="decorative-frame frame-right">
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <!-- Central Photo Display -->
         <div class="photo-frame">
             <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200&q=80" alt="Photography" class="main-photo active" id="mainPhoto">
@@ -47,7 +56,7 @@
     </section>
 
     <!-- Recent Works Section -->
-    <section class="recent-works">
+    <section class="recent-works" id="work">
         <h2 class="section-title">recent work</h2>
         
         <div class="works-container">
@@ -86,6 +95,31 @@
                     <span class="work-year">2023</span>
                 </div>
             </article>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-content">
+            <h2 class="section-title">get in touch</h2>
+            <p class="contact-intro">
+                interested in commissioning work or collaborating on a project? 
+                I'd love to hear from you.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:your.email@example.com" class="contact-link">
+                    <span class="contact-label">email</span>
+                    <span class="contact-value">your.email@example.com</span>
+                </a>
+                <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <span class="contact-label">instagram</span>
+                    <span class="contact-value">@yourusername</span>
+                </a>
+                <a href="tel:+1234567890" class="contact-link">
+                    <span class="contact-label">phone</span>
+                    <span class="contact-value">+1 (234) 567-890</span>
+                </a>
+            </div>
         </div>
     </section>
 

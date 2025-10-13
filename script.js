@@ -38,6 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Hide scroll indicator on scroll
     initScrollIndicatorHide();
+    
+    // Initialize navigation scroll effect
+    initNavScroll();
 });
 
 // ============================================
@@ -196,6 +199,23 @@ function initScrollIndicatorHide() {
                 scrollIndicator.classList.add('hidden');
             } else {
                 scrollIndicator.classList.remove('hidden');
+            }
+        });
+    }
+}
+
+// ============================================
+// Navigation Scroll Effect
+// ============================================
+function initNavScroll() {
+    const nav = document.querySelector('.nav');
+    
+    if (nav) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
             }
         });
     }
