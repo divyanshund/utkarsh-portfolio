@@ -35,24 +35,26 @@ body.dark-mode {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
+    background: transparent;
+    backdrop-filter: none;
     border-bottom: 1px solid transparent;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body.dark-mode .nav {
-    background: rgba(10, 10, 10, 0.85);
+    background: transparent;
 }
 
 .nav.scrolled {
     background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--accent-line);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
 }
 
 body.dark-mode .nav.scrolled {
     background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
 }
 
 .nav-content {
