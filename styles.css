@@ -75,6 +75,10 @@ body.dark-mode .nav.scrolled {
     transition: all 0.3s ease;
 }
 
+body.dark-mode .nav-link {
+    color: #a0a0a0;
+}
+
 .nav-link::after {
     content: '';
     position: absolute;
@@ -90,6 +94,11 @@ body.dark-mode .nav.scrolled {
 .nav-link:hover {
     color: var(--text-gray);
     opacity: 0.7;
+}
+
+body.dark-mode .nav-link:hover {
+    color: #ffffff;
+    opacity: 1;
 }
 
 .nav-link:hover::after {
