@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize navigation scroll effect
     initNavScroll();
+    
+    // Initialize repelling text effect
+    initRepellingText();
 });
 
 // ============================================
@@ -301,6 +304,98 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// ============================================
+// Repelling Text Effect
+// ============================================
+function initRepellingText() {
+    const artistName = document.getElementById('artistName');
+    if (!artistName) return;
+    
+    // Configuration
+    const REPULSION_STRENGTH = 15; // Max pixels letters can move
+    const REPULSION_RADIUS = 100; // Cursor proximity needed to affect letters
+    
+    // Split text into individual letter spans
+    const text = artistName.textContent;
+    artistName.innerHTML = '';
+    
+    text.split('').forEach(char => {
+        const span = document.createElement('span');
+        span.className = 'letter';
+        span.textContent = char;
+        // Preserve spaces
+        if (char === ' ') {
+            span.style.width = '0.3em';
+        }
+        artistName.appendChild(span);
+    });
+    
+    const letters = artistName.querySelectorAll('.letter');
+    
+    // Store original positions
+    const letterPositions = [];
+    letters.forEach(letter => {
+        const rect = letter.getBoundingClientRect();
+        letterPositions.push({
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2
+        });
+    });
+    
+    // Mouse move handler
+    artistName.addEventListener('mousemove', function(e) {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        
+        letters.forEach((letter, index) => {
+            const pos = letterPositions[index];
+            
+            // Calculate distance from cursor to letter
+            const deltaX = pos.x - mouseX;
+            const deltaY = pos.y - mouseY;
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            
+            // Only repel if cursor is within radius
+            if (distance < REPULSION_RADIUS) {
+                // Calculate repulsion strength (stronger when closer)
+                const force = (REPULSION_RADIUS - distance) / REPULSION_RADIUS;
+                
+                // Calculate push direction (normalized)
+                const pushX = (deltaX / distance) * force * REPULSION_STRENGTH;
+                const pushY = (deltaY / distance) * force * REPULSION_STRENGTH;
+                
+                // Apply transform
+                letter.style.transform = `translate(${pushX}px, ${pushY}px)`;
+            } else {
+                // Reset to original position if cursor is far
+                letter.style.transform = 'translate(0, 0)';
+            }
+        });
+    });
+    
+    // Reset all letters when mouse leaves
+    artistName.addEventListener('mouseleave', function() {
+        letters.forEach(letter => {
+            letter.style.transform = 'translate(0, 0)';
+        });
+    });
+    
+    // Update positions on window resize
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            letters.forEach((letter, index) => {
+                const rect = letter.getBoundingClientRect();
+                letterPositions[index] = {
+                    x: rect.left + rect.width / 2,
+                    y: rect.top + rect.height / 2
+                };
+            });
+        }, 250);
+    });
+}
 
 // ============================================
 // Preload Images
