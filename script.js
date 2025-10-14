@@ -313,8 +313,8 @@ function initRepellingText() {
     if (!artistName) return;
     
     // Configuration
-    const REPULSION_STRENGTH = 15; // Max pixels letters can move
-    const REPULSION_RADIUS = 100; // Cursor proximity needed to affect letters
+    const REPULSION_STRENGTH = 28; // Max pixels letters can move
+    const REPULSION_RADIUS = 120; // Cursor proximity needed to affect letters
     
     // Split text into individual letter spans
     const text = artistName.textContent;
