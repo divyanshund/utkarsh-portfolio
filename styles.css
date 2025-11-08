@@ -515,7 +515,7 @@ body.dark-mode .photo-frame::after {
 .work-tag {
     display: inline-block;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: var(--text-light);
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -558,12 +558,12 @@ body.dark-mode .photo-frame::after {
     display: inline-block;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1rem;
-    color: var(--text-gray);
+    color: var(--white);
     text-decoration: none;
     text-transform: lowercase;
     padding: 12px 30px;
-    border: 1px solid var(--accent-line);
-    background: transparent;
+    border: 1px solid var(--text-gray);
+    background: var(--text-gray);
     transition: all 0.3s ease;
     margin-top: 25px;
     letter-spacing: 0.5px;
@@ -574,16 +574,22 @@ body.dark-mode .photo-frame::after {
 }
 
 .work-link:hover {
-    background: var(--text-gray);
-    color: var(--white);
+    background: transparent;
+    color: var(--text-gray);
     border-color: var(--text-gray);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-body.dark-mode .work-link:hover {
+body.dark-mode .work-link {
     background: var(--white);
     color: var(--text-gray);
+    border-color: var(--white);
+}
+
+body.dark-mode .work-link:hover {
+    background: transparent;
+    color: var(--white);
     border-color: var(--white);
 }
 
@@ -1219,27 +1225,33 @@ html {
     display: inline-block;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
-    color: var(--text-gray);
+    color: var(--white);
     text-decoration: none;
     text-transform: lowercase;
     padding: 12px 30px;
-    border: 1px solid var(--accent-line);
-    background: transparent;
+    border: 1px solid var(--text-gray);
+    background: var(--text-gray);
     transition: all 0.3s ease;
     letter-spacing: 0.5px;
 }
 
 .back-link:hover {
-    background: var(--text-gray);
-    color: var(--white);
+    background: transparent;
+    color: var(--text-gray);
     border-color: var(--text-gray);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-body.dark-mode .back-link:hover {
+body.dark-mode .back-link {
     background: var(--white);
     color: var(--text-gray);
+    border-color: var(--white);
+}
+
+body.dark-mode .back-link:hover {
+    background: transparent;
+    color: var(--white);
     border-color: var(--white);
 }
 
