@@ -467,7 +467,7 @@ function initProjectGalleryAnimations() {
     
     const observerOptions = {
         threshold: 0.05,
-        rootMargin: '0px 0px 100px 0px' // Trigger 100px before entering viewport
+        rootMargin: '0px 0px 200px 0px' // Trigger 200px before entering viewport
     };
     
     const observer = new IntersectionObserver(function(entries) {
