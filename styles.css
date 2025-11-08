@@ -512,6 +512,19 @@ body.dark-mode .photo-frame::after {
     padding: 0 20px;
 }
 
+.work-tag {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 16px;
+    border: 1px solid var(--accent-line);
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+}
+
 .work-title {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
