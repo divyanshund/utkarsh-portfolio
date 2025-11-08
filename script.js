@@ -5,13 +5,13 @@ const PHOTO_CHANGE_INTERVAL = 1000; // 1 second - easily adjustable
 
 // Photo URLs for the main slideshow
 const PHOTOS = [
-    'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1200&q=80',
-    'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80',
-    'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&q=80',
-    'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80',
-    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80',
-    'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=1200&q=80',
-    'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=1200&q=80'
+    'images/header/2.jpg',
+    'images/header/4.jpg',
+    'images/header/6.jpg',
+    'images/header/7.jpg',
+    'images/header/10.jpg',
+    'images/header/12.jpg',
+    'images/header/DSC09168.jpg'
 ];
 
 // ============================================
@@ -44,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize repelling text effect
     initRepellingText();
+    
+    // Initialize parallax effect on work images
+    initWorkImageParallax();
 });
 
 // ============================================
@@ -394,6 +397,60 @@ function initRepellingText() {
                 };
             });
         }, 250);
+    });
+}
+
+// ============================================
+// Parallax Effect on Work Images
+// ============================================
+function initWorkImageParallax() {
+    const workImages = document.querySelectorAll('.work-image');
+    if (workImages.length === 0) return;
+    
+    let ticking = false;
+    
+    function updateParallax() {
+        workImages.forEach(workImage => {
+            const rect = workImage.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            // Calculate how far the image is in the viewport
+            // 0 = top of screen, 1 = bottom of screen
+            const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
+            
+            // Only apply parallax when image is in viewport
+            if (scrollProgress >= -0.2 && scrollProgress <= 1.2) {
+                const img = workImage.querySelector('img');
+                if (img) {
+                    // Multi-layer parallax effect
+                    // The image moves slower than scroll (creating depth)
+                    const translateY = (scrollProgress - 0.5) * -50; // Vertical movement
+                    const scale = 1 + Math.abs(scrollProgress - 0.5) * 0.05; // Subtle scale
+                    
+                    img.style.transform = `translateY(${translateY}px) scale(${scale})`;
+                }
+            }
+        });
+        
+        ticking = false;
+    }
+    
+    function requestTick() {
+        if (!ticking) {
+            window.requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }
+    
+    // Initial call
+    updateParallax();
+    
+    // Update on scroll
+    window.addEventListener('scroll', requestTick);
+    
+    // Update on resize
+    window.addEventListener('resize', () => {
+        setTimeout(updateParallax, 100);
     });
 }
 
