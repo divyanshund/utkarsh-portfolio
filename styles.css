@@ -538,6 +538,36 @@ body.dark-mode .photo-frame::after {
     color: var(--text-light);
     letter-spacing: 2px;
     margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.work-link {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--text-gray);
+    text-decoration: none;
+    text-transform: lowercase;
+    padding: 12px 30px;
+    border: 1px solid var(--accent-line);
+    background: transparent;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    letter-spacing: 0.5px;
+}
+
+.work-link:hover {
+    background: var(--text-gray);
+    color: var(--white);
+    border-color: var(--text-gray);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .work-link:hover {
+    background: var(--white);
+    color: var(--text-gray);
+    border-color: var(--white);
 }
 
 /* Contact Section */
@@ -967,4 +997,179 @@ html {
 ::selection {
     background: var(--text-gray);
     color: var(--white);
+}
+
+/* ============================================
+   PROJECT PAGE STYLES
+   ============================================ */
+
+.project-page {
+    min-height: 100vh;
+    padding-top: 100px;
+}
+
+.project-header {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 60px 40px;
+    text-align: center;
+}
+
+.project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    color: var(--text-gray);
+    text-transform: lowercase;
+}
+
+.project-year {
+    display: inline-block;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    letter-spacing: 2px;
+}
+
+.project-hero {
+    max-width: 1400px;
+    margin: 60px auto;
+    padding: 0 60px;
+}
+
+.project-hero-image {
+    width: 100%;
+    aspect-ratio: 3/2;
+    overflow: hidden;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.08),
+        0 8px 20px rgba(0, 0, 0, 0.04);
+}
+
+.project-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.project-content {
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 0 60px;
+}
+
+.project-text {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: var(--text-gray);
+    font-weight: 300;
+}
+
+.project-text p {
+    margin-bottom: 30px;
+    text-align: justify;
+}
+
+.project-text p:first-child::first-letter {
+    font-size: 3.5rem;
+    font-family: 'Playfair Display', serif;
+    float: left;
+    line-height: 1;
+    margin-right: 10px;
+    margin-top: 5px;
+    color: var(--text-gray);
+}
+
+.project-gallery {
+    max-width: 1400px;
+    margin: 100px auto;
+    padding: 0 60px;
+}
+
+.project-footer {
+    max-width: 1400px;
+    margin: 80px auto 60px;
+    padding: 0 60px;
+    text-align: center;
+}
+
+.back-link {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    text-decoration: none;
+    text-transform: lowercase;
+    padding: 12px 30px;
+    border: 1px solid var(--accent-line);
+    background: transparent;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.back-link:hover {
+    background: var(--text-gray);
+    color: var(--white);
+    border-color: var(--text-gray);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .back-link:hover {
+    background: var(--white);
+    color: var(--text-gray);
+    border-color: var(--white);
+}
+
+/* Project Page Responsive */
+@media (max-width: 768px) {
+    .project-header {
+        padding: 40px 20px 20px;
+    }
+    
+    .project-title {
+        font-size: 2rem;
+    }
+    
+    .project-hero {
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+    
+    .project-hero-image {
+        aspect-ratio: 4/3;
+    }
+    
+    .project-content {
+        margin: 60px auto;
+        padding: 0 20px;
+    }
+    
+    .project-text {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+    
+    .project-text p {
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    
+    .project-text p:first-child::first-letter {
+        font-size: 2.5rem;
+        margin-right: 8px;
+    }
+    
+    .project-gallery {
+        margin: 60px auto;
+        padding: 0 20px;
+    }
+    
+    .project-footer {
+        margin: 60px auto 40px;
+        padding: 0 20px;
+    }
 }
