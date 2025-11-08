@@ -47,6 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize parallax effect on work images
     initWorkImageParallax();
+    
+    // Initialize project gallery animations
+    initProjectGalleryAnimations();
 });
 
 // ============================================
@@ -451,6 +454,35 @@ function initWorkImageParallax() {
     // Update on resize
     window.addEventListener('resize', () => {
         setTimeout(updateParallax, 100);
+    });
+}
+
+// ============================================
+// Project Gallery Scroll Animations
+// ============================================
+function initProjectGalleryAnimations() {
+    const galleryElements = document.querySelectorAll('.gallery-full, .gallery-row-2, .gallery-row-3');
+    
+    if (galleryElements.length === 0) return;
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Don't unobserve so animation persists
+            }
+        });
+    }, observerOptions);
+    
+    galleryElements.forEach((element, index) => {
+        // Stagger initial state
+        element.style.transitionDelay = `${index * 0.1}s`;
+        observer.observe(element);
     });
 }
 
