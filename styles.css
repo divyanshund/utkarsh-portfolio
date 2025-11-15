@@ -545,7 +545,7 @@ body.dark-mode .photo-frame::after {
 }
 
 .work-year {
-    display: inline-block;
+    display: none; /* Hidden for now, can be shown later */
     font-family: 'Playfair Display', serif;
     font-size: 0.9rem;
     color: var(--text-light);
@@ -567,10 +567,6 @@ body.dark-mode .photo-frame::after {
     transition: all 0.3s ease;
     margin-top: 25px;
     letter-spacing: 0.5px;
-}
-
-.work-year {
-    display: block;
 }
 
 .work-link:hover {
