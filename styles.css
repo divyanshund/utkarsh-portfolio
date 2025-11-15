@@ -536,7 +536,7 @@ body.dark-mode .photo-frame::after {
 }
 
 .work-description {
-    font-size: 1.1rem;
+    font-size: 20px;
     line-height: 1.9;
     color: var(--text-light);
     font-weight: 300;
@@ -608,7 +608,7 @@ body.dark-mode .work-link:hover {
 }
 
 .contact-intro {
-    font-size: 1.1rem;
+    font-size: 20px;
     line-height: 1.8;
     color: var(--text-light);
     font-weight: 300;
@@ -1108,7 +1108,7 @@ html {
 }
 
 .project-text {
-    font-size: 1.1rem;
+    font-size: 20px;
     line-height: 2;
     color: var(--text-gray);
     font-weight: 300;
