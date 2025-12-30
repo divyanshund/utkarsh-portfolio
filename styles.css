@@ -813,11 +813,14 @@ body.dark-mode .work-link:hover {
 .gallery-item {
     position: relative;
     overflow: hidden;
-    background: var(--light-gray);
+    background: var(--white);
     cursor: pointer;
     opacity: 0;
     transform: translateY(20px);
     transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .gallery-item.visible {
@@ -1184,6 +1187,10 @@ html {
 .gallery-item {
     position: relative;
     overflow: hidden;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .gallery-item img {
