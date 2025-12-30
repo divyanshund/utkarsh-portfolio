@@ -390,7 +390,7 @@ body.dark-mode .photo-frame::after {
 }
 
 .artist-bio {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.65;
     color: var(--text-light);
     font-weight: 300;
