@@ -1215,6 +1215,62 @@ html {
 .gallery-row-3 .gallery-item:nth-child(2) { transition-delay: 0.2s; }
 .gallery-row-3 .gallery-item:nth-child(3) { transition-delay: 0.3s; }
 
+/* Credits Section */
+.project-credits {
+    max-width: 1400px;
+    margin: 100px auto 80px;
+    padding: 0 60px;
+}
+
+.credits-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 0;
+    border-top: 1px solid var(--accent-line);
+}
+
+.credits-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text-gray);
+    text-transform: lowercase;
+    margin-bottom: 50px;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.credits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 50px 40px;
+}
+
+.credit-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.credit-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-light);
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.credit-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-gray);
+    line-height: 1.6;
+    text-transform: lowercase;
+}
+
 .project-footer {
     max-width: 1400px;
     margin: 80px auto 60px;
@@ -1298,6 +1354,33 @@ body.dark-mode .back-link:hover {
     .project-text p:first-child::first-letter {
         font-size: 2.5rem;
         margin-right: 8px;
+    }
+    
+    .project-credits {
+        margin: 60px auto 50px;
+        padding: 0 20px;
+    }
+    
+    .credits-content {
+        padding: 40px 0;
+    }
+    
+    .credits-title {
+        font-size: 1.5rem;
+        margin-bottom: 35px;
+    }
+    
+    .credits-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+    
+    .credit-role {
+        font-size: 0.9rem;
+    }
+    
+    .credit-name {
+        font-size: 1rem;
     }
     
     .project-gallery {
