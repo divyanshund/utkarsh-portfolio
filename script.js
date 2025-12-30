@@ -5,13 +5,28 @@ const PHOTO_CHANGE_INTERVAL = 1000; // 1 second - easily adjustable
 
 // Photo URLs for the main slideshow
 const PHOTOS = [
-    'images/header/2.jpg',
-    'images/header/4.jpg',
-    'images/header/6.jpg',
-    'images/header/7.jpg',
-    'images/header/10.jpg',
-    'images/header/12.jpg',
-    'images/header/DSC09168.jpg'
+    'images/can you smell/1.jpg',
+    'images/can you smell/2.jpg',
+    'images/can you smell/3.jpg',
+    'images/can you smell/4.jpg',
+    'images/can you smell/5.jpg',
+    'images/can you smell/6.jpg',
+    'images/can you smell/7.jpg',
+    'images/can you smell/8.jpg',
+    'images/can you smell/9.jpg',
+    'images/can you smell/10.jpg',
+    'images/can you smell/11.jpg',
+    'images/can you smell/12.jpg',
+    'images/can you smell/13.jpg',
+    'images/can you smell/14.jpg',
+    'images/can you smell/15.jpg',
+    'images/can you smell/16.jpg',
+    'images/can you smell/17.jpg',
+    'images/can you smell/18.jpg',
+    'images/can you smell/19.jpg',
+    'images/can you smell/20.jpg',
+    'images/can you smell/21.jpg',
+    'images/can you smell/22.jpg'
 ];
 
 // ============================================
