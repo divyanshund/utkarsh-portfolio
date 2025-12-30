@@ -1116,6 +1116,22 @@ html {
     font-weight: 300;
 }
 
+.project-details {
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--accent-line);
+}
+
+.project-meta {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-light);
+    font-weight: 400;
+    text-transform: lowercase;
+    margin: 0;
+}
+
 .project-text p {
     margin-bottom: 30px;
     text-align: justify;
@@ -1344,6 +1360,16 @@ body.dark-mode .back-link:hover {
     .project-text {
         font-size: 1rem;
         line-height: 1.8;
+    }
+    
+    .project-details {
+        margin-bottom: 35px;
+        padding-bottom: 20px;
+    }
+    
+    .project-meta {
+        font-size: 0.9rem;
+        line-height: 1.6;
     }
     
     .project-text p {
