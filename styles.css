@@ -436,6 +436,13 @@ body.dark-mode .decorative-frame {
 .work-details {
     flex: 1;
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.work-item:nth-child(even) .work-details {
+    align-items: flex-start;
 }
 
 .work-tag {
@@ -453,7 +460,8 @@ body.dark-mode .decorative-frame {
 
 .work-title-link {
     text-decoration: none;
-    display: inline-block;
+    display: block;
+    width: 100%;
 }
 
 .work-title-link:hover .work-title {
@@ -847,6 +855,7 @@ body.dark-mode .work-link:hover {
     .work-details {
         padding: 0;
         text-align: center;
+        align-items: center;
     }
 }
 
