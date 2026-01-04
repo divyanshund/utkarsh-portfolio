@@ -246,9 +246,8 @@ body.dark-mode .hero {
 /* Photo Frame */
 .photo-frame {
     width: 100%;
-    max-width: 550px;
-    height: 70vh;
-    min-height: 600px;
+    max-width: 800px;
+    aspect-ratio: 3/2;
     margin-bottom: 50px;
     position: relative;
     overflow: hidden;
@@ -882,13 +881,13 @@ body.dark-mode .work-link:hover {
 }
 
 /* Responsive Design */
-/* Desktop/Laptop - Ensure portrait photo frame */
+/* Desktop/Laptop - Landscape photo frame */
 @media (min-width: 769px) {
     .photo-frame {
-        width: calc(75vh * 2/3) !important;
-        height: 75vh !important;
-        max-width: 600px !important;
-        max-height: 900px !important;
+        width: 100% !important;
+        max-width: 900px !important;
+        height: auto !important;
+        aspect-ratio: 3/2 !important;
         margin-bottom: 80px !important;
     }
 }
