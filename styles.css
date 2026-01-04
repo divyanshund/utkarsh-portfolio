@@ -247,7 +247,7 @@ body.dark-mode .hero {
 .photo-frame {
     width: 100%;
     max-width: 650px;
-    aspect-ratio: 1/1.25;
+    aspect-ratio: 1/1.5;
     margin-bottom: 50px;
     position: relative;
     overflow: hidden;
@@ -260,10 +260,10 @@ body.dark-mode .hero {
 }
 
 /* Fallback for browsers that don't support aspect-ratio */
-@supports not (aspect-ratio: 1/1.25) {
+@supports not (aspect-ratio: 1/1.5) {
     .photo-frame {
         height: 0;
-        padding-bottom: 125%; /* 125% of width = 25% taller than square */
+        padding-bottom: 150%; /* 150% of width = 50% taller than square */
     }
     
     .photo-frame .main-photo {
@@ -883,7 +883,7 @@ body.dark-mode .work-link:hover {
 /* Desktop/Laptop - Ensure portrait photo frame */
 @media (min-width: 769px) {
     .photo-frame {
-        aspect-ratio: 1/1.25 !important;
+        aspect-ratio: 1/1.5 !important;
     }
 }
 
