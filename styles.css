@@ -65,7 +65,7 @@ body.dark-mode .nav.scrolled {
 
 .nav-link {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
+    font-size: 18px;
     letter-spacing: 0.5px;
     color: var(--text-gray);
     text-decoration: none;
@@ -247,7 +247,7 @@ body.dark-mode .hero {
 .photo-frame {
     width: 100%;
     max-width: 650px;
-    aspect-ratio: 4/5;
+    height: 812px;
     margin-bottom: 50px;
     position: relative;
     overflow: hidden;
