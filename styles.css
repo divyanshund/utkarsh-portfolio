@@ -854,36 +854,37 @@ body.dark-mode .work-link:hover {
     }
     
     .hero {
-        padding: 100px 20px 80px;
+        padding: 0;
         min-height: 100vh;
+        justify-content: center;
     }
     
     .photo-frame {
-        max-width: 100%;
-        margin-bottom: 30px;
-        aspect-ratio: 4/3;
-        box-shadow: 
-            0 8px 30px rgba(0, 0, 0, 0.1),
-            0 2px 6px rgba(0, 0, 0, 0.06);
-    }
-    
-    /* Hide decorative frames on mobile */
-    .decorative-frame {
-        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        margin-bottom: 0;
+        aspect-ratio: auto;
     }
     
     .artist-info {
-        margin-bottom: 60px;
+        margin-bottom: 0;
+        padding: 0 20px;
     }
     
     .artist-name {
-        font-size: 1.8rem;
-        margin-bottom: 8px;
+        font-size: 2.2rem;
+        margin-bottom: 12px;
+        color: #ffffff;
     }
     
     .artist-bio {
-        font-size: 0.95rem;
-        line-height: 1.6;
+        font-size: 1.1rem;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.9);
     }
     
     .scroll-indicator {
