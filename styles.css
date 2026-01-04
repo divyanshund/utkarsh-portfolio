@@ -228,7 +228,7 @@ body.dark-mode .decorative-frame {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -246,12 +246,14 @@ body.dark-mode .hero {
 /* Photo Frame */
 .photo-frame {
     width: 100%;
-    max-width: 650px;
-    aspect-ratio: 1/1.5;
+    max-width: 550px;
+    height: 70vh;
+    min-height: 600px;
     margin-bottom: 50px;
     position: relative;
     overflow: hidden;
     background: var(--white);
+    flex-shrink: 0;
     box-shadow: 
         0 15px 50px rgba(0, 0, 0, 0.12),
         0 8px 20px rgba(0, 0, 0, 0.08),
@@ -883,7 +885,11 @@ body.dark-mode .work-link:hover {
 /* Desktop/Laptop - Ensure portrait photo frame */
 @media (min-width: 769px) {
     .photo-frame {
-        aspect-ratio: 1/1.5 !important;
+        width: calc(75vh * 2/3) !important;
+        height: 75vh !important;
+        max-width: 600px !important;
+        max-height: 900px !important;
+        margin-bottom: 80px !important;
     }
 }
 
@@ -949,7 +955,7 @@ body.dark-mode .work-link:hover {
     
     .hero {
         padding: 100px 20px 80px;
-        height: 100vh;
+        min-height: 100vh;
     }
     
     .photo-frame {
