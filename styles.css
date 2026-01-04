@@ -790,14 +790,15 @@ body.dark-mode .work-link:hover {
 }
 
 /* Responsive Design */
-/* Desktop/Laptop - Landscape photo frame */
+/* Desktop/Laptop - Full Screen Hero Slideshow */
 @media (min-width: 769px) {
     .photo-frame {
         width: 100% !important;
-        max-width: 900px !important;
-        height: auto !important;
-        aspect-ratio: 3/2 !important;
-        margin-bottom: 80px !important;
+        height: 100% !important;
+        max-width: none !important;
+        max-height: none !important;
+        margin-bottom: 0 !important;
+        aspect-ratio: auto !important;
     }
 }
 
