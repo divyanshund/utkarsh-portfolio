@@ -1,7 +1,7 @@
 // ============================================
 // CONFIGURATION
 // ============================================
-const PHOTO_CHANGE_INTERVAL = 1000; // 1 second - easily adjustable
+const PHOTO_CHANGE_INTERVAL = 3000; // 3 seconds - easily adjustable
 
 // Photo URLs for the main slideshow
 const PHOTOS = [
