@@ -247,7 +247,7 @@ body.dark-mode .hero {
 .photo-frame {
     width: 100%;
     max-width: 650px;
-    height: 812px;
+    aspect-ratio: 1/1.25;
     margin-bottom: 50px;
     position: relative;
     overflow: hidden;
@@ -257,6 +257,20 @@ body.dark-mode .hero {
         0 8px 20px rgba(0, 0, 0, 0.08),
         0 3px 8px rgba(0, 0, 0, 0.06);
     transition: box-shadow 1.2s cubic-bezier(0.4, 0, 0.2, 1), border 1.2s ease;
+}
+
+/* Fallback for browsers that don't support aspect-ratio */
+@supports not (aspect-ratio: 1/1.25) {
+    .photo-frame {
+        height: 0;
+        padding-bottom: 125%; /* 125% of width = 25% taller than square */
+    }
+    
+    .photo-frame .main-photo {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 }
 
 .photo-frame::after {
@@ -866,6 +880,13 @@ body.dark-mode .work-link:hover {
 }
 
 /* Responsive Design */
+/* Desktop/Laptop - Ensure portrait photo frame */
+@media (min-width: 769px) {
+    .photo-frame {
+        aspect-ratio: 1/1.25 !important;
+    }
+}
+
 @media (max-width: 1024px) {
     .recent-works {
         padding: 80px 40px;
