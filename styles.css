@@ -244,7 +244,7 @@ body.dark-mode .decorative-frame {
     flex-direction: column;
     align-items: center;
     justify-content: flex-end; /* Move text towards bottom */
-    padding: 0 0 18vh 0; /* Position text comfortably above the scroll indicator */
+    padding: 0 0 12vh 0; /* Position text comfortably above the scroll indicator */
     position: relative;
     overflow: hidden;
 }
@@ -280,12 +280,12 @@ body.dark-mode .decorative-frame {
     height: 100%;
     background: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.6) 0%,      /* Darker at top for nav visibility */
+        rgba(0, 0, 0, 0.65) 0%,     /* Darker at top for nav visibility */
         rgba(0, 0, 0, 0.2) 15%,
         rgba(0, 0, 0, 0) 40%,
-        rgba(0, 0, 0, 0) 60%,
-        rgba(0, 0, 0, 0.6) 80%,      /* Darker gradient starting for bio */
-        rgba(0, 0, 0, 0.95) 100%     /* Very dark at the bottom */
+        rgba(0, 0, 0, 0) 55%,
+        rgba(0, 0, 0, 0.75) 75%,    /* Darker gradient starting earlier for bio */
+        rgba(0, 0, 0, 1) 100%       /* Pure black at the bottom */
     );
     z-index: 2;
     pointer-events: none;
