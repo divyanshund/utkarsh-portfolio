@@ -536,15 +536,15 @@ body.dark-mode .decorative-frame {
 }
 
 body.dark-mode .work-link {
-    background: var(--white);
-    color: var(--text-gray);
-    border-color: var(--white);
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
 }
 
 body.dark-mode .work-link:hover {
     background: transparent;
-    color: var(--white);
-    border-color: var(--white);
+    color: #ffffff;
+    border-color: #ffffff;
 }
 
 /* Contact Section */
