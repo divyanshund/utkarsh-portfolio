@@ -5,6 +5,10 @@ const PHOTO_CHANGE_INTERVAL = 3000; // 3 seconds - easily adjustable
 
 // Photo URLs for the main slideshow
 const PHOTOS = [
+    // Header folder
+    'images/header/IMG_7114.PNG',
+    
+    // Can You Smell folder
     'images/can you smell/1.jpg',
     'images/can you smell/2.jpg',
     'images/can you smell/3.jpg',
@@ -26,7 +30,33 @@ const PHOTOS = [
     'images/can you smell/19.jpg',
     'images/can you smell/20.jpg',
     'images/can you smell/21.jpg',
-    'images/can you smell/22.jpg'
+    'images/can you smell/22.jpg',
+    
+    // Grad folder
+    'images/grad/1.jpg',
+    'images/grad/2.jpg',
+    'images/grad/3.jpg',
+    'images/grad/4.jpg',
+    'images/grad/5.jpg',
+    'images/grad/6.jpg',
+    'images/grad/7.jpg',
+    'images/grad/8.jpg',
+    'images/grad/9.jpg',
+    'images/grad/10.jpg',
+    'images/grad/11.jpg',
+    'images/grad/12.jpg',
+    'images/grad/13.jpg',
+    'images/grad/14.jpg',
+    'images/grad/15.jpg',
+    'images/grad/16.jpg',
+    'images/grad/17.JPG',
+    'images/grad/18.jpg',
+    'images/grad/19.jpg',
+    'images/grad/20.jpg',
+    'images/grad/21.jpg',
+    'images/grad/22.jpg',
+    'images/grad/23.jpg',
+    'images/grad/cover.JPG'
 ];
 
 // ============================================
@@ -73,11 +103,13 @@ document.addEventListener('DOMContentLoaded', function() {
 function initDarkMode() {
     const themeToggle = document.getElementById('themeToggle');
     
-    // Check for saved theme preference or default to light mode
-    const currentTheme = localStorage.getItem('theme') || 'light';
+    // Check for saved theme preference or default to dark mode (lights off)
+    const currentTheme = localStorage.getItem('theme') || 'dark';
     
     if (currentTheme === 'dark') {
         document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
     }
     
     // Toggle theme on button click
