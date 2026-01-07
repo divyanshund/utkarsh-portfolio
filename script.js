@@ -5,34 +5,10 @@ const PHOTO_CHANGE_INTERVAL = 3000; // 3 seconds - easily adjustable
 
 // Photo URLs for the main slideshow
 const PHOTOS = [
-    // Header folder
+    // From header
     'images/header/IMG_7114.PNG',
     
-    // Can You Smell folder
-    'images/can you smell/1.jpg',
-    'images/can you smell/2.jpg',
-    'images/can you smell/3.jpg',
-    'images/can you smell/4.jpg',
-    'images/can you smell/5.jpg',
-    'images/can you smell/6.jpg',
-    'images/can you smell/7.jpg',
-    'images/can you smell/8.jpg',
-    'images/can you smell/9.jpg',
-    'images/can you smell/10.jpg',
-    'images/can you smell/11.jpg',
-    'images/can you smell/12.jpg',
-    'images/can you smell/13.jpg',
-    'images/can you smell/14.jpg',
-    'images/can you smell/15.jpg',
-    'images/can you smell/16.jpg',
-    'images/can you smell/17.jpg',
-    'images/can you smell/18.jpg',
-    'images/can you smell/19.jpg',
-    'images/can you smell/20.jpg',
-    'images/can you smell/21.jpg',
-    'images/can you smell/22.jpg',
-    
-    // Grad folder
+    // From grad
     'images/grad/1.jpg',
     'images/grad/2.jpg',
     'images/grad/3.jpg',
@@ -56,7 +32,24 @@ const PHOTOS = [
     'images/grad/21.jpg',
     'images/grad/22.jpg',
     'images/grad/23.jpg',
-    'images/grad/cover.JPG'
+    
+    // From goback
+    'images/goback/1.jpg',
+    'images/goback/2.jpg',
+    'images/goback/4.jpg',
+    'images/goback/5.jpg',
+    'images/goback/6.jpg',
+    'images/goback/7.jpg',
+    'images/goback/8.jpg',
+    'images/goback/9.jpg',
+    'images/goback/11.jpg',
+    'images/goback/12.jpg',
+    'images/goback/13.jpg',
+    'images/goback/14.jpg',
+    'images/goback/16.jpg',
+    'images/goback/17.jpg',
+    'images/goback/18.jpg',
+    'images/goback/19.jpg'
 ];
 
 // ============================================
