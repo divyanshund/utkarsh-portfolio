@@ -244,7 +244,7 @@ body.dark-mode .decorative-frame {
     flex-direction: column;
     align-items: center;
     justify-content: flex-end; /* Move text towards bottom */
-    padding: 0 0 12vh 0; /* Position text comfortably above the scroll indicator */
+    padding: 0 0 6vh 0; /* Position text comfortably above the scroll indicator */
     position: relative;
     overflow: hidden;
 }
@@ -901,7 +901,7 @@ body.dark-mode .work-link:hover {
     }
     
     .hero {
-        padding: 0 0 12vh 0;
+        padding: 0 0 6vh 0;
         min-height: 100vh;
         justify-content: flex-end;
     }
