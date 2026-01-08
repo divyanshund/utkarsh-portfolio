@@ -418,6 +418,11 @@ body.dark-mode .decorative-frame {
     will-change: transform, box-shadow;
 }
 
+/* Specific aspect ratio for 'The Man Who Knows' image to show full width */
+.work-item.man-who-knows .work-image {
+    aspect-ratio: 1448 / 632;
+}
+
 .work-image img {
     width: 110%; /* Slightly larger to allow for parallax movement */
     height: 110%;
