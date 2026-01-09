@@ -5,51 +5,22 @@ const PHOTO_CHANGE_INTERVAL = 3000; // 3 seconds - easily adjustable
 
 // Photo URLs for the main slideshow
 const PHOTOS = [
-    // From header
-    'images/header/IMG_7114.PNG',
-    
-    // From grad
-    'images/grad/1.jpg',
-    'images/grad/2.jpg',
-    'images/grad/3.jpg',
-    'images/grad/4.jpg',
-    'images/grad/5.jpg',
-    'images/grad/6.jpg',
-    'images/grad/7.jpg',
-    'images/grad/8.jpg',
-    'images/grad/9.jpg',
-    'images/grad/10.jpg',
-    'images/grad/11.jpg',
-    'images/grad/12.jpg',
-    'images/grad/13.jpg',
-    'images/grad/14.jpg',
-    'images/grad/15.jpg',
-    'images/grad/16.jpg',
-    'images/grad/17.JPG',
-    'images/grad/18.jpg',
-    'images/grad/19.jpg',
-    'images/grad/20.jpg',
-    'images/grad/21.jpg',
-    'images/grad/22.jpg',
-    'images/grad/23.jpg',
-    
-    // From goback
-    'images/goback/1.jpg',
-    'images/goback/2.jpg',
-    'images/goback/4.jpg',
-    'images/goback/5.jpg',
-    'images/goback/6.jpg',
-    'images/goback/7.jpg',
-    'images/goback/8.jpg',
-    'images/goback/9.jpg',
-    'images/goback/11.jpg',
-    'images/goback/12.jpg',
-    'images/goback/13.jpg',
-    'images/goback/14.jpg',
-    'images/goback/16.jpg',
-    'images/goback/17.jpg',
-    'images/goback/18.jpg',
-    'images/goback/19.jpg'
+    'images/homepage/a.jpg',
+    'images/homepage/b.jpg',
+    'images/homepage/c.jpg',
+    'images/homepage/d.jpg',
+    'images/homepage/e.jpg',
+    'images/homepage/f.jpg',
+    'images/homepage/g.jpg',
+    'images/homepage/h.jpg',
+    'images/homepage/i.jpg',
+    'images/homepage/j.jpg',
+    'images/homepage/k.jpg',
+    'images/homepage/l.jpg',
+    'images/homepage/m.jpg',
+    'images/homepage/n.jpg',
+    'images/homepage/o.jpg',
+    'images/homepage/p.jpg'
 ];
 
 // ============================================
