@@ -1063,7 +1063,7 @@ html {
 }
 
 .project-hero {
-    max-width: 1400px;
+    max-width: 910px; /* Reduced by 35% from 1400px */
     margin: 60px auto;
     padding: 0 60px;
 }
