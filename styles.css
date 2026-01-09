@@ -426,7 +426,7 @@ body.dark-mode .decorative-frame {
 /* Align 'Till We All Breathe The Same' image to the top */
 .work-item.till-we-breathe .work-image img {
     object-position: top;
-    top: 0;
+    top: -5%;
 }
 
 .work-image img {
