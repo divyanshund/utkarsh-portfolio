@@ -548,6 +548,10 @@ function initHeroTextReveal() {
     artistInfo.style.transform = 'translateY(40px)';
     artistInfo.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
     
+    // Lock scrolling initially
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    
     // Function to reveal the text
     function revealText() {
         if (textRevealed) return;
@@ -561,11 +565,17 @@ function initHeroTextReveal() {
             scrollIndicator.style.opacity = '0.4';
         }
         
-        // Remove listeners after reveal
-        window.removeEventListener('wheel', handleWheel);
-        window.removeEventListener('touchstart', handleTouchStart);
-        window.removeEventListener('touchmove', handleTouchMove);
-        document.removeEventListener('keydown', handleKeydown);
+        // Unlock scrolling after animation completes
+        setTimeout(() => {
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+            
+            // Remove listeners after unlock
+            window.removeEventListener('wheel', handleWheel, true);
+            window.removeEventListener('touchstart', handleTouchStart);
+            window.removeEventListener('touchmove', handleTouchMove);
+            document.removeEventListener('keydown', handleKeydown);
+        }, 800);
     }
     
     // Handle wheel events - trigger on ANY scroll attempt
