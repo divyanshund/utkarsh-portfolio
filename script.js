@@ -59,6 +59,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize project gallery animations
     initProjectGalleryAnimations();
+    
+    // Initialize hero text reveal on scroll
+    initHeroTextReveal();
 });
 
 // ============================================
@@ -525,6 +528,98 @@ function initProjectGalleryAnimations() {
         element.style.transitionDelay = `${index * 0.1}s`;
         observer.observe(element);
     });
+}
+
+// ============================================
+// Hero Text Reveal on First Scroll
+// ============================================
+function initHeroTextReveal() {
+    const artistInfo = document.querySelector('.artist-info');
+    const heroSection = document.querySelector('.hero');
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    
+    // Only apply to homepage with hero section
+    if (!artistInfo || !heroSection) return;
+    
+    let textRevealed = false;
+    let isAnimating = false;
+    
+    // Initially hide the text
+    artistInfo.classList.add('hero-text-hidden');
+    
+    // Function to reveal the text
+    function revealText() {
+        if (textRevealed || isAnimating) return;
+        
+        isAnimating = true;
+        artistInfo.classList.remove('hero-text-hidden');
+        artistInfo.classList.add('hero-text-visible');
+        
+        // Update scroll indicator text if it exists
+        if (scrollIndicator) {
+            scrollIndicator.classList.add('fade-out');
+        }
+        
+        // After animation completes, allow normal scrolling
+        setTimeout(() => {
+            textRevealed = true;
+            isAnimating = false;
+        }, 800);
+    }
+    
+    // Handle wheel events
+    function handleWheel(e) {
+        if (!textRevealed && !isAnimating && e.deltaY > 0) {
+            e.preventDefault();
+            revealText();
+        }
+    }
+    
+    // Handle touch events for mobile
+    let touchStartY = 0;
+    
+    function handleTouchStart(e) {
+        touchStartY = e.touches[0].clientY;
+    }
+    
+    function handleTouchMove(e) {
+        if (!textRevealed && !isAnimating) {
+            const touchY = e.touches[0].clientY;
+            const deltaY = touchStartY - touchY;
+            
+            // Swiping up (scrolling down)
+            if (deltaY > 30) {
+                e.preventDefault();
+                revealText();
+            }
+        }
+    }
+    
+    // Handle keyboard navigation
+    function handleKeydown(e) {
+        if (!textRevealed && !isAnimating) {
+            if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+                e.preventDefault();
+                revealText();
+            }
+        }
+    }
+    
+    // Add event listeners
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('keydown', handleKeydown);
+    
+    // Also reveal on click of scroll indicator
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', function(e) {
+            if (!textRevealed) {
+                e.preventDefault();
+                revealText();
+            }
+        });
+    }
 }
 
 // ============================================
