@@ -1122,7 +1122,7 @@ html {
 .project-content {
     max-width: 900px;
     margin: 80px auto;
-    padding: 0 60px;
+    padding: 0 20px; /* Reduced padding for more horizontal text space */
 }
 
 .project-text {
@@ -1133,6 +1133,9 @@ html {
 }
 
 .project-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-bottom: 50px;
     padding-bottom: 30px;
     border-bottom: 1px solid var(--accent-line);
@@ -1140,12 +1143,14 @@ html {
 
 .project-meta {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    line-height: 1.8;
+    font-size: 0.75rem;
     color: var(--text-light);
-    font-weight: 400;
-    text-transform: lowercase;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 16px;
+    border: 1px solid var(--accent-line);
     margin: 0;
+    line-height: 1;
 }
 
 .project-text p {
@@ -1379,13 +1384,19 @@ body.dark-mode .back-link:hover {
     }
     
     .project-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
         margin-bottom: 35px;
         padding-bottom: 20px;
+        justify-content: center;
     }
     
     .project-meta {
-        font-size: 0.9rem;
-        line-height: 1.6;
+        font-size: 0.75rem;
+        padding: 5px 12px;
+        border: 1px solid var(--accent-line);
+        line-height: 1;
     }
     
     .project-text p {
