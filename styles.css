@@ -8,8 +8,8 @@
     --white: #ffffff;
     --off-white: #fbfbfd;
     --light-gray: #f5f5f7;
-    --text-gray: #333333;
-    --text-light: #666666;
+    --text-gray: #1a1a1a;
+    --text-light: #444444;
     --accent-line: #e0e0e0;
     --transition: all 0.3s ease;
 }
@@ -320,7 +320,7 @@ body.dark-mode .decorative-frame {
     font-size: 25px;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
-    font-weight: 300;
+    font-weight: 400;
     max-width: 969px;
     margin: 0 auto;
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
@@ -517,7 +517,7 @@ body.dark-mode .decorative-frame {
     font-size: 20px;
     line-height: 1.9;
     color: var(--text-light);
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 20px;
     text-transform: lowercase;
 }
@@ -589,7 +589,7 @@ body.dark-mode .work-link:hover {
     font-size: 20px;
     line-height: 1.8;
     color: var(--text-light);
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 60px;
     text-transform: lowercase;
 }
@@ -703,7 +703,7 @@ body.dark-mode .work-link:hover {
 
 .card-subtitle {
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 1px;
     color: var(--text-light);
 }
@@ -762,7 +762,7 @@ body.dark-mode .work-link:hover {
     align-items: center;
     gap: 10px;
     transition: var(--transition);
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .back-button:hover {
@@ -781,7 +781,7 @@ body.dark-mode .work-link:hover {
 .gallery-title {
     font-size: 1rem;
     letter-spacing: 1px;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--text-light);
 }
 
@@ -1124,7 +1124,7 @@ html {
     font-size: 20px;
     line-height: 2;
     color: var(--text-gray);
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .project-details {
@@ -1292,7 +1292,7 @@ html {
 .credit-name {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--text-gray);
     line-height: 1.6;
     text-transform: lowercase;
