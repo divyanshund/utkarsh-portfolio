@@ -286,6 +286,12 @@ function initParallaxScroll() {
                 // Fade out as we scroll past hero
                 const fadeOutOpacity = 1 - (scrolled * 0.0015);
                 artistInfo.style.opacity = Math.max(0, Math.min(1, fadeOutOpacity));
+                
+                // Also fade out the bottom gradient
+                const bottomGradient = document.querySelector('.hero-bottom-gradient');
+                if (bottomGradient) {
+                    bottomGradient.style.opacity = Math.max(0, Math.min(1, fadeOutOpacity));
+                }
             }
         }
         
@@ -530,13 +536,14 @@ function initHeroTextReveal() {
     const artistInfo = document.querySelector('.artist-info');
     const heroSection = document.querySelector('.hero');
     const scrollIndicator = document.querySelector('.scroll-indicator');
+    const bottomGradient = document.querySelector('.hero-bottom-gradient');
     
     // Only apply to homepage with hero section
     if (!artistInfo || !heroSection) return;
     
     let textRevealed = false;
     
-    // Initially hide the text
+    // Initially hide the text (gradient is hidden via CSS)
     artistInfo.style.opacity = '0';
     artistInfo.style.transform = 'translateY(40px)';
     artistInfo.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
@@ -545,10 +552,15 @@ function initHeroTextReveal() {
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
     
-    // Function to reveal the text
+    // Function to reveal the text and gradient
     function revealText() {
         if (textRevealed) return;
         textRevealed = true;
+        
+        // Reveal the bottom gradient
+        if (bottomGradient) {
+            bottomGradient.style.opacity = '1';
+        }
         
         artistInfo.style.opacity = '1';
         artistInfo.style.transform = 'translateY(0)';
