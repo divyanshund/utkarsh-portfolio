@@ -1126,7 +1126,7 @@ html {
 }
 
 .project-text {
-    font-size: 20px;
+    font-size: 22px; /* Increased by 2 from 20px */
     line-height: 2;
     color: var(--text-gray);
     font-weight: 400;
@@ -1379,7 +1379,7 @@ body.dark-mode .back-link:hover {
     }
     
     .project-text {
-        font-size: 1rem;
+        font-size: 1.125rem; /* Increased to approx 18px */
         line-height: 1.8;
     }
     
