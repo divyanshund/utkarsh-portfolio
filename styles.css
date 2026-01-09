@@ -1137,35 +1137,33 @@ html {
     flex-wrap: wrap;
     gap: 12px;
     margin-bottom: 50px;
-    padding-bottom: 30px;
+    padding-bottom: 40px;
+    justify-content: center; /* Center the tags */
     border-bottom: 1px solid var(--accent-line);
 }
 
 .project-meta {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    padding: 6px 16px;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    padding: 8px 24px;
     border: 1px solid var(--accent-line);
+    border-radius: 30px; /* Capsule shape for elegance */
     margin: 0;
     line-height: 1;
+    transition: all 0.3s ease;
+}
+
+.project-meta:hover {
+    border-color: var(--text-gray);
+    color: var(--text-gray);
 }
 
 .project-text p {
     margin-bottom: 30px;
     text-align: justify;
-}
-
-.project-text p:first-child::first-letter {
-    font-size: 3.5rem;
-    font-family: 'Playfair Display', serif;
-    float: left;
-    line-height: 1;
-    margin-right: 10px;
-    margin-top: 5px;
-    color: var(--text-gray);
 }
 
 .project-gallery {
@@ -1279,8 +1277,9 @@ html {
 
 .credits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 50px 40px;
+    grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns for better structure */
+    gap: 60px 40px;
+    text-align: left;
 }
 
 .credit-item {
@@ -1291,20 +1290,21 @@ html {
 
 .credit-role {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95rem;
-    font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 400;
     color: var(--text-light);
     text-transform: lowercase;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
+    letter-spacing: 1.5px;
+    margin-bottom: 2px;
+    opacity: 0.8;
 }
 
 .credit-name {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 400;
     color: var(--text-gray);
-    line-height: 1.6;
+    line-height: 1.4;
     text-transform: lowercase;
 }
 
@@ -1424,8 +1424,15 @@ body.dark-mode .back-link:hover {
     }
     
     .credits-grid {
-        grid-template-columns: 1fr;
-        gap: 35px;
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+        gap: 40px 20px;
+    }
+
+    @media (max-width: 480px) {
+        .credits-grid {
+            grid-template-columns: 1fr; /* 1 column for phones */
+            text-align: center;
+        }
     }
     
     .credit-role {
