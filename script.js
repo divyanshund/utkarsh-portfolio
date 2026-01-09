@@ -256,6 +256,9 @@ function initNavScroll() {
     }
 }
 
+// Global flag for hero text reveal state
+let heroTextRevealComplete = false;
+
 // ============================================
 // Apple-like Smooth Parallax Scroll
 // ============================================
@@ -276,23 +279,13 @@ function initParallaxScroll() {
                 photoFrame.style.opacity = 1 - (scrolled * 0.001);
             }
             
-            if (artistInfo) {
+            // Only control artistInfo opacity after initial reveal is complete
+            if (artistInfo && heroTextRevealComplete) {
                 artistInfo.style.transform = `translateY(${scrolled * 0.5}px)`;
                 
-                // Reveal text on scroll, then fade out as we reach work section
-                let infoOpacity = 0;
-                if (scrolled <= 0) {
-                    infoOpacity = 0;
-                } else if (scrolled < 150) {
-                    infoOpacity = scrolled / 150; // Rapid fade in
-                    // Add subtle lift during reveal
-                    const translateY = 20 * (1 - infoOpacity);
-                    artistInfo.style.transform += ` translateY(${translateY}px)`;
-                } else {
-                    infoOpacity = 1 - ((scrolled - 150) * 0.0015);
-                }
-                
-                artistInfo.style.opacity = Math.max(0, Math.min(1, infoOpacity));
+                // Fade out as we scroll past hero
+                const fadeOutOpacity = 1 - (scrolled * 0.0015);
+                artistInfo.style.opacity = Math.max(0, Math.min(1, fadeOutOpacity));
             }
         }
         
@@ -569,6 +562,9 @@ function initHeroTextReveal() {
         setTimeout(() => {
             document.body.style.overflow = '';
             document.documentElement.style.overflow = '';
+            
+            // Mark reveal as complete so parallax can take over
+            heroTextRevealComplete = true;
             
             // Remove listeners after unlock
             window.removeEventListener('wheel', handleWheel, true);
