@@ -229,18 +229,22 @@ function initScrollIndicatorHide() {
 // ============================================
 function initNavScroll() {
     const nav = document.querySelector('.nav');
-    const hasHero = document.querySelector('.hero');
+    const hero = document.querySelector('.hero');
     
     if (nav) {
-        // Initial check
-        if (window.scrollY > 50 || !hasHero) {
+        if (hero) {
+            nav.classList.add('has-hero');
+        }
+
+        // Initial check for scrolled state
+        if (window.scrollY > 50) {
             nav.classList.add('scrolled');
         } else {
             nav.classList.remove('scrolled');
         }
 
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 50 || !hasHero) {
+            if (window.scrollY > 50) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
