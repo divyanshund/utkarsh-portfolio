@@ -468,6 +468,7 @@ body.dark-mode .decorative-frame {
     padding: 6px 16px;
     border: 1px solid var(--accent-line);
     margin-bottom: 16px;
+    margin-right: 8px;
     transition: all 0.3s ease;
 }
 
@@ -596,7 +597,8 @@ body.dark-mode .work-link:hover {
 .contact-link {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    align-items: center;
+    gap: 12px;
     padding: 25px 35px;
     background: var(--white);
     border: 1px solid var(--accent-line);
@@ -605,8 +607,18 @@ body.dark-mode .work-link:hover {
     text-align: center;
 }
 
+.contact-icon {
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+.contact-link:hover .contact-icon {
+    color: var(--text-gray);
+    transform: scale(1.1);
+}
+
 .contact-link:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     border-color: var(--text-gray);
 }
