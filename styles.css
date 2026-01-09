@@ -1093,7 +1093,7 @@ html {
 }
 
 .project-video {
-    max-width: 1200px; /* Increased from 900px to allow more height */
+    max-width: 1400px; /* Increased from 1200px for larger display */
     margin: 60px auto;
     padding: 0 60px;
 }
