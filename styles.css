@@ -1115,13 +1115,17 @@ html {
 .video-container {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; /* Default 16:9, but will adjust to video */
+    padding-bottom: 56.25%; /* Default 16:9 */
     height: 0;
     overflow: hidden;
     background: var(--light-gray);
     box-shadow: 
         0 20px 60px rgba(0, 0, 0, 0.08),
         0 8px 20px rgba(0, 0, 0, 0.04);
+}
+
+.video-container.ultra-wide {
+    padding-bottom: 20%; /* Adjusted for three-channel wide video to remove wasted space */
 }
 
 .video-container iframe {
