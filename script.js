@@ -229,10 +229,18 @@ function initScrollIndicatorHide() {
 // ============================================
 function initNavScroll() {
     const nav = document.querySelector('.nav');
+    const hasHero = document.querySelector('.hero');
     
     if (nav) {
+        // Initial check
+        if (window.scrollY > 50 || !hasHero) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
+            if (window.scrollY > 50 || !hasHero) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
