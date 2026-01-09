@@ -542,35 +542,37 @@ function initHeroTextReveal() {
     if (!artistInfo || !heroSection) return;
     
     let textRevealed = false;
-    let isAnimating = false;
     
     // Initially hide the text
-    artistInfo.classList.add('hero-text-hidden');
+    artistInfo.style.opacity = '0';
+    artistInfo.style.transform = 'translateY(40px)';
+    artistInfo.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
     
     // Function to reveal the text
     function revealText() {
-        if (textRevealed || isAnimating) return;
+        if (textRevealed) return;
+        textRevealed = true;
         
-        isAnimating = true;
-        artistInfo.classList.remove('hero-text-hidden');
-        artistInfo.classList.add('hero-text-visible');
+        artistInfo.style.opacity = '1';
+        artistInfo.style.transform = 'translateY(0)';
         
-        // Update scroll indicator text if it exists
+        // Fade scroll indicator
         if (scrollIndicator) {
-            scrollIndicator.classList.add('fade-out');
+            scrollIndicator.style.opacity = '0.4';
         }
         
-        // After animation completes, allow normal scrolling
-        setTimeout(() => {
-            textRevealed = true;
-            isAnimating = false;
-        }, 800);
+        // Remove listeners after reveal
+        window.removeEventListener('wheel', handleWheel);
+        window.removeEventListener('touchstart', handleTouchStart);
+        window.removeEventListener('touchmove', handleTouchMove);
+        document.removeEventListener('keydown', handleKeydown);
     }
     
-    // Handle wheel events
+    // Handle wheel events - trigger on ANY scroll attempt
     function handleWheel(e) {
-        if (!textRevealed && !isAnimating && e.deltaY > 0) {
+        if (!textRevealed && e.deltaY > 0) {
             e.preventDefault();
+            e.stopPropagation();
             revealText();
         }
     }
@@ -583,12 +585,12 @@ function initHeroTextReveal() {
     }
     
     function handleTouchMove(e) {
-        if (!textRevealed && !isAnimating) {
+        if (!textRevealed) {
             const touchY = e.touches[0].clientY;
             const deltaY = touchStartY - touchY;
             
             // Swiping up (scrolling down)
-            if (deltaY > 30) {
+            if (deltaY > 20) {
                 e.preventDefault();
                 revealText();
             }
@@ -597,7 +599,7 @@ function initHeroTextReveal() {
     
     // Handle keyboard navigation
     function handleKeydown(e) {
-        if (!textRevealed && !isAnimating) {
+        if (!textRevealed) {
             if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
                 e.preventDefault();
                 revealText();
@@ -605,11 +607,11 @@ function initHeroTextReveal() {
         }
     }
     
-    // Add event listeners
-    window.addEventListener('wheel', handleWheel, { passive: false });
+    // Add event listeners with capture to intercept early
+    window.addEventListener('wheel', handleWheel, { passive: false, capture: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
-    window.addEventListener('keydown', handleKeydown);
+    document.addEventListener('keydown', handleKeydown);
     
     // Also reveal on click of scroll indicator
     if (scrollIndicator) {
