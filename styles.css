@@ -431,10 +431,24 @@ body.dark-mode .decorative-frame {
     aspect-ratio: 1448 / 632;
 }
 
-/* Align 'Till We All Breathe The Same' image to the top */
+.work-item.man-who-knows .work-image img {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* Specific aspect ratio for 'Till We All Breathe The Same' image to show full photo */
+.work-item.till-we-breathe .work-image {
+    aspect-ratio: 2550 / 3150;
+}
+
 .work-item.till-we-breathe .work-image img {
-    object-position: top;
-    top: -8%;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-position: center;
 }
 
 .work-image img {
