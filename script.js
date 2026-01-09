@@ -259,43 +259,61 @@ function initNavScroll() {
 function initParallaxScroll() {
     let ticking = false;
     
-    window.addEventListener('scroll', function() {
-        if (!ticking) {
-            window.requestAnimationFrame(function() {
-                const scrolled = window.pageYOffset;
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        
+        // Parallax effect on hero section
+        const hero = document.querySelector('.hero');
+        if (hero && scrolled < window.innerHeight) {
+            const photoFrame = document.querySelector('.photo-frame');
+            const artistInfo = document.querySelector('.artist-info');
+            
+            if (photoFrame) {
+                photoFrame.style.transform = `translateY(${scrolled * 0.3}px) scale(${1 - scrolled * 0.0001})`;
+                photoFrame.style.opacity = 1 - (scrolled * 0.001);
+            }
+            
+            if (artistInfo) {
+                artistInfo.style.transform = `translateY(${scrolled * 0.5}px)`;
                 
-                // Parallax effect on hero section
-                const hero = document.querySelector('.hero');
-                if (hero && scrolled < window.innerHeight) {
-                    const photoFrame = document.querySelector('.photo-frame');
-                    const artistInfo = document.querySelector('.artist-info');
-                    
-                    if (photoFrame) {
-                        photoFrame.style.transform = `translateY(${scrolled * 0.3}px) scale(${1 - scrolled * 0.0001})`;
-                        photoFrame.style.opacity = 1 - (scrolled * 0.001);
-                    }
-                    
-                    if (artistInfo) {
-                        artistInfo.style.transform = `translateY(${scrolled * 0.5}px)`;
-                        artistInfo.style.opacity = 1 - (scrolled * 0.0015);
-                    }
+                // Reveal text on scroll, then fade out as we reach work section
+                let infoOpacity = 0;
+                if (scrolled <= 0) {
+                    infoOpacity = 0;
+                } else if (scrolled < 150) {
+                    infoOpacity = scrolled / 150; // Rapid fade in
+                    // Add subtle lift during reveal
+                    const translateY = 20 * (1 - infoOpacity);
+                    artistInfo.style.transform += ` translateY(${translateY}px)`;
+                } else {
+                    infoOpacity = 1 - ((scrolled - 150) * 0.0015);
                 }
                 
-                // Fade in works on scroll
-                const workItems = document.querySelectorAll('.work-item');
-                workItems.forEach(item => {
-                    const rect = item.getBoundingClientRect();
-                    const windowHeight = window.innerHeight;
-                    
-                    if (rect.top < windowHeight * 0.85) {
-                        item.style.opacity = '1';
-                        item.style.transform = 'translateY(0)';
-                    }
-                });
-                
-                ticking = false;
-            });
+                artistInfo.style.opacity = Math.max(0, Math.min(1, infoOpacity));
+            }
+        }
+        
+        // Fade in works on scroll
+        const workItems = document.querySelectorAll('.work-item');
+        workItems.forEach(item => {
+            const rect = item.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
             
+            if (rect.top < windowHeight * 0.85) {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }
+        });
+        
+        ticking = false;
+    }
+
+    // Initial call
+    updateParallax();
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(updateParallax);
             ticking = true;
         }
     });
