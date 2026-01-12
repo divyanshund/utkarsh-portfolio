@@ -1106,7 +1106,7 @@ html {
 }
 
 .project-hero {
-    max-width: 910px; /* Reduced by 35% from 1400px */
+    max-width: 1137px; /* Increased by 25% from 910px */
     margin: 60px auto;
     padding: 0 60px;
 }
@@ -1208,7 +1208,7 @@ html {
 .project-gallery {
     max-width: 1400px;
     margin: 100px auto;
-    padding: 0 100px;
+    padding: 0 20px;
 }
 
 /* Editorial Gallery Layouts */
