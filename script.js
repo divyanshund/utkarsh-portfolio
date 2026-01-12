@@ -20,7 +20,8 @@ const PHOTOS = [
     'images/homepage/m.jpg',
     'images/homepage/n.jpg',
     'images/homepage/o.jpg',
-    'images/homepage/p.jpg'
+    'images/homepage/p.jpg',
+    'images/homepage/IMG_7114.PNG'
 ];
 
 // ============================================
