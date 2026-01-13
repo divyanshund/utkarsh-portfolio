@@ -50,6 +50,7 @@ body.dark-mode .nav {
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--accent-line);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    padding: 15px 60px; /* Reduced vertical padding from 30px to 15px */
 }
 
 body.dark-mode .nav.scrolled {
@@ -944,6 +945,10 @@ body.dark-mode .work-link:hover {
         padding: 20px 20px;
     }
     
+    .nav.scrolled {
+        padding: 12px 20px; /* Reduced vertical padding on mobile when scrolled */
+    }
+    
     .nav-content {
         gap: 20px; /* Brought closer for mobile */
     }
@@ -1508,5 +1513,110 @@ body.dark-mode .back-link:hover {
     .project-footer {
         margin: 60px auto 40px;
         padding: 0 20px;
+    }
+}
+
+/* ============================================
+   Camera Shutter Interactive Element
+   ============================================ */
+.camera-shutter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+.camera-icon {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.camera-icon:hover {
+    transform: scale(1.05);
+}
+
+.camera-icon:active {
+    transform: scale(0.95);
+}
+
+.camera-body {
+    width: 120px;
+    height: 120px;
+    color: var(--text-gray);
+    transition: color 0.3s ease;
+}
+
+.camera-hint {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.875rem;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    margin: 0;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.camera-icon:hover .camera-hint {
+    opacity: 1;
+}
+
+/* Shutter blade animation */
+.shutter-blades .blade {
+    transition: opacity 0.05s ease;
+    transform-origin: 50% 50%;
+}
+
+/* Shutter closing animation */
+.camera-icon.shuttering .blade-1 { opacity: 0.8; transition-delay: 0s; }
+.camera-icon.shuttering .blade-2 { opacity: 0.8; transition-delay: 0.03s; }
+.camera-icon.shuttering .blade-3 { opacity: 0.8; transition-delay: 0.06s; }
+.camera-icon.shuttering .blade-4 { opacity: 0.8; transition-delay: 0.09s; }
+.camera-icon.shuttering .blade-5 { opacity: 0.8; transition-delay: 0.12s; }
+.camera-icon.shuttering .blade-6 { opacity: 0.8; transition-delay: 0.15s; }
+.camera-icon.shuttering .blade-7 { opacity: 0.8; transition-delay: 0.18s; }
+.camera-icon.shuttering .blade-8 { opacity: 0.8; transition-delay: 0.21s; }
+
+/* Shutter opening animation */
+.camera-icon.opening .blade-1 { opacity: 0; transition-delay: 0.21s; }
+.camera-icon.opening .blade-2 { opacity: 0; transition-delay: 0.18s; }
+.camera-icon.opening .blade-3 { opacity: 0; transition-delay: 0.15s; }
+.camera-icon.opening .blade-4 { opacity: 0; transition-delay: 0.12s; }
+.camera-icon.opening .blade-5 { opacity: 0; transition-delay: 0.09s; }
+.camera-icon.opening .blade-6 { opacity: 0; transition-delay: 0.06s; }
+.camera-icon.opening .blade-7 { opacity: 0; transition-delay: 0.03s; }
+.camera-icon.opening .blade-8 { opacity: 0; transition-delay: 0s; }
+
+/* Flash effect */
+.page-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity 0.1s ease;
+}
+
+.page-flash.active {
+    opacity: 0.4;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .camera-body {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .camera-shutter-container {
+        margin-top: 60px;
     }
 }

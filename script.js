@@ -653,3 +653,48 @@ window.addEventListener('load', function() {
         img.src = url;
     });
 });
+
+// ============================================
+// Camera Shutter Animation (About Page)
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    const cameraShutter = document.getElementById('cameraShutter');
+    
+    if (!cameraShutter) return; // Only run on about page
+    
+    // Create flash element
+    const flash = document.createElement('div');
+    flash.className = 'page-flash';
+    document.body.appendChild(flash);
+    
+    let isAnimating = false;
+    
+    cameraShutter.addEventListener('click', function() {
+        if (isAnimating) return;
+        
+        isAnimating = true;
+        
+        // Close shutter
+        cameraShutter.classList.add('shuttering');
+        
+        // Flash effect at the moment of "capture"
+        setTimeout(() => {
+            flash.classList.add('active');
+            setTimeout(() => {
+                flash.classList.remove('active');
+            }, 100);
+        }, 240);
+        
+        // Open shutter
+        setTimeout(() => {
+            cameraShutter.classList.remove('shuttering');
+            cameraShutter.classList.add('opening');
+        }, 280);
+        
+        // Reset
+        setTimeout(() => {
+            cameraShutter.classList.remove('opening');
+            isAnimating = false;
+        }, 700);
+    });
+});
