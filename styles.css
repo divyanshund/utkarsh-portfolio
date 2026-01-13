@@ -1187,7 +1187,7 @@ html {
     font-family: 'Cormorant Garamond', serif;
     font-size: 0.85rem;
     color: var(--text-light);
-    text-transform: lowercase;
+    text-transform: uppercase;
     letter-spacing: 1px;
     padding: 8px 24px;
     border: 1px solid var(--accent-line);
