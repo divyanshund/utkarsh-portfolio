@@ -1083,7 +1083,7 @@ html {
 .project-header {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 60px 20px 40px; /* Reduced side padding to 20px */
+    padding: 60px 20px 0; /* Reduced side padding to 20px, no bottom padding as details has margin */
     text-align: center;
 }
 
@@ -1103,6 +1103,7 @@ html {
     font-size: 1rem;
     color: var(--text-light);
     letter-spacing: 2px;
+    margin-bottom: 0;
 }
 
 .project-hero {
@@ -1175,8 +1176,9 @@ html {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-bottom: 50px;
-    padding-bottom: 40px;
+    margin-top: 40px; /* Space from year */
+    margin-bottom: 60px; /* Space after separator */
+    padding-bottom: 30px; /* Space before separator line */
     justify-content: center; /* Center the tags */
     border-bottom: 1px solid var(--accent-line);
 }
@@ -1391,7 +1393,7 @@ body.dark-mode .back-link:hover {
 /* Project Page Responsive */
 @media (max-width: 768px) {
     .project-header {
-        padding: 40px 20px 20px;
+        padding: 40px 20px 0;
     }
     
     .project-title {
@@ -1426,7 +1428,8 @@ body.dark-mode .back-link:hover {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
-        margin-bottom: 35px;
+        margin-top: 30px;
+        margin-bottom: 40px;
         padding-bottom: 20px;
         justify-content: center;
     }
