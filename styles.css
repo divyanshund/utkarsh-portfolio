@@ -1210,7 +1210,7 @@ html {
 .project-gallery {
     max-width: 900px;
     margin: 100px auto;
-    padding: 0 20px;
+    padding: 0 23px; /* Increased by 15% from 20px */
 }
 
 /* Editorial Gallery Layouts */
@@ -1483,7 +1483,7 @@ body.dark-mode .back-link:hover {
     
     .project-gallery {
         margin: 60px auto;
-        padding: 0 20px;
+        padding: 0 23px; /* Increased by 15% from 20px */
     }
     
     /* Mobile Gallery Adjustments */
