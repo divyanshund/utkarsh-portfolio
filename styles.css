@@ -2075,16 +2075,83 @@ body.dark-mode .video-click-hint {
     align-items: center;
     justify-content: center;
     position: relative;
+    padding: 40px;
 }
 
 body.dark-mode .video-embed {
     background-color: #1a1a1a;
 }
 
-.video-embed iframe {
+.video-thumbnail-link {
+    position: relative;
+    display: block;
+    width: 70%;
+    max-width: 600px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.video-thumbnail-link:hover {
+    transform: scale(1.02);
+}
+
+.video-thumbnail-image {
     width: 100%;
+    height: auto;
+    display: block;
     aspect-ratio: 16 / 9;
-    border: none;
+    object-fit: cover;
+    background-color: #ddd;
+}
+
+body.dark-mode .video-thumbnail-image {
+    background-color: #333;
+}
+
+.video-play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.play-icon {
+    width: 60px;
+    height: 60px;
+    color: #000;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .play-icon {
+    color: #fff;
+}
+
+.video-thumbnail-link:hover .play-icon {
+    transform: scale(1.1);
+}
+
+.play-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-transform: lowercase;
+}
+
+body.dark-mode .play-text {
+    color: #fff;
+}
+
+.video-thumbnail-link:hover .play-text {
+    opacity: 1;
 }
 
 .video-gallery {
@@ -2126,7 +2193,16 @@ body.dark-mode .video-embed {
     }
     
     .video-embed {
-        min-height: 400px;
+        padding: 30px;
+    }
+    
+    .video-thumbnail-link {
+        width: 85%;
+    }
+    
+    .play-icon {
+        width: 50px;
+        height: 50px;
     }
 }
 
@@ -2150,7 +2226,20 @@ body.dark-mode .video-embed {
     }
     
     .video-embed {
-        min-height: 300px;
+        padding: 20px;
+    }
+    
+    .video-thumbnail-link {
+        width: 100%;
+    }
+    
+    .play-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .play-text {
+        font-size: 12px;
     }
     
     .commissioned-work-title {
