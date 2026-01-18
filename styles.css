@@ -692,7 +692,6 @@ body.dark-mode .work-image-link:hover .work-image {
     margin-bottom: 20px;
     color: var(--text-gray);
     letter-spacing: 0.5px;
-    text-transform: lowercase;
 }
 
 .work-description {
