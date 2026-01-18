@@ -1973,6 +1973,21 @@ body.dark-mode .commissioned-filter-btn:hover {
 }
 
 /* Gallery for non-video sections */
+.commissioned-section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+body.dark-mode .commissioned-section-heading {
+    color: #888;
+}
+
 .commissioned-gallery-full {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
