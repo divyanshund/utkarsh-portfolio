@@ -456,8 +456,10 @@ body.dark-mode .decorative-frame {
     box-shadow: 
         0 20px 60px rgba(0, 0, 0, 0.08),
         0 8px 20px rgba(0, 0, 0, 0.04);
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform, box-shadow;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), outline-color 0.3s ease;
+    will-change: transform, outline-color;
 }
 
 /* Specific aspect ratio for 'The Man Who Knows' image to show full width */
@@ -551,9 +553,11 @@ body.dark-mode .decorative-frame {
 
 .work-image-link:hover .work-image {
     transform: translateY(-12px);
-    box-shadow: 
-        0 40px 90px rgba(0, 0, 0, 0.15),
-        0 15px 35px rgba(0, 0, 0, 0.08);
+    outline-color: #000000;
+}
+
+body.dark-mode .work-image-link:hover .work-image {
+    outline-color: #ffffff;
 }
 
 .work-title {
