@@ -136,6 +136,16 @@ body.dark-mode .nav.scrolled .nav-link:hover {
     width: 60%;
 }
 
+.back-link-nav {
+    opacity: 0.6;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+
+.back-link-nav:hover {
+    opacity: 1;
+}
+
 /* Elegant Theme Toggle Button */
 .theme-toggle {
     position: fixed;
