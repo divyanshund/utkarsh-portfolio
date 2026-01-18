@@ -78,9 +78,16 @@
     <section class="recent-works" id="work">
         <h2 class="section-title">work</h2>
         
+        <!-- Filter Buttons -->
+        <div class="work-filters">
+            <button class="filter-btn active" data-filter="all">all</button>
+            <button class="filter-btn" data-filter="personal">personal</button>
+            <button class="filter-btn" data-filter="commissioned">commissioned</button>
+        </div>
+        
         <div class="works-container">
             <!-- Work 1 -->
-            <article class="work-item">
+            <article class="work-item" data-category="personal">
                 <a href="graduation-project.html" class="work-image-link">
                     <div class="work-image">
                         <img src="images/as we lose/cover.JPG" alt="Graduation Project">
@@ -101,7 +108,7 @@
             </article>
             
             <!-- Work 2 -->
-            <article class="work-item">
+            <article class="work-item" data-category="personal">
                 <a href="goback-project.html" class="work-image-link">
                     <div class="work-image">
                         <img src="images/goback/book spreads/0.jpg" alt="We'll Go Back to Our Roots When We Reach the Sky">
@@ -121,7 +128,7 @@
             </article>
             
             <!-- Work 3 -->
-            <article class="work-item till-we-breathe">
+            <article class="work-item till-we-breathe" data-category="personal">
                 <a href="till-we-all-breathe-the-same.html" class="work-image-link">
                     <div class="work-image">
                         <img src="images/tillwebreath/cover.jpg" alt="Till We All Breathe The Same">
@@ -141,7 +148,7 @@
             </article>
 
             <!-- Work 4 -->
-            <article class="work-item man-who-knows">
+            <article class="work-item man-who-knows" data-category="personal">
                 <a href="the-man-who-knows.html" class="work-image-link">
                     <div class="work-image">
                         <img src="images/manwhoknows/themanwho.png" alt="The Man Who Knows">

@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize active navigation state
     initActiveNav();
     
+    // Initialize work filters
+    initWorkFilters();
+    
     // Initialize photo slideshow
     initPhotoSlideshow();
     
@@ -93,6 +96,39 @@ function initDarkMode() {
             localStorage.setItem('theme', theme);
         });
     }
+}
+
+// ============================================
+// Work Filters
+// ============================================
+function initWorkFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const workItems = document.querySelectorAll('.work-item');
+    
+    if (filterBtns.length === 0 || workItems.length === 0) return;
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter work items
+            workItems.forEach(item => {
+                const category = item.getAttribute('data-category');
+                
+                if (filter === 'all') {
+                    item.classList.remove('hidden');
+                } else if (category === filter) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        });
+    });
 }
 
 // ============================================

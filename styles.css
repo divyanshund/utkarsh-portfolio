@@ -423,6 +423,53 @@ body.dark-mode .decorative-frame {
     margin-right: auto;
 }
 
+/* Work Filters */
+.work-filters {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+    max-width: 1400px;
+    margin: 0 auto 50px auto;
+}
+
+.filter-btn {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    padding: 8px 24px;
+    background: transparent;
+    border: 1px solid var(--accent-line);
+    color: var(--text-light);
+    cursor: pointer;
+    text-transform: lowercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border-radius: 25px;
+}
+
+.filter-btn:hover {
+    background: var(--text-gray);
+    color: var(--white);
+    border-color: var(--text-gray);
+}
+
+.filter-btn.active {
+    background: var(--text-gray);
+    color: var(--white);
+    border-color: var(--text-gray);
+}
+
+body.dark-mode .filter-btn:hover,
+body.dark-mode .filter-btn.active {
+    background: var(--white);
+    color: var(--text-gray);
+    border-color: var(--white);
+}
+
+/* Hide filtered work items */
+.work-item.hidden {
+    display: none;
+}
+
 .works-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -952,6 +999,15 @@ body.dark-mode .work-link:hover {
 
     .work-tags {
         justify-content: center;
+    }
+    
+    .work-filters {
+        justify-content: center;
+    }
+    
+    .filter-btn {
+        font-size: 16px;
+        padding: 6px 20px;
     }
 }
 
