@@ -1921,7 +1921,7 @@ body.dark-mode .back-link:hover {
 
 .video-description {
     flex: 0 0 450px;
-    background-color: #e8e6da;
+    background-color: #f5f5f7;
     padding: 60px;
     display: flex;
     flex-direction: column;
@@ -1929,7 +1929,7 @@ body.dark-mode .back-link:hover {
 }
 
 body.dark-mode .video-description {
-    background-color: #2a2a2a;
+    background-color: #1a1a1a;
 }
 
 .video-item-title {
