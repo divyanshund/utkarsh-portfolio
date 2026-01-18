@@ -432,21 +432,6 @@ body.dark-mode .decorative-frame {
     margin: 0 auto 50px auto;
 }
 
-/* Work Category Titles */
-.work-category-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 400;
-    text-align: left;
-    margin-bottom: 40px;
-    color: var(--text-gray);
-    letter-spacing: 0.5px;
-    text-transform: lowercase;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 /* Work Divider */
 .work-divider {
     max-width: 1400px;
@@ -491,7 +476,6 @@ body.dark-mode .filter-btn.active {
 /* Hide filtered work items */
 .work-item.hidden,
 .commissioned-item.hidden,
-.work-category-title.hidden,
 .work-divider.hidden,
 .commissioned-grid.hidden {
     display: none !important;

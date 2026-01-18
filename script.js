@@ -105,7 +105,6 @@ function initWorkFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const workItems = document.querySelectorAll('.work-item');
     const commissionedItems = document.querySelectorAll('.commissioned-item');
-    const categoryTitles = document.querySelectorAll('.work-category-title');
     const divider = document.querySelector('.work-divider');
     const commissionedGrid = document.querySelector('.commissioned-grid');
     
@@ -138,19 +137,6 @@ function initWorkFilters() {
                     item.classList.remove('hidden');
                 } else {
                     item.classList.add('hidden');
-                }
-            });
-            
-            // Show/hide category titles and divider based on filter
-            categoryTitles.forEach(title => {
-                const category = title.getAttribute('data-category');
-                
-                if (filter === 'all') {
-                    title.classList.remove('hidden');
-                } else if (category === filter) {
-                    title.classList.remove('hidden');
-                } else {
-                    title.classList.add('hidden');
                 }
             });
             
