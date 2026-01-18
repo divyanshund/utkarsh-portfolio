@@ -127,7 +127,7 @@ body.dark-mode .nav.scrolled .nav-link:hover {
 /* Elegant Theme Toggle Button */
 .theme-toggle {
     position: fixed;
-    top: 30px;
+    top: 25px;
     right: 60px;
     padding: 10px 24px;
     min-height: 40px;
