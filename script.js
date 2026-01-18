@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize dark mode
     initDarkMode();
     
+    // Initialize active navigation state
+    initActiveNav();
+    
     // Initialize photo slideshow
     initPhotoSlideshow();
     
@@ -90,6 +93,50 @@ function initDarkMode() {
             localStorage.setItem('theme', theme);
         });
     }
+}
+
+// ============================================
+// Active Navigation State
+// ============================================
+function initActiveNav() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const currentPath = window.location.pathname;
+    const currentHash = window.location.hash;
+    
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        
+        // Check if it's the about page
+        if (href === 'about.html' && currentPath.includes('about.html')) {
+            link.classList.add('active');
+        }
+        // Check if it's a hash link on index page or current page
+        else if (href.startsWith('#')) {
+            // If we're on index page (or root) and hash matches
+            if ((currentPath === '/' || currentPath.includes('index.html') || currentPath === '') && href === currentHash) {
+                link.classList.add('active');
+            }
+            // Default to home if no hash and we're on homepage
+            if (href === '#home' && (currentPath === '/' || currentPath.includes('index.html') || currentPath === '') && !currentHash) {
+                link.classList.add('active');
+            }
+        }
+    });
+    
+    // Update active state on hash change
+    window.addEventListener('hashchange', function() {
+        const newHash = window.location.hash;
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('#')) {
+                if (href === newHash) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            }
+        });
+    });
 }
 
 // ============================================
