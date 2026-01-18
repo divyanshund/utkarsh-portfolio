@@ -433,15 +433,15 @@ body.dark-mode .decorative-frame {
 /* Work Section Labels */
 .work-section-label {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
+    font-size: 18px;
     color: #999999;
     text-align: left;
     margin-bottom: 40px;
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 60px;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* Work Divider */
