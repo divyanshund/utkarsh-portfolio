@@ -374,6 +374,7 @@ function initScrollIndicatorHide() {
 function initNavScroll() {
     const nav = document.querySelector('.nav');
     const hero = document.querySelector('.hero');
+    const themeToggle = document.getElementById('themeToggle');
     
     if (nav) {
         if (hero) {
@@ -383,17 +384,26 @@ function initNavScroll() {
         // Initial check for scrolled state
         if (window.scrollY > 50) {
             nav.classList.add('scrolled');
+            if (themeToggle && hero) themeToggle.classList.add('visible');
         } else {
             nav.classList.remove('scrolled');
+            if (themeToggle && hero) themeToggle.classList.remove('visible');
         }
 
         window.addEventListener('scroll', function() {
             if (window.scrollY > 50) {
                 nav.classList.add('scrolled');
+                if (themeToggle && hero) themeToggle.classList.add('visible');
             } else {
                 nav.classList.remove('scrolled');
+                if (themeToggle && hero) themeToggle.classList.remove('visible');
             }
         });
+    }
+    
+    // Show theme toggle on non-hero pages immediately
+    if (!hero && themeToggle) {
+        themeToggle.classList.add('visible');
     }
 }
 
