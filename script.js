@@ -104,8 +104,12 @@ function initDarkMode() {
 function initWorkFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const workItems = document.querySelectorAll('.work-item');
+    const commissionedItems = document.querySelectorAll('.commissioned-item');
+    const categoryTitles = document.querySelectorAll('.work-category-title');
+    const divider = document.querySelector('.work-divider');
+    const commissionedGrid = document.querySelector('.commissioned-grid');
     
-    if (filterBtns.length === 0 || workItems.length === 0) return;
+    if (filterBtns.length === 0) return;
     
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -115,18 +119,57 @@ function initWorkFilters() {
             filterBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
             
-            // Filter work items
+            // Filter personal work items
             workItems.forEach(item => {
                 const category = item.getAttribute('data-category');
                 
-                if (filter === 'all') {
-                    item.classList.remove('hidden');
-                } else if (category === filter) {
+                if (filter === 'all' || category === filter) {
                     item.classList.remove('hidden');
                 } else {
                     item.classList.add('hidden');
                 }
             });
+            
+            // Filter commissioned items
+            commissionedItems.forEach(item => {
+                const category = item.getAttribute('data-category');
+                
+                if (filter === 'all' || category === filter) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+            
+            // Show/hide category titles and divider based on filter
+            categoryTitles.forEach(title => {
+                const category = title.getAttribute('data-category');
+                
+                if (filter === 'all') {
+                    title.classList.remove('hidden');
+                } else if (category === filter) {
+                    title.classList.remove('hidden');
+                } else {
+                    title.classList.add('hidden');
+                }
+            });
+            
+            // Show/hide divider and commissioned grid
+            if (divider) {
+                if (filter === 'all' || filter === 'commissioned') {
+                    divider.classList.remove('hidden');
+                } else {
+                    divider.classList.add('hidden');
+                }
+            }
+            
+            if (commissionedGrid) {
+                if (filter === 'all' || filter === 'commissioned') {
+                    commissionedGrid.classList.remove('hidden');
+                } else {
+                    commissionedGrid.classList.add('hidden');
+                }
+            }
         });
     });
 }
