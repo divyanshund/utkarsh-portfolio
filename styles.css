@@ -2162,7 +2162,7 @@ body.dark-mode .play-text {
 }
 
 .video-gallery-item {
-    width: 60%;
+    width: 85%;
     aspect-ratio: 16/9;
     overflow: hidden;
     transition: transform 0.3s ease;
