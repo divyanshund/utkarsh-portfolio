@@ -2074,20 +2074,17 @@ body.dark-mode .video-click-hint {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 body.dark-mode .video-embed {
     background-color: #1a1a1a;
 }
 
-.video-embed .video-container {
-    width: 100%;
-    height: 100%;
-}
-
 .video-embed iframe {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
 }
 
 .video-gallery {
