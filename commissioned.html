@@ -3,110 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Commissioned Work - Utkarsh Singh</title>
+    <meta name="description" content="Video - Commissioned Work by Utkarsh Singh">
+    <title>Video - Utkarsh Singh</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="dark-mode">
-    <!-- Header -->
-    <header class="gallery-header">
-        <a href="index.html" class="back-button">
-            <span>←</span>
-            <span>Back</span>
-        </a>
-        <div class="gallery-name">Utkarsh Singh</div>
-        <h1 class="gallery-title">Commissioned</h1>
-    </header>
-
-    <!-- Gallery Container -->
-    <div class="gallery-container">
-        <div class="gallery-grid" id="commissioned-gallery">
-            <!-- Gallery Item - Photo Example -->
-            <div class="gallery-item" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80" alt="Commissioned work 1">
-                <div class="gallery-item-overlay"></div>
-            </div>
-
-            <!-- Gallery Item - Photo Example -->
-            <div class="gallery-item" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1485470733090-0aae1788d5af?w=800&q=80" alt="Commissioned work 2">
-                <div class="gallery-item-overlay"></div>
-            </div>
-
-            <!-- Gallery Item - Video Example -->
-            <div class="gallery-item" data-aos="fade-up">
-                <video muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause()">
-                    <source src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf" type="video/mp4">
-                </video>
-                <div class="gallery-item-overlay">
-                    <span class="play-icon">▶</span>
-                </div>
-            </div>
-
-            <!-- Gallery Item - Photo Example -->
-            <div class="gallery-item" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Commissioned work 3">
-                <div class="gallery-item-overlay"></div>
-            </div>
-
-            <!-- Gallery Item - Photo Example -->
-            <div class="gallery-item" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=80" alt="Commissioned work 4">
-                <div class="gallery-item-overlay"></div>
-            </div>
-
-            <!-- Gallery Item - Photo Example -->
-            <div class="gallery-item" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80" alt="Commissioned work 5">
-                <div class="gallery-item-overlay"></div>
-            </div>
-
-            <!-- Gallery Item - Photo Example -->
-            <div class="gallery-item" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80" alt="Commissioned work 6">
-                <div class="gallery-item-overlay"></div>
-            </div>
-
-            <!-- Gallery Item - Video Example -->
-            <div class="gallery-item" data-aos="fade-up">
-                <video muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause()">
-                    <source src="https://player.vimeo.com/external/370467553.sd.mp4?s=311a6c8b0f0e4e9a8e2e9b8d7e0e4f7e" type="video/mp4">
-                </video>
-                <div class="gallery-item-overlay">
-                    <span class="play-icon">▶</span>
-                </div>
-            </div>
-
-            <!-- Gallery Item - Photo Example -->
-            <div class="gallery-item" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&q=80" alt="Commissioned work 7">
-                <div class="gallery-item-overlay"></div>
-            </div>
-
-            <!-- Gallery Item - Photo Example -->
-            <div class="gallery-item" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1560343090-f0409e92791a?w=800&q=80" alt="Commissioned work 8">
-                <div class="gallery-item-overlay"></div>
-            </div>
-
-            <!-- Gallery Item - Photo Example -->
-            <div class="gallery-item" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80" alt="Commissioned work 9">
-                <div class="gallery-item-overlay"></div>
-            </div>
-
-            <!-- Gallery Item - Photo Example -->
-            <div class="gallery-item" data-aos="fade-up">
-                <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&q=80" alt="Commissioned work 10">
-                <div class="gallery-item-overlay"></div>
-            </div>
-
-            <!-- Add more gallery items as needed -->
-            <!-- Replace the placeholder images with your actual photos/videos -->
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html#home" class="nav-link">home</a>
+            <a href="index.html#work" class="nav-link">work</a>
+            <a href="about.html" class="nav-link">about</a>
+            <a href="index.html#contact" class="nav-link">contact me</a>
         </div>
-    </div>
+    </nav>
+
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="toggle-text light-text">turn lights off</span>
+        <span class="toggle-text dark-text">turn lights on</span>
+    </button>
+
+    <!-- Project Content -->
+    <main class="project-page">
+        <!-- Project Header -->
+        <section class="project-header">
+            <h1 class="project-title">commissioned work</h1>
+        </section>
+
+        <!-- Category Filters -->
+        <section class="commissioned-filters">
+            <button class="commissioned-filter-btn" data-target="video">video</button>
+            <button class="commissioned-filter-btn" data-target="fashion">fashion & lifestyle</button>
+            <button class="commissioned-filter-btn" data-target="interior">interior & architecture</button>
+            <button class="commissioned-filter-btn" data-target="products">products & event</button>
+        </section>
+
+        <!-- Video Section -->
+        <section class="video-item" id="video">
+            <div class="video-content-wrapper">
+                <!-- Video Description (Left Side) -->
+                <div class="video-description">
+                    <h2 class="video-item-title">Video Title 1 : documentary film</h2>
+                    <p class="video-item-meta">Duration 00:00</p>
+                    <div class="video-item-text">
+                        <p>Video description paragraph 1 goes here.</p>
+                        <p>Video description paragraph 2 goes here.</p>
+                        <p>Video description paragraph 3 goes here.</p>
+                        <p><strong>Produced by</strong> [Producer name]</p>
+                    </div>
+                    <p class="video-click-hint">Click on the image to watch the film</p>
+                </div>
+
+                <!-- YouTube Embed (Right Side) -->
+                <div class="video-embed">
+                    <div class="video-container">
+                        <iframe src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" title="Video Title 1"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Gallery -->
+            <div class="video-gallery">
+                <div class="video-gallery-item">
+                    <img src="" alt="Video still 1">
+                </div>
+                <div class="video-gallery-item">
+                    <img src="" alt="Video still 2">
+                </div>
+                <div class="video-gallery-item">
+                    <img src="" alt="Video still 3">
+                </div>
+                <!-- Add more gallery items as needed -->
+            </div>
+        </section>
+
+        <!-- Fashion & Lifestyle Section -->
+        <section class="video-item" id="fashion">
+            <div class="commissioned-gallery-full">
+                <!-- Gallery images will be added here -->
+            </div>
+        </section>
+
+        <!-- Interior & Architecture Section -->
+        <section class="video-item" id="interior">
+            <div class="commissioned-gallery-full">
+                <!-- Gallery images will be added here -->
+            </div>
+        </section>
+
+        <!-- Products & Event Section -->
+        <section class="video-item" id="products">
+            <div class="commissioned-gallery-full">
+                <!-- Gallery images will be added here -->
+            </div>
+        </section>
+
+        <!-- Back Link -->
+        <section class="project-footer">
+            <a href="index.html#work" class="back-link">← back to work</a>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">

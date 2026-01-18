@@ -885,4 +885,28 @@ function initGalleryLightbox() {
 // Initialize lightbox on page load
 document.addEventListener('DOMContentLoaded', function() {
     initGalleryLightbox();
+    initCommissionedFilters();
 });
+
+// ============================================
+// Commissioned Work Filters - Scroll to Section
+// ============================================
+function initCommissionedFilters() {
+    const filterBtns = document.querySelectorAll('.commissioned-filter-btn');
+    
+    if (filterBtns.length === 0) return;
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const target = this.getAttribute('data-target');
+            const section = document.getElementById(target);
+            
+            if (section) {
+                section.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}

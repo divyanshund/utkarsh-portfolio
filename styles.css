@@ -430,26 +430,55 @@ body.dark-mode .decorative-frame {
     margin-right: auto;
 }
 
-/* Work Section Labels */
-.work-section-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: #999999;
-    text-align: left;
-    margin-bottom: 40px;
+/* Commissioned Work Tile */
+.commissioned-work-tile {
     max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    margin: 120px auto 0 auto;
 }
 
-/* Work Divider */
-.work-divider {
-    max-width: 1400px;
-    margin: 80px auto;
-    height: 1px;
-    background: var(--accent-line);
+.commissioned-work-link {
+    display: block;
+    text-decoration: none;
+}
+
+.commissioned-work-image {
+    position: relative;
+    aspect-ratio: 21/9;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.commissioned-work-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.commissioned-work-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 40px;
+    transition: background 0.3s ease;
+}
+
+.commissioned-work-link:hover .commissioned-work-overlay {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+.commissioned-work-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    margin: 0;
 }
 
 /* Commissioned Work Grid */
@@ -1904,7 +1933,62 @@ body.dark-mode .back-link:hover {
 }
 
 /* ============================================
-   Commissioned Video Page Styles
+   Commissioned Work Page Styles
+   ============================================ */
+
+/* Category Filters */
+.commissioned-filters {
+    max-width: 1200px;
+    margin: 60px auto 80px auto;
+    padding: 0 60px;
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.commissioned-filter-btn {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    padding: 10px 24px;
+    background: transparent;
+    border: 1px solid var(--accent-line);
+    color: var(--text-light);
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border-radius: 25px;
+}
+
+.commissioned-filter-btn:hover {
+    background: var(--text-gray);
+    color: var(--white);
+    border-color: var(--text-gray);
+}
+
+body.dark-mode .commissioned-filter-btn:hover {
+    background: var(--white);
+    color: var(--text-gray);
+    border-color: var(--white);
+}
+
+/* Gallery for non-video sections */
+.commissioned-gallery-full {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 0 60px;
+}
+
+.commissioned-gallery-full img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+}
+
+/* ============================================
+   Video Sections
    ============================================ */
 
 .video-item {
@@ -2070,5 +2154,20 @@ body.dark-mode .video-embed {
     
     .video-embed {
         min-height: 300px;
+    }
+    
+    .commissioned-work-title {
+        font-size: 1.8rem;
+    }
+    
+    .commissioned-filters {
+        padding: 0 20px;
+        justify-content: center;
+    }
+    
+    .commissioned-gallery-full {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 20px;
     }
 }
