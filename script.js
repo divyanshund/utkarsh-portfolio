@@ -149,16 +149,22 @@ function initActiveNav() {
         observer.observe(section);
     });
     
-    // Also handle direct hash link clicks
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            const href = this.getAttribute('href');
-            if (href.startsWith('#')) {
-                navLinks.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
+    // Set initial active state based on current position
+    const currentHash = window.location.hash;
+    if (currentHash) {
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentHash) {
+                link.classList.add('active');
             }
         });
-    });
+    } else {
+        // Default to home if no hash
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === '#home') {
+                link.classList.add('active');
+            }
+        });
+    }
 }
 
 // ============================================
