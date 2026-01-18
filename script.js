@@ -101,39 +101,61 @@ function initDarkMode() {
 function initActiveNav() {
     const navLinks = document.querySelectorAll('.nav-link');
     const currentPath = window.location.pathname;
-    const currentHash = window.location.hash;
     
-    navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        
-        // Check if it's the about page
-        if (href === 'about.html' && currentPath.includes('about.html')) {
-            link.classList.add('active');
-        }
-        // Check if it's a hash link on index page or current page
-        else if (href.startsWith('#')) {
-            // If we're on index page (or root) and hash matches
-            if ((currentPath === '/' || currentPath.includes('index.html') || currentPath === '') && href === currentHash) {
+    // Check if we're on the about page
+    if (currentPath.includes('about.html')) {
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === 'about.html') {
                 link.classList.add('active');
             }
-            // Default to home if no hash and we're on homepage
-            if (href === '#home' && (currentPath === '/' || currentPath.includes('index.html') || currentPath === '') && !currentHash) {
-                link.classList.add('active');
+        });
+        return; // Exit early for about page
+    }
+    
+    // For homepage with sections, use intersection observer
+    const sections = document.querySelectorAll('section[id]');
+    
+    if (sections.length === 0) return;
+    
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -70% 0px', // Trigger when section is in the middle of viewport
+        threshold: 0
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.getAttribute('id');
+                
+                // Update active state for all nav links
+                navLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    
+                    // Remove active from all
+                    link.classList.remove('active');
+                    
+                    // Add active to matching section
+                    if (href === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
             }
-        }
+        });
+    }, observerOptions);
+    
+    // Observe all sections
+    sections.forEach(section => {
+        observer.observe(section);
     });
     
-    // Update active state on hash change
-    window.addEventListener('hashchange', function() {
-        const newHash = window.location.hash;
-        navLinks.forEach(link => {
-            const href = link.getAttribute('href');
+    // Also handle direct hash link clicks
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            const href = this.getAttribute('href');
             if (href.startsWith('#')) {
-                if (href === newHash) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
             }
         });
     });
