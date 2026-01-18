@@ -2158,6 +2158,7 @@ body.dark-mode .play-text {
     display: flex;
     justify-content: center;
     margin-top: 60px;
+    margin-bottom: 60px;
     padding: 0 60px;
 }
 
