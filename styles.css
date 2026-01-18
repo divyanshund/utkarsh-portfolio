@@ -1975,10 +1975,10 @@ body.dark-mode .commissioned-filter-btn:hover {
 /* Gallery for non-video sections */
 .commissioned-gallery-full {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 0 60px;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
