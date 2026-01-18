@@ -458,8 +458,8 @@ body.dark-mode .decorative-frame {
         0 8px 20px rgba(0, 0, 0, 0.04);
     outline: 2px solid transparent;
     outline-offset: 2px;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), outline-color 0.3s ease;
-    will-change: transform, outline-color;
+    transition: outline-color 0.3s ease;
+    will-change: outline-color;
 }
 
 /* Specific aspect ratio for 'The Man Who Knows' image to show full width */
@@ -552,7 +552,6 @@ body.dark-mode .decorative-frame {
 }
 
 .work-image-link:hover .work-image {
-    transform: translateY(-12px);
     outline-color: #000000;
 }
 
