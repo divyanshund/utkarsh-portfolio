@@ -2155,17 +2155,16 @@ body.dark-mode .play-text {
 }
 
 .video-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    display: flex;
+    justify-content: center;
     margin-top: 60px;
     padding: 0 60px;
 }
 
 .video-gallery-item {
+    width: 60%;
     aspect-ratio: 16/9;
     overflow: hidden;
-    cursor: pointer;
     transition: transform 0.3s ease;
 }
 
@@ -2220,9 +2219,11 @@ body.dark-mode .play-text {
     }
     
     .video-gallery {
-        grid-template-columns: 1fr;
-        gap: 15px;
         padding: 0 20px;
+    }
+    
+    .video-gallery-item {
+        width: 80%;
     }
     
     .video-embed {
