@@ -555,12 +555,18 @@ body.dark-mode .decorative-frame {
 /* Specific aspect ratio for 'The Man Who Knows' image to show full width */
 .work-item.man-who-knows .work-image {
     aspect-ratio: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .work-item.man-who-knows .work-image img {
     width: 100%;
     height: auto;
     object-fit: contain;
+    position: static;
+    left: auto;
+    top: auto;
 }
 
 /* Specific aspect ratio for 'Till We All Breathe The Same' image to show full photo */
