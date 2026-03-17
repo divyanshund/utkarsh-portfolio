@@ -79,12 +79,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Horizontal scroll (sideways wheel/trackpad) also moves the gallery
+    // Trackpads often give small deltaX - multiply for snappier response
+    const HORIZONTAL_SCROLL_MULTIPLIER = 5;
     window.addEventListener('wheel', function(e) {
         if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
             e.preventDefault();
             const totalWidth = pageCount * getPageWidth() + (pageCount - 1) * PAGE_GAP;
             const maxScroll = Math.max(0, totalWidth - window.innerHeight);
-            const newScroll = Math.max(0, Math.min(maxScroll, window.scrollY + e.deltaX));
+            const delta = e.deltaX * HORIZONTAL_SCROLL_MULTIPLIER;
+            const newScroll = Math.max(0, Math.min(maxScroll, window.scrollY + delta));
             window.scrollTo(0, newScroll);
         }
     }, { passive: false });

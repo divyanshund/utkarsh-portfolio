@@ -30,7 +30,10 @@
 
     <!-- Project Content -->
     <main class="project-page book-page">
-        <!-- Project Header -->
+        <!-- Scroll trigger: tall element that creates vertical scroll distance -->
+        <div class="book-scroll-trigger" id="bookScrollTrigger"></div>
+
+        <!-- Project Header: at end of scroll so gallery is visible on load -->
         <section class="project-header book-header">
             <h1 class="project-title">do we all breathe the same</h1>
             <span class="project-year">2024</span>
@@ -38,9 +41,6 @@
                 <p class="project-meta">book</p>
             </div>
         </section>
-
-        <!-- Scroll trigger: tall element that creates vertical scroll distance -->
-        <div class="book-scroll-trigger" id="bookScrollTrigger"></div>
 
         <!-- Horizontal gallery: fixed, translates on scroll. Pages centered as user scrolls. -->
         <div class="book-horizontal-gallery" id="bookHorizontalGallery">
