@@ -1,100 +1,247 @@
 // ============================================
-// Do We All Breathe the Same - Horizontal Scroll
-// Vertical scroll drives horizontal movement. Page in center gets focus (shadow, stroke).
-// Adjacent pages are slightly smaller. Based on Figma design.
+// Do We All Breathe the Same - 3D Book Page Flip
+// Scroll-driven and arrow-navigated page turning with CSS 3D transforms.
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
-    const scrollTrigger = document.getElementById('bookScrollTrigger');
-    const gallery = document.getElementById('bookHorizontalGallery');
+    var section = document.getElementById('bookFlipSection');
+    var book = document.getElementById('bookFlip');
+    var prevBtn = document.getElementById('bookPrev');
+    var nextBtn = document.getElementById('bookNext');
+    var indicator = document.getElementById('bookIndicator');
+    var scrollHint = document.getElementById('bookScrollHint');
 
-    if (!scrollTrigger || !gallery) return;
+    if (!book || !section) return;
 
-    const pageItems = gallery.querySelectorAll('.book-page-item');
-    const pageCount = pageItems.length;
-    const PAGE_GAP = 48;
+    var leaves = Array.from(book.querySelectorAll('.book-leaf'));
+    var totalPages = leaves.length;
+    var currentPage = 0;
+    var SCROLL_PER_PAGE = 200;
+    var FLIP_DURATION = 800;
+    var zIndexTimeout;
 
-    function getPageWidth() {
-        return Math.min(420, window.innerWidth * 0.38);
-    }
-
-    function getPageHeight() {
-        return Math.min(680, window.innerHeight * 0.65);
-    }
+    // --- Layout ---
 
     function updateLayout() {
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
-        const pageW = getPageWidth();
-        const pageH = getPageHeight();
+        var scrollDistance = (totalPages - 1) * SCROLL_PER_PAGE;
+        section.style.height = (scrollDistance + window.innerHeight) + 'px';
+    }
 
-        // Total width of gallery
-        const totalWidth = pageCount * pageW + (pageCount - 1) * PAGE_GAP;
-        const maxTranslate = Math.max(0, totalWidth - vw);
+    updateLayout();
+    window.addEventListener('resize', updateLayout);
 
-        // Scroll trigger height
-        scrollTrigger.style.height = totalWidth + 'px';
+    // --- Z-index management ---
 
-        // Translate based on scroll
-        const scrollTop = window.scrollY;
-        const maxScroll = Math.max(0, totalWidth - vh);
-        const progress = maxScroll > 0 ? Math.min(1, scrollTop / maxScroll) : 0;
-        const translateX = -progress * maxTranslate;
+    function setRestingZIndexes() {
+        for (var i = 0; i < totalPages; i++) {
+            if (i < currentPage) {
+                leaves[i].style.zIndex = i + 1;
+            } else if (i === currentPage) {
+                leaves[i].style.zIndex = totalPages;
+            } else {
+                leaves[i].style.zIndex = totalPages - i;
+            }
+        }
+    }
 
-        gallery.style.transform = `translate(${translateX}px, -50%)`;
+    function scheduleZIndexSettle() {
+        clearTimeout(zIndexTimeout);
+        zIndexTimeout = setTimeout(setRestingZIndexes, 50);
+    }
 
-        // Find which page is closest to viewport center
-        const viewportCenterX = vw / 2;
-        let focusIndex = 0;
-        let minDist = Infinity;
+    setRestingZIndexes();
 
-        for (let i = 0; i < pageCount; i++) {
-            const pageLeft = i * (pageW + PAGE_GAP) + translateX;
-            const pageCenter = pageLeft + pageW / 2;
-            const dist = Math.abs(pageCenter - viewportCenterX);
-            if (dist < minDist) {
-                minDist = dist;
-                focusIndex = i;
+    leaves.forEach(function(leaf) {
+        leaf.addEventListener('transitionend', function(e) {
+            if (e.propertyName === 'transform') {
+                scheduleZIndexSettle();
+            }
+        });
+    });
+
+    // --- Core page flip ---
+
+    function setPage(pageIndex) {
+        pageIndex = Math.max(0, Math.min(totalPages - 1, pageIndex));
+        if (pageIndex === currentPage) return;
+
+        var oldPage = currentPage;
+        var forward = pageIndex > oldPage;
+        currentPage = pageIndex;
+
+        var lo = Math.min(oldPage, pageIndex);
+        var hi = Math.max(oldPage, pageIndex);
+
+        for (var i = 0; i < totalPages; i++) {
+            if (i < currentPage) {
+                leaves[i].classList.add('flipped');
+            } else {
+                leaves[i].classList.remove('flipped');
+            }
+
+            // Boost z-index for actively flipping pages
+            if (i >= lo && i <= hi) {
+                leaves[i].style.zIndex = totalPages + (hi - i) + 1;
+            } else if (i < currentPage) {
+                leaves[i].style.zIndex = i + 1;
+            } else if (i === currentPage) {
+                leaves[i].style.zIndex = totalPages;
+            } else {
+                leaves[i].style.zIndex = totalPages - i;
             }
         }
 
-        // Apply focus class to centered page
-        pageItems.forEach((item, i) => {
-            if (i === focusIndex) {
-                item.classList.add('book-page-focus');
+        updateIndicator();
+        updateArrows();
+    }
+
+    function updateIndicator() {
+        if (indicator) {
+            indicator.textContent = (currentPage + 1) + ' / ' + totalPages;
+        }
+    }
+
+    function updateArrows() {
+        if (prevBtn) {
+            if (currentPage === 0) {
+                prevBtn.classList.add('disabled');
             } else {
-                item.classList.remove('book-page-focus');
+                prevBtn.classList.remove('disabled');
             }
+        }
+        if (nextBtn) {
+            if (currentPage === totalPages - 1) {
+                nextBtn.classList.add('disabled');
+            } else {
+                nextBtn.classList.remove('disabled');
+            }
+        }
+    }
+
+    // --- Scroll to a specific page position ---
+
+    function scrollToPage(pageIndex) {
+        var sectionDocTop = section.getBoundingClientRect().top + window.scrollY;
+        var targetScroll = sectionDocTop + pageIndex * SCROLL_PER_PAGE;
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    }
+
+    // --- Arrow navigation ---
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentPage > 0) scrollToPage(currentPage - 1);
         });
     }
 
-    let ticking = false;
-    function onScroll() {
-        if (!ticking) {
-            requestAnimationFrame(function() {
-                updateLayout();
-                ticking = false;
-            });
-            ticking = true;
-        }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentPage < totalPages - 1) scrollToPage(currentPage + 1);
+        });
     }
 
-    // Horizontal scroll (sideways wheel/trackpad) also moves the gallery
-    // Trackpads often give small deltaX - multiply for snappier response
-    const HORIZONTAL_SCROLL_MULTIPLIER = 5;
-    window.addEventListener('wheel', function(e) {
-        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-            e.preventDefault();
-            const totalWidth = pageCount * getPageWidth() + (pageCount - 1) * PAGE_GAP;
-            const maxScroll = Math.max(0, totalWidth - window.innerHeight);
-            const delta = e.deltaX * HORIZONTAL_SCROLL_MULTIPLIER;
-            const newScroll = Math.max(0, Math.min(maxScroll, window.scrollY + delta));
-            window.scrollTo(0, newScroll);
-        }
-    }, { passive: false });
+    // --- Keyboard navigation ---
 
-    updateLayout();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', function() {
-        updateLayout();
+    document.addEventListener('keydown', function(e) {
+        var rect = section.getBoundingClientRect();
+        var inView = rect.top < window.innerHeight && rect.bottom > 0;
+        if (!inView) return;
+
+        if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            if (currentPage < totalPages - 1) scrollToPage(currentPage + 1);
+        } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            if (currentPage > 0) scrollToPage(currentPage - 1);
+        }
     });
+
+    // --- Scroll-driven page flipping ---
+
+    var ticking = false;
+
+    function onScroll() {
+        var scrollIntoSection = -(section.getBoundingClientRect().top);
+
+        if (scrollIntoSection < 0) {
+            if (currentPage !== 0) setPage(0);
+            ticking = false;
+            return;
+        }
+
+        var maxScroll = (totalPages - 1) * SCROLL_PER_PAGE;
+        if (scrollIntoSection > maxScroll) {
+            if (currentPage !== totalPages - 1) setPage(totalPages - 1);
+            ticking = false;
+            return;
+        }
+
+        var targetPage = Math.round(scrollIntoSection / SCROLL_PER_PAGE);
+        if (targetPage !== currentPage) {
+            setPage(targetPage);
+        }
+
+        if (scrollHint) {
+            scrollHint.style.opacity = scrollIntoSection > 30 ? '0' : '';
+        }
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(onScroll);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    // --- Touch swipe on book ---
+
+    var touchStartX = 0;
+    var touchStartY = 0;
+
+    book.addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    book.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        var dy = e.changedTouches[0].clientY - touchStartY;
+
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+            if (dx < 0 && currentPage < totalPages - 1) {
+                scrollToPage(currentPage + 1);
+            } else if (dx > 0 && currentPage > 0) {
+                scrollToPage(currentPage - 1);
+            }
+        }
+    }, { passive: true });
+
+    // --- Click on book to flip forward ---
+
+    book.addEventListener('click', function() {
+        if (currentPage < totalPages - 1) {
+            scrollToPage(currentPage + 1);
+        }
+    });
+
+    // --- Preload images ---
+
+    window.addEventListener('load', function() {
+        var images = book.querySelectorAll('.book-leaf-front img');
+        images.forEach(function(img) {
+            if (!img.complete) {
+                var preload = new Image();
+                preload.src = img.src;
+            }
+        });
+    });
+
+    // --- Initialize ---
+
+    updateIndicator();
+    updateArrows();
+    requestAnimationFrame(onScroll);
 });

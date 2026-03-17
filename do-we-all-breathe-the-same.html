@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Do We All Breathe the Same - A project by Utkarsh Singh">
-    <title>Do We All Breathe the Same - Utkarsh Singh</title>
+    <meta name="description" content="Do We All Breathe The Same - A book by Utkarsh Singh">
+    <title>Do We All Breathe The Same - Utkarsh Singh</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="dark-mode book-horizontal-scroll">
-    <!-- Navigation -->
+<body class="dark-mode">
     <nav class="nav">
         <div class="nav-content">
             <a href="index.html#home" class="nav-link">home</a>
@@ -22,19 +21,13 @@
         </div>
     </nav>
 
-    <!-- Dark Mode Toggle -->
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
         <span class="toggle-text light-text">turn lights off</span>
         <span class="toggle-text dark-text">turn lights on</span>
     </button>
 
-    <!-- Project Content -->
-    <main class="project-page book-page">
-        <!-- Scroll trigger: tall element that creates vertical scroll distance -->
-        <div class="book-scroll-trigger" id="bookScrollTrigger"></div>
-
-        <!-- Project Header: at end of scroll so gallery is visible on load -->
-        <section class="project-header book-header">
+    <main class="project-page">
+        <section class="project-header">
             <h1 class="project-title">do we all breathe the same</h1>
             <span class="project-year">2024</span>
             <div class="project-details">
@@ -42,37 +35,55 @@
             </div>
         </section>
 
-        <!-- Horizontal gallery: fixed, translates on scroll. Pages centered as user scrolls. -->
-        <div class="book-horizontal-gallery" id="bookHorizontalGallery">
-            <div class="book-page-item" data-index="0"><img src="images/do-we-all/do we all.jpg" alt="Do We All Breathe the Same Cover"></div>
-            <div class="book-page-item" data-index="1"><img src="images/do-we-all/do we all 2.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="2"><img src="images/do-we-all/do we all 3.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="3"><img src="images/do-we-all/do we all 4.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="4"><img src="images/do-we-all/do we all 5.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="5"><img src="images/do-we-all/do we all 6.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="6"><img src="images/do-we-all/do we all 7.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="7"><img src="images/do-we-all/do we all 8.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="8"><img src="images/do-we-all/do we all 9.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="9"><img src="images/do-we-all/do we all 10.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="10"><img src="images/do-we-all/do we all 11.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="11"><img src="images/do-we-all/do we all 12.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="12"><img src="images/do-we-all/do we all 13.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="13"><img src="images/do-we-all/do we all 14.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="14"><img src="images/do-we-all/do we all 15.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="15"><img src="images/do-we-all/do we all 16.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="16"><img src="images/do-we-all/do we all 17.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="17"><img src="images/do-we-all/do we all 18.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="18"><img src="images/do-we-all/do we all 19.jpg" alt="Project Image"></div>
-            <div class="book-page-item" data-index="19"><img src="images/do-we-all/do we all 20.jpg" alt="Project Image"></div>
-        </div>
+        <section class="book-flip-section" id="bookFlipSection">
+            <div class="book-flip-viewer" id="bookFlipViewer">
+                <div class="book-flip-stage">
+                    <div class="book-flip" id="bookFlip">
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all.jpg" alt="Cover" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 2.jpg" alt="Page 2" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 3.jpg" alt="Page 3" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 4.jpg" alt="Page 4" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 5.jpg" alt="Page 5" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 6.jpg" alt="Page 6" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 7.jpg" alt="Page 7" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 8.jpg" alt="Page 8" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 9.jpg" alt="Page 9" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 10.jpg" alt="Page 10" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 11.jpg" alt="Page 11" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 12.jpg" alt="Page 12" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 13.jpg" alt="Page 13" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 14.jpg" alt="Page 14" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 15.jpg" alt="Page 15" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 16.jpg" alt="Page 16" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 17.jpg" alt="Page 17" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 18.jpg" alt="Page 18" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 19.jpg" alt="Page 19" draggable="false"></div><div class="book-leaf-back"></div></div>
+                        <div class="book-leaf"><div class="book-leaf-front"><img src="images/do-we-all/do we all 20.jpg" alt="Page 20" draggable="false"></div><div class="book-leaf-back"></div></div>
+                    </div>
+                    <div class="book-flip-shadow"></div>
+                </div>
 
-        <!-- Back Link -->
-        <section class="project-footer book-footer">
+                <button class="book-flip-arrow book-flip-arrow-left disabled" id="bookPrev" aria-label="Previous page">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button class="book-flip-arrow book-flip-arrow-right" id="bookNext" aria-label="Next page">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+
+                <div class="book-flip-indicator" id="bookIndicator">1 / 20</div>
+
+                <div class="book-flip-scroll-hint" id="bookScrollHint">
+                    scroll to flip pages
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-footer">
             <a href="index.html#work" class="back-link">← back to work</a>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2025 Utkarsh Singh. All rights reserved.</p>

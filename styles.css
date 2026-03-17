@@ -2360,77 +2360,219 @@ body:not(.dark-mode) .cursor-glow {
 }
 
 /* ============================================
-   BOOK HORIZONTAL SCROLL - Do We All Breathe the Same
-   Vertical scroll drives horizontal movement. Page in center gets focus.
-   From Figma: focus page has shadow + subtle stroke; adjacent pages slightly smaller.
+   BOOK PAGE FLIP VIEWER - Do We All Breathe the Same
+   3D page flip with scroll-driven and arrow navigation.
    ============================================ */
 
-body.book-horizontal-scroll {
-    overflow-x: hidden;
-}
-
-.book-page .book-header {
-    padding-bottom: 40px;
+.book-flip-section {
     position: relative;
-    z-index: 5;
-    background: var(--off-white);
 }
 
-.book-scroll-trigger {
-    /* Height set by JS - creates scroll distance */
-    width: 1px;
-    pointer-events: none;
-}
-
-.book-horizontal-gallery {
-    position: fixed;
-    top: 50%;
-    left: 0;
-    width: max-content;
+.book-flip-viewer {
+    position: sticky;
+    top: 0;
+    height: 100vh;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    gap: 48px;
-    z-index: 0;
-    will-change: transform;
+    justify-content: center;
 }
 
-.book-page-item {
-    flex-shrink: 0;
-    width: min(420px, 38vw);
-    height: min(680px, 65vh);
+.book-flip-stage {
+    position: relative;
+}
+
+.book-flip {
+    position: relative;
+    width: min(380px, 42vw);
+    height: min(560px, 68vh);
+    perspective: 1800px;
+}
+
+.book-leaf {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.book-leaf.flipped {
+    transform: rotateY(-180deg);
+}
+
+.book-leaf-front,
+.book-leaf-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 2px 5px 5px 2px;
     overflow: hidden;
-    border-radius: 4px;
-    transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
 }
 
-/* Adjacent pages: slightly smaller (per Figma 12:685, 13:514) */
-.book-page-item:not(.book-page-focus) {
-    transform: scale(0.95);
+.book-leaf-front {
+    background: var(--light-gray);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 8px 30px rgba(0, 0, 0, 0.06);
 }
 
-/* Page in focus: shadow + subtle stroke (Figma: 0px 79px 100px 4px rgba(0,0,0,0.08), border #b1b1b1) */
-.book-page-item.book-page-focus {
-    transform: scale(1);
-    box-shadow: 0 79px 100px 4px rgba(0, 0, 0, 0.08);
-    border: 1px solid #b1b1b1;
-}
-
-body.dark-mode .book-page-item.book-page-focus {
-    box-shadow: 0 79px 100px 4px rgba(0, 0, 0, 0.35);
-    border-color: rgba(255, 255, 255, 0.15);
-}
-
-.book-page-item img {
+.book-leaf-front img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
-.book-page .book-footer {
-    position: relative;
-    z-index: 10;
-    padding: 40px 20px 80px;
-    text-align: center;
+.book-leaf-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(to right, #ddd8d0 0%, #ebe7e0 8%, #f0ece5 100%);
+}
+
+body.dark-mode .book-leaf-back {
+    background: linear-gradient(to right, #1f1c18 0%, #282420 8%, #302c26 100%);
+}
+
+.book-flip::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 3%;
+    bottom: 3%;
+    width: 10px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.06), transparent);
+    z-index: 9999;
+    pointer-events: none;
+}
+
+body.dark-mode .book-flip::before {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.15), transparent);
+}
+
+.book-flip-shadow {
+    position: absolute;
+    bottom: -22px;
+    left: 5%;
+    right: -5%;
+    height: 30px;
+    background: radial-gradient(ellipse at 60% 0%, rgba(0, 0, 0, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+body.dark-mode .book-flip-shadow {
+    background: radial-gradient(ellipse at 60% 0%, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
+}
+
+.book-flip-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--accent-line);
+    background: var(--white);
+    color: var(--text-light);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+}
+
+.book-flip-arrow:hover:not(.disabled) {
+    color: var(--text-gray);
+    border-color: var(--text-gray);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transform: translateY(-50%) scale(1.06);
+}
+
+.book-flip-arrow.disabled {
+    opacity: 0.25;
+    cursor: default;
+    pointer-events: none;
+}
+
+.book-flip-arrow-left {
+    left: max(20px, 6vw);
+}
+
+.book-flip-arrow-right {
+    right: max(20px, 6vw);
+}
+
+.book-flip-indicator {
+    position: absolute;
+    bottom: max(36px, 6vh);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    letter-spacing: 2px;
+    z-index: 100;
+}
+
+.book-flip-scroll-hint {
+    position: absolute;
+    bottom: max(16px, 3vh);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+    z-index: 100;
+    white-space: nowrap;
+}
+
+.book-flip-scroll-hint svg {
+    animation: chevronBounce 2s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    .book-flip {
+        width: min(280px, 72vw);
+        height: min(420px, 55vh);
+    }
+
+    .book-flip-arrow {
+        width: 38px;
+        height: 38px;
+    }
+
+    .book-flip-arrow svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .book-flip-arrow-left {
+        left: 12px;
+    }
+
+    .book-flip-arrow-right {
+        right: 12px;
+    }
+
+    .book-flip-indicator {
+        bottom: 28px;
+        font-size: 0.8rem;
+    }
+
+    .book-flip-scroll-hint {
+        bottom: 10px;
+        font-size: 0.7rem;
+    }
 }
