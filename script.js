@@ -58,6 +58,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize repelling text effect
     initRepellingText();
     
+    // Initialize cursor glow
+    initCursorGlow();
+    
     // Initialize parallax effect on work images
     initWorkImageParallax();
     
@@ -405,6 +408,15 @@ function initParallaxScroll() {
             ticking = true;
         }
     });
+
+    // Fix: When tab is backgrounded, rAF is paused so ticking never resets.
+    // When user returns, reset ticking so scroll handlers work again.
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') {
+            ticking = false;
+            updateParallax();
+        }
+    });
 }
 
 // ============================================
@@ -584,6 +596,15 @@ function initWorkImageParallax() {
     window.addEventListener('resize', () => {
         setTimeout(updateParallax, 100);
     });
+
+    // Fix: When tab is backgrounded, rAF is paused so ticking never resets.
+    // When user returns, reset ticking so scroll handlers work again.
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') {
+            ticking = false;
+            updateParallax();
+        }
+    });
 }
 
 // ============================================
@@ -716,6 +737,21 @@ function initHeroTextReveal() {
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
     document.addEventListener('keydown', handleKeydown);
+
+    // Fix: When tab is backgrounded for a long time, the first scroll may not fire.
+    // Unlock scroll when user returns to the tab so they're not stuck.
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible' && !textRevealed) {
+            revealText();
+        }
+    });
+
+    // Fallback: Auto-unlock after 15s if user never scrolled (e.g. left tab immediately).
+    setTimeout(function() {
+        if (!textRevealed) {
+            revealText();
+        }
+    }, 15000);
     
     // Also reveal on click of scroll indicator
     if (scrollIndicator) {
@@ -909,4 +945,40 @@ function initCommissionedFilters() {
             }
         });
     });
+}
+
+// ============================================
+// Cursor Glow
+// ============================================
+function initCursorGlow() {
+    if ('ontouchstart' in window && !window.matchMedia('(pointer: fine)').matches) return;
+
+    const glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    document.body.appendChild(glow);
+
+    let targetX = -200, targetY = -200;
+    let currentX = -200, currentY = -200;
+    let fadeTimeout;
+
+    window.addEventListener('mousemove', function (e) {
+        targetX = e.clientX;
+        targetY = e.clientY;
+        glow.style.opacity = '1';
+
+        clearTimeout(fadeTimeout);
+        fadeTimeout = setTimeout(() => {
+            glow.style.opacity = '0';
+        }, 150);
+    });
+
+    function animate() {
+        currentX += (targetX - currentX) * 0.15;
+        currentY += (targetY - currentY) * 0.15;
+        glow.style.left = currentX + 'px';
+        glow.style.top = currentY + 'px';
+        requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
 }

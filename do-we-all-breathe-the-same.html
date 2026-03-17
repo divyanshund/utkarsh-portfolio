@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="dark-mode">
+<body class="dark-mode book-horizontal-scroll">
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-content">
@@ -29,9 +29,9 @@
     </button>
 
     <!-- Project Content -->
-    <main class="project-page">
+    <main class="project-page book-page">
         <!-- Project Header -->
-        <section class="project-header">
+        <section class="project-header book-header">
             <h1 class="project-title">do we all breathe the same</h1>
             <span class="project-year">2024</span>
             <div class="project-details">
@@ -39,106 +39,35 @@
             </div>
         </section>
 
-        <!-- Cover Image -->
-        <section class="project-hero">
-            <div class="project-hero-image">
-                <img src="images/do-we-all/do we all.jpg" alt="Do We All Breathe the Same Cover">
-            </div>
-        </section>
+        <!-- Scroll trigger: tall element that creates vertical scroll distance -->
+        <div class="book-scroll-trigger" id="bookScrollTrigger"></div>
 
-        <!-- Project Description -->
-        <section class="project-content">
-            <div class="project-text">
-                <p>Project description coming soon.</p>
-            </div>
-        </section>
-
-        <!-- Project Images Gallery -->
-        <section class="project-gallery">
-            <div class="gallery-full">
-                <img src="images/do-we-all/do we all 2.jpg" alt="Project Image">
-            </div>
-
-            <div class="gallery-row-2">
-                <div class="gallery-item">
-                    <img src="images/do-we-all/do we all 3.jpg" alt="Project Image">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/do-we-all/do we all 4.jpg" alt="Project Image">
-                </div>
-            </div>
-
-            <div class="gallery-full">
-                <img src="images/do-we-all/do we all 5.jpg" alt="Project Image">
-            </div>
-
-            <div class="gallery-full">
-                <img src="images/do-we-all/do we all 6.jpg" alt="Project Image">
-            </div>
-
-            <div class="gallery-row-2">
-                <div class="gallery-item">
-                    <img src="images/do-we-all/do we all 7.jpg" alt="Project Image">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/do-we-all/do we all 8.jpg" alt="Project Image">
-                </div>
-            </div>
-
-            <div class="gallery-full">
-                <img src="images/do-we-all/do we all 9.jpg" alt="Project Image">
-            </div>
-
-            <div class="gallery-full">
-                <img src="images/do-we-all/do we all 10.jpg" alt="Project Image">
-            </div>
-
-            <div class="gallery-row-2">
-                <div class="gallery-item">
-                    <img src="images/do-we-all/do we all 11.jpg" alt="Project Image">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/do-we-all/do we all 12.jpg" alt="Project Image">
-                </div>
-            </div>
-
-            <div class="gallery-full">
-                <img src="images/do-we-all/do we all 13.jpg" alt="Project Image">
-            </div>
-
-            <div class="gallery-full">
-                <img src="images/do-we-all/do we all 14.jpg" alt="Project Image">
-            </div>
-
-            <div class="gallery-row-2">
-                <div class="gallery-item">
-                    <img src="images/do-we-all/do we all 15.jpg" alt="Project Image">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/do-we-all/do we all 16.jpg" alt="Project Image">
-                </div>
-            </div>
-
-            <div class="gallery-full">
-                <img src="images/do-we-all/do we all 17.jpg" alt="Project Image">
-            </div>
-
-            <div class="gallery-full">
-                <img src="images/do-we-all/do we all 18.jpg" alt="Project Image">
-            </div>
-
-            <div class="gallery-row-2">
-                <div class="gallery-item">
-                    <img src="images/do-we-all/do we all 19.jpg" alt="Project Image">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/do-we-all/do we all 20.jpg" alt="Project Image">
-                </div>
-            </div>
-        </section>
+        <!-- Horizontal gallery: fixed, translates on scroll. Pages centered as user scrolls. -->
+        <div class="book-horizontal-gallery" id="bookHorizontalGallery">
+            <div class="book-page-item" data-index="0"><img src="images/do-we-all/do we all.jpg" alt="Do We All Breathe the Same Cover"></div>
+            <div class="book-page-item" data-index="1"><img src="images/do-we-all/do we all 2.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="2"><img src="images/do-we-all/do we all 3.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="3"><img src="images/do-we-all/do we all 4.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="4"><img src="images/do-we-all/do we all 5.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="5"><img src="images/do-we-all/do we all 6.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="6"><img src="images/do-we-all/do we all 7.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="7"><img src="images/do-we-all/do we all 8.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="8"><img src="images/do-we-all/do we all 9.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="9"><img src="images/do-we-all/do we all 10.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="10"><img src="images/do-we-all/do we all 11.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="11"><img src="images/do-we-all/do we all 12.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="12"><img src="images/do-we-all/do we all 13.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="13"><img src="images/do-we-all/do we all 14.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="14"><img src="images/do-we-all/do we all 15.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="15"><img src="images/do-we-all/do we all 16.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="16"><img src="images/do-we-all/do we all 17.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="17"><img src="images/do-we-all/do we all 18.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="18"><img src="images/do-we-all/do we all 19.jpg" alt="Project Image"></div>
+            <div class="book-page-item" data-index="19"><img src="images/do-we-all/do we all 20.jpg" alt="Project Image"></div>
+        </div>
 
         <!-- Back Link -->
-        <section class="project-footer">
+        <section class="project-footer book-footer">
             <a href="index.html#work" class="back-link">← back to work</a>
         </section>
     </main>
@@ -151,5 +80,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="do-we-all-scroll.js"></script>
 </body>
 </html>

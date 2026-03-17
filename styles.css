@@ -621,6 +621,23 @@ body.dark-mode .decorative-frame {
     object-position: center;
 }
 
+/* Show full height for 'Do We All Breathe the Same' cover image */
+.work-item.do-we-all .work-image {
+    aspect-ratio: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.work-item.do-we-all .work-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: static;
+    left: auto;
+    top: auto;
+}
+
 .work-image img {
     width: 110%; /* Slightly larger to allow for parallax movement */
     height: 110%;
@@ -2321,4 +2338,99 @@ body.dark-mode .play-text {
         gap: 15px;
         padding: 0 20px;
     }
+}
+
+/* Cursor Glow */
+.cursor-glow {
+    position: fixed;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    will-change: left, top, opacity;
+}
+
+body:not(.dark-mode) .cursor-glow {
+    background: radial-gradient(circle, rgba(255, 200, 50, 0.08) 0%, transparent 70%);
+}
+
+/* ============================================
+   BOOK HORIZONTAL SCROLL - Do We All Breathe the Same
+   Vertical scroll drives horizontal movement. Page in center gets focus.
+   From Figma: focus page has shadow + subtle stroke; adjacent pages slightly smaller.
+   ============================================ */
+
+body.book-horizontal-scroll {
+    overflow-x: hidden;
+}
+
+.book-page .book-header {
+    padding-bottom: 40px;
+    position: relative;
+    z-index: 5;
+    background: var(--off-white);
+}
+
+.book-scroll-trigger {
+    /* Height set by JS - creates scroll distance */
+    width: 1px;
+    pointer-events: none;
+}
+
+.book-horizontal-gallery {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 48px;
+    z-index: 0;
+    will-change: transform;
+}
+
+.book-page-item {
+    flex-shrink: 0;
+    width: min(420px, 38vw);
+    height: min(680px, 65vh);
+    overflow: hidden;
+    border-radius: 4px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
+}
+
+/* Adjacent pages: slightly smaller (per Figma 12:685, 13:514) */
+.book-page-item:not(.book-page-focus) {
+    transform: scale(0.95);
+}
+
+/* Page in focus: shadow + subtle stroke (Figma: 0px 79px 100px 4px rgba(0,0,0,0.08), border #b1b1b1) */
+.book-page-item.book-page-focus {
+    transform: scale(1);
+    box-shadow: 0 79px 100px 4px rgba(0, 0, 0, 0.08);
+    border: 1px solid #b1b1b1;
+}
+
+body.dark-mode .book-page-item.book-page-focus {
+    box-shadow: 0 79px 100px 4px rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.book-page-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.book-page .book-footer {
+    position: relative;
+    z-index: 10;
+    padding: 40px 20px 80px;
+    text-align: center;
 }
