@@ -2393,6 +2393,10 @@ body:not(.dark-mode) .cursor-glow {
     position: relative;
 }
 
+.book-project-page .project-header {
+    padding: 60px 20px 0;
+}
+
 .book-flip-viewer {
     position: sticky;
     top: 0;

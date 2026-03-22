@@ -16,13 +16,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var totalPages = leaves.length;
     var currentPage = 0;
     var SCROLL_PER_PAGE = 200;
+    var SCROLL_BUFFER = 300;
     var FLIP_DURATION = 800;
     var zIndexTimeout;
 
     // --- Layout ---
 
     function updateLayout() {
-        var scrollDistance = (totalPages - 1) * SCROLL_PER_PAGE;
+        var scrollDistance = SCROLL_BUFFER + (totalPages - 1) * SCROLL_PER_PAGE;
         section.style.height = (scrollDistance + window.innerHeight) + 'px';
     }
 
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function scrollToPage(pageIndex) {
         var sectionDocTop = section.getBoundingClientRect().top + window.scrollY;
-        var targetScroll = sectionDocTop + pageIndex * SCROLL_PER_PAGE;
+        var targetScroll = sectionDocTop + SCROLL_BUFFER + pageIndex * SCROLL_PER_PAGE;
         window.scrollTo({ top: targetScroll, behavior: 'smooth' });
     }
 
@@ -170,14 +171,22 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        var flipScroll = scrollIntoSection - SCROLL_BUFFER;
+
+        if (flipScroll < 0) {
+            if (currentPage !== 0) setPage(0);
+            ticking = false;
+            return;
+        }
+
         var maxScroll = (totalPages - 1) * SCROLL_PER_PAGE;
-        if (scrollIntoSection > maxScroll) {
+        if (flipScroll > maxScroll) {
             if (currentPage !== totalPages - 1) setPage(totalPages - 1);
             ticking = false;
             return;
         }
 
-        var targetPage = Math.round(scrollIntoSection / SCROLL_PER_PAGE);
+        var targetPage = Math.round(flipScroll / SCROLL_PER_PAGE);
         if (targetPage !== currentPage) {
             setPage(targetPage);
         }
