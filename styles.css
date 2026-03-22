@@ -2395,7 +2395,20 @@ body:not(.dark-mode) .cursor-glow {
 
 .book-project-page .project-header {
     padding: 60px 20px 0;
-    margin-bottom: -80px;
+}
+
+.book-project-content {
+    margin-bottom: 20px;
+}
+
+.book-scroll-arrow {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    color: var(--text-light);
+    opacity: 0.5;
+    animation: chevronBounce 2s ease-in-out infinite;
+    transition: opacity 0.4s ease;
 }
 
 .book-flip-viewer {

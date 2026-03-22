@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var nextBtn = document.getElementById('bookNext');
     var indicator = document.getElementById('bookIndicator');
     var scrollHint = document.getElementById('bookScrollHint');
+    var bookScrollArrow = document.getElementById('bookScrollArrow');
 
     if (!book || !section) return;
 
@@ -169,6 +170,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentPage !== 0) setPage(0);
             ticking = false;
             return;
+        }
+
+        if (bookScrollArrow) {
+            bookScrollArrow.style.opacity = scrollIntoSection > 0 ? '0' : '';
         }
 
         var flipScroll = scrollIntoSection - SCROLL_BUFFER;
