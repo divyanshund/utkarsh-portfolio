@@ -5,23 +5,23 @@ const PHOTO_CHANGE_INTERVAL = 2000; // 2 seconds - easily adjustable
 
 // Photo URLs for the main slideshow
 const PHOTOS = [
-    'images/homepage/a.jpg',
-    'images/homepage/b.jpg',
-    'images/homepage/c.jpg',
-    'images/homepage/d.jpg',
-    'images/homepage/e.jpg',
-    'images/homepage/f.jpg',
-    'images/homepage/g.jpg',
-    'images/homepage/h.jpg',
-    'images/homepage/i.jpg',
-    'images/homepage/j.jpg',
-    'images/homepage/k.jpg',
-    'images/homepage/l.jpg',
-    'images/homepage/m.jpg',
-    'images/homepage/n.jpg',
-    'images/homepage/o.jpg',
-    'images/homepage/p.jpg',
-    'images/homepage/IMG_7114.PNG'
+    'images/homepage/a.webp',
+    'images/homepage/b.webp',
+    'images/homepage/c.webp',
+    'images/homepage/d.webp',
+    'images/homepage/e.webp',
+    'images/homepage/f.webp',
+    'images/homepage/g.webp',
+    'images/homepage/h.webp',
+    'images/homepage/i.webp',
+    'images/homepage/j.webp',
+    'images/homepage/k.webp',
+    'images/homepage/l.webp',
+    'images/homepage/m.webp',
+    'images/homepage/n.webp',
+    'images/homepage/o.webp',
+    'images/homepage/p.webp',
+    'images/homepage/IMG_7114.webp'
 ];
 
 // ============================================

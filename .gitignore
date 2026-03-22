@@ -26,6 +26,9 @@ Temporary Items
 .vscode/
 .idea/
 
+# Dependencies
+node_modules/
+
 # Optional: Uncomment if you want to ignore large video files
 # *.mp4
 # *.mov

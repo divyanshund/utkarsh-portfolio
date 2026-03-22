@@ -1,0 +1,15 @@
+{
+  "name": "utkarsh-portfolio",
+  "version": "1.0.0",
+  "description": "A professional, elegant portfolio website designed to showcase photography work with smooth animations and modern design.",
+  "main": "do-we-all-scroll.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}
