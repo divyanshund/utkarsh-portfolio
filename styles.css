@@ -2398,7 +2398,7 @@ body:not(.dark-mode) .cursor-glow {
 }
 
 .book-project-content {
-    margin-bottom: 20px;
+    margin-bottom: -30px;
 }
 
 .book-scroll-arrow {

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var totalPages = leaves.length;
     var currentPage = 0;
     var SCROLL_PER_PAGE = 200;
-    var SCROLL_BUFFER = 300;
+    var SCROLL_BUFFER = 150;
     var FLIP_DURATION = 800;
     var zIndexTimeout;
 
@@ -98,7 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateIndicator() {
         if (indicator) {
-            indicator.textContent = (currentPage + 1) + ' / ' + totalPages;
+            if (currentPage === 0) {
+                indicator.textContent = 'scroll to flip';
+            } else {
+                indicator.textContent = (currentPage + 1) + ' / ' + totalPages;
+            }
         }
     }
 
@@ -173,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (bookScrollArrow) {
-            bookScrollArrow.style.opacity = scrollIntoSection > 0 ? '0' : '';
+            bookScrollArrow.style.opacity = '0';
         }
 
         var flipScroll = scrollIntoSection - SCROLL_BUFFER;
@@ -274,6 +278,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     setTimeout(peekHint, 800);
+
+    // --- Hide scroll arrow on any scroll ---
+
+    if (bookScrollArrow) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                bookScrollArrow.style.opacity = '0';
+            }
+        }, { passive: true });
+    }
 
     // --- Initialize ---
 
