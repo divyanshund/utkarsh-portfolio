@@ -12,6 +12,7 @@
     --text-light: #444444;
     --accent-line: #e0e0e0;
     --transition: all 0.3s ease;
+    --placeholder-bg: #e8e8e8;
 }
 
 /* Dark Mode Variables */
@@ -22,6 +23,12 @@ body.dark-mode {
     --text-gray: #e5e5e5;
     --text-light: #a0a0a0;
     --accent-line: #2a2a2a;
+    --placeholder-bg: #1a1a1a;
+}
+
+/* Lazy image fade-in */
+img[loading="lazy"]:not(.img-loaded) {
+    opacity: 0;
 }
 
 /* Navigation */
@@ -475,6 +482,7 @@ body.dark-mode .decorative-frame {
     position: relative;
     aspect-ratio: 21/9;
     overflow: hidden;
+    background-color: var(--placeholder-bg);
     transition: transform 0.3s ease;
 }
 
@@ -483,6 +491,7 @@ body.dark-mode .decorative-frame {
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: opacity 0.5s ease;
 }
 
 .commissioned-work-overlay {
@@ -602,6 +611,7 @@ body.dark-mode .decorative-frame {
     position: relative;
     overflow: hidden;
     aspect-ratio: 3/2;
+    background-color: var(--placeholder-bg);
     box-shadow: 
         0 20px 60px rgba(0, 0, 0, 0.08),
         0 8px 20px rgba(0, 0, 0, 0.04);
@@ -667,8 +677,7 @@ body.dark-mode .decorative-frame {
     position: relative;
     left: -5%; /* Center the oversized image */
     top: -5%;
-    /* Smooth transition but will be overridden by parallax transform */
-    transition: none; /* Removed transition for parallax to work smoothly */
+    transition: opacity 0.5s ease;
     will-change: transform; /* Performance optimization */
 }
 
@@ -1420,6 +1429,7 @@ html {
 .gallery-full {
     width: 100%;
     margin-bottom: 60px;
+    background-color: var(--placeholder-bg);
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.6s ease, transform 0.6s ease;
@@ -1434,6 +1444,7 @@ html {
     width: 100%;
     height: auto;
     display: block;
+    transition: opacity 0.5s ease;
     box-shadow: 
         0 20px 60px rgba(0, 0, 0, 0.08),
         0 8px 20px rgba(0, 0, 0, 0.04);
@@ -1466,7 +1477,7 @@ html {
 .gallery-item {
     position: relative;
     overflow: hidden;
-    background: var(--white);
+    background: var(--placeholder-bg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1476,7 +1487,7 @@ html {
     width: 100%;
     height: auto;
     display: block;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
     box-shadow: 
         0 15px 40px rgba(0, 0, 0, 0.08),
         0 5px 15px rgba(0, 0, 0, 0.04);
@@ -2257,6 +2268,7 @@ body.dark-mode .play-text {
     width: 85%;
     aspect-ratio: 16/9;
     overflow: hidden;
+    background-color: var(--placeholder-bg);
     transition: transform 0.3s ease;
 }
 
@@ -2269,6 +2281,7 @@ body.dark-mode .play-text {
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: opacity 0.5s ease;
 }
 
 /* Responsive */

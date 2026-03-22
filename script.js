@@ -69,6 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize hero text reveal on scroll
     initHeroTextReveal();
+
+    // Initialize lazy image fade-in
+    initLazyImageFadeIn();
 });
 
 // ============================================
@@ -773,6 +776,22 @@ window.addEventListener('load', function() {
         img.src = url;
     });
 });
+
+// ============================================
+// Lazy Image Fade-In
+// ============================================
+function initLazyImageFadeIn() {
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+
+    lazyImages.forEach(img => {
+        if (img.complete && img.naturalHeight > 0) {
+            img.classList.add('img-loaded');
+        } else {
+            img.addEventListener('load', () => img.classList.add('img-loaded'));
+            img.addEventListener('error', () => img.classList.add('img-loaded'));
+        }
+    });
+}
 
 // ============================================
 // Camera Shutter Animation (About Page)
