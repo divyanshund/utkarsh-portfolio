@@ -7,19 +7,24 @@ redirects = []
 [functions."*"]
 
 [build]
-publish = "/Users/divyanshu/Coding/Utkarsh portfolio"
-publishOrigin = "default"
+publish = "."
 
 [build.environment]
 
 [build.processing]
 
 [build.processing.css]
+bundle = true
+minify = true
 
 [build.processing.html]
+pretty_urls = true
 
 [build.processing.images]
+compress = true
 
 [build.processing.js]
+bundle = true
+minify = true
 
 [build.services]
