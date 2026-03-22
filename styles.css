@@ -2395,6 +2395,7 @@ body:not(.dark-mode) .cursor-glow {
 
 .book-project-page .project-header {
     padding: 60px 20px 0;
+    margin-bottom: -80px;
 }
 
 .book-flip-viewer {
