@@ -193,8 +193,8 @@ function initPhotoSlideshow() {
 // ============================================
 function initScrollAnimations() {
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.05,
+        rootMargin: '0px 0px 100px 0px'
     };
 
     const observer = new IntersectionObserver(function(entries) {
@@ -214,7 +214,7 @@ function initScrollAnimations() {
     // Observe gallery items
     const galleryItems = document.querySelectorAll('.gallery-item');
     galleryItems.forEach((item, index) => {
-        item.style.transitionDelay = `${index * 0.1}s`;
+        item.style.transitionDelay = `${index * 0.05}s`;
         observer.observe(item);
     });
 
@@ -228,9 +228,9 @@ function initScrollAnimations() {
     const workItems = document.querySelectorAll('.work-item');
     workItems.forEach((item, index) => {
         item.style.opacity = '0';
-        item.style.transform = 'translateY(30px)';
-        item.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        item.style.transitionDelay = `${index * 0.2}s`;
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        item.style.transitionDelay = `${index * 0.08}s`;
         observer.observe(item);
     });
 }
@@ -390,7 +390,7 @@ function initParallaxScroll() {
             const rect = item.getBoundingClientRect();
             const windowHeight = window.innerHeight;
             
-            if (rect.top < windowHeight * 0.85) {
+            if (rect.top < windowHeight * 0.92) {
                 item.style.opacity = '1';
                 item.style.transform = 'translateY(0)';
             }
@@ -630,8 +630,7 @@ function initProjectGalleryAnimations() {
     }, observerOptions);
     
     galleryElements.forEach((element, index) => {
-        // Stagger initial state
-        element.style.transitionDelay = `${index * 0.1}s`;
+        element.style.transitionDelay = `${index * 0.05}s`;
         observer.observe(element);
     });
 }
@@ -652,8 +651,8 @@ function initHeroTextReveal() {
     
     // Initially hide the text (gradient is hidden via CSS)
     artistInfo.style.opacity = '0';
-    artistInfo.style.transform = 'translateY(40px)';
-    artistInfo.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    artistInfo.style.transform = 'translateY(20px)';
+    artistInfo.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     
     // Lock scrolling initially
     document.body.style.overflow = 'hidden';

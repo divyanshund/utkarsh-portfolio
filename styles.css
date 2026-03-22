@@ -566,7 +566,7 @@ body.dark-mode .decorative-frame {
     align-items: center;
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 1s ease, transform 1s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .work-item:nth-child(even) {
@@ -1397,7 +1397,7 @@ html {
     margin-bottom: 60px;
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 1s ease, transform 1s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .gallery-full.visible {
@@ -1421,7 +1421,7 @@ html {
     margin-bottom: 60px;
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 1s ease, transform 1s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .gallery-row-2.visible,
@@ -2379,13 +2379,20 @@ body:not(.dark-mode) .cursor-glow {
 
 .book-flip-stage {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .book-flip {
     position: relative;
-    width: min(380px, 42vw);
-    height: min(560px, 68vh);
-    perspective: 1800px;
+    width: min(720px, 85vw);
+    aspect-ratio: 8 / 5;
+    perspective: 2000px;
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.08),
+        0 12px 40px rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
 }
 
 .book-leaf {
@@ -2411,15 +2418,12 @@ body:not(.dark-mode) .cursor-glow {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 2px 5px 5px 2px;
+    border-radius: 3px;
     overflow: hidden;
 }
 
 .book-leaf-front {
     background: var(--light-gray);
-    box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.08),
-        0 8px 30px rgba(0, 0, 0, 0.06);
 }
 
 .book-leaf-front img {
@@ -2441,17 +2445,27 @@ body.dark-mode .book-leaf-back {
 .book-flip::before {
     content: '';
     position: absolute;
-    left: -1px;
-    top: 3%;
-    bottom: 3%;
-    width: 10px;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.06), transparent);
+    left: -12px;
+    top: 10px;
+    bottom: 10px;
+    width: 24px;
     z-index: 9999;
     pointer-events: none;
+    background:
+        radial-gradient(circle 6px at 12px 50%, #b8b3ab 5px, transparent 5.5px),
+        radial-gradient(circle 3.5px at 12px 50%, var(--white) 2.5px, transparent 3px);
+    background-size: 24px 32px;
+    background-repeat: repeat-y;
+    background-position: 0 0;
 }
 
 body.dark-mode .book-flip::before {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.15), transparent);
+    background:
+        radial-gradient(circle 6px at 12px 50%, #4a4a4a 5px, transparent 5.5px),
+        radial-gradient(circle 3.5px at 12px 50%, var(--white) 2.5px, transparent 3px);
+    background-size: 24px 32px;
+    background-repeat: repeat-y;
+    background-position: 0 0;
 }
 
 .book-flip-shadow {
@@ -2501,16 +2515,16 @@ body.dark-mode .book-flip-shadow {
 }
 
 .book-flip-arrow-left {
-    left: max(20px, 6vw);
+    left: -80px;
 }
 
 .book-flip-arrow-right {
-    right: max(20px, 6vw);
+    right: -80px;
 }
 
 .book-flip-indicator {
     position: absolute;
-    bottom: max(36px, 6vh);
+    bottom: -50px;
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Cormorant Garamond', serif;
@@ -2518,11 +2532,12 @@ body.dark-mode .book-flip-shadow {
     color: var(--text-light);
     letter-spacing: 2px;
     z-index: 100;
+    white-space: nowrap;
 }
 
 .book-flip-scroll-hint {
     position: absolute;
-    bottom: max(16px, 3vh);
+    bottom: -72px;
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Cormorant Garamond', serif;
@@ -2544,8 +2559,7 @@ body.dark-mode .book-flip-shadow {
 
 @media (max-width: 768px) {
     .book-flip {
-        width: min(280px, 72vw);
-        height: min(420px, 55vh);
+        width: min(560px, 92vw);
     }
 
     .book-flip-arrow {
@@ -2559,20 +2573,20 @@ body.dark-mode .book-flip-shadow {
     }
 
     .book-flip-arrow-left {
-        left: 12px;
+        left: -48px;
     }
 
     .book-flip-arrow-right {
-        right: 12px;
+        right: -48px;
     }
 
     .book-flip-indicator {
-        bottom: 28px;
+        bottom: -30px;
         font-size: 0.8rem;
     }
 
     .book-flip-scroll-hint {
-        bottom: 10px;
+        bottom: -50px;
         font-size: 0.7rem;
     }
 }

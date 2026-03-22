@@ -239,6 +239,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // --- Peek hint: partial flip on load to show interactivity ---
+
+    function peekHint() {
+        var firstLeaf = leaves[0];
+        if (!firstLeaf) return;
+
+        firstLeaf.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        firstLeaf.style.transform = 'rotateY(-25deg)';
+
+        setTimeout(function() {
+            firstLeaf.style.transition = 'transform 0.8s cubic-bezier(0.2, 0, 0.4, 1)';
+            firstLeaf.style.transform = 'rotateY(0deg)';
+
+            setTimeout(function() {
+                firstLeaf.style.transition = '';
+                firstLeaf.style.transform = '';
+            }, 850);
+        }, 700);
+    }
+
+    setTimeout(peekHint, 800);
+
     // --- Initialize ---
 
     updateIndicator();
