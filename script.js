@@ -651,22 +651,33 @@ function initHeroTextReveal() {
     if (!artistInfo || !heroSection) return;
     
     let textRevealed = false;
+    const alreadySeen = sessionStorage.getItem('heroRevealed');
     
-    // Initially hide the text (gradient is hidden via CSS)
+    if (alreadySeen) {
+        // Returning visit — show everything immediately, no scroll lock
+        artistInfo.style.opacity = '1';
+        artistInfo.style.transform = 'translateY(0)';
+        if (bottomGradient) bottomGradient.style.opacity = '1';
+        if (scrollIndicator) scrollIndicator.style.opacity = '0.4';
+        heroTextRevealComplete = true;
+        textRevealed = true;
+        return;
+    }
+    
+    // First visit — animate the reveal
     artistInfo.style.opacity = '0';
     artistInfo.style.transform = 'translateY(20px)';
     artistInfo.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     
-    // Lock scrolling initially
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
     
-    // Function to reveal the text and gradient
     function revealText() {
         if (textRevealed) return;
         textRevealed = true;
         
-        // Reveal the bottom gradient
+        sessionStorage.setItem('heroRevealed', '1');
+        
         if (bottomGradient) {
             bottomGradient.style.opacity = '1';
         }
@@ -674,20 +685,16 @@ function initHeroTextReveal() {
         artistInfo.style.opacity = '1';
         artistInfo.style.transform = 'translateY(0)';
         
-        // Fade scroll indicator
         if (scrollIndicator) {
             scrollIndicator.style.opacity = '0.4';
         }
         
-        // Unlock scrolling after animation completes
         setTimeout(() => {
             document.body.style.overflow = '';
             document.documentElement.style.overflow = '';
             
-            // Mark reveal as complete so parallax can take over
             heroTextRevealComplete = true;
             
-            // Remove listeners after unlock
             window.removeEventListener('wheel', handleWheel, true);
             window.removeEventListener('touchstart', handleTouchStart);
             window.removeEventListener('touchmove', handleTouchMove);
@@ -695,7 +702,6 @@ function initHeroTextReveal() {
         }, 800);
     }
     
-    // Handle wheel events - trigger on ANY scroll attempt
     function handleWheel(e) {
         if (!textRevealed && e.deltaY > 0) {
             e.preventDefault();
@@ -704,7 +710,6 @@ function initHeroTextReveal() {
         }
     }
     
-    // Handle touch events for mobile
     let touchStartY = 0;
     
     function handleTouchStart(e) {
@@ -716,7 +721,6 @@ function initHeroTextReveal() {
             const touchY = e.touches[0].clientY;
             const deltaY = touchStartY - touchY;
             
-            // Swiping up (scrolling down)
             if (deltaY > 20) {
                 e.preventDefault();
                 revealText();
@@ -724,7 +728,6 @@ function initHeroTextReveal() {
         }
     }
     
-    // Handle keyboard navigation
     function handleKeydown(e) {
         if (!textRevealed) {
             if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
@@ -734,14 +737,11 @@ function initHeroTextReveal() {
         }
     }
     
-    // Add event listeners with capture to intercept early
     window.addEventListener('wheel', handleWheel, { passive: false, capture: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
     document.addEventListener('keydown', handleKeydown);
 
-    // Fix: When tab is backgrounded for a long time, the first scroll may not fire.
-    // Unlock scroll when user returns to the tab so they're not stuck.
     document.addEventListener('visibilitychange', function() {
         if (document.visibilityState === 'visible' && !textRevealed) {
             revealText();
