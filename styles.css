@@ -2655,6 +2655,51 @@ body.dark-mode .book-flip-shadow {
     }
 }
 
+/* Scroll-driven horizontal gallery */
+.scroll-gallery-wrapper {
+    position: relative;
+}
+
+.scroll-gallery-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.scroll-gallery-track {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    will-change: transform;
+    transition: transform 0.05s linear;
+}
+
+.scroll-gallery-slide {
+    flex-shrink: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.scroll-gallery-slide img {
+    height: 85vh;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    user-select: none;
+    opacity: 0.3;
+    transform: scale(0.96);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.scroll-gallery-slide.focused img {
+    opacity: 1;
+    transform: scale(1);
+}
+
 /* Scroll-to-top button */
 .scroll-to-top {
     position: fixed;
