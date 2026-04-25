@@ -62,6 +62,14 @@
             display: block;
             object-fit: contain;
             user-select: none;
+            opacity: 0.3;
+            transform: scale(0.96);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .scroll-gallery-slide.focused img {
+            opacity: 1;
+            transform: scale(1);
         }
     </style>
 </head>
@@ -198,10 +206,10 @@
             const wrapper = document.getElementById('scrollGallery');
             const track = document.getElementById('scrollGalleryTrack');
             const imgs = track.querySelectorAll('img');
+            const slides = track.querySelectorAll('.scroll-gallery-slide');
+            let currentTranslateX = 0;
 
             function init() {
-                // Center the first image by adding left padding equal to
-                // (viewport width - first image rendered width) / 2
                 const firstImg = imgs[0];
                 const firstImgWidth = firstImg.getBoundingClientRect().width;
                 const leftPad = Math.max(0, (window.innerWidth - firstImgWidth) / 2);
@@ -216,16 +224,34 @@
                 wrapper.style.height = (window.innerHeight + overscroll) + 'px';
             }
 
+            function updateFocus() {
+                const viewCenter = window.innerWidth / 2;
+                let closestSlide = null;
+                let closestDist = Infinity;
+                slides.forEach(function (slide) {
+                    const slideCenter = slide.offsetLeft + slide.offsetWidth / 2 + currentTranslateX;
+                    const dist = Math.abs(slideCenter - viewCenter);
+                    if (dist < closestDist) {
+                        closestDist = dist;
+                        closestSlide = slide;
+                    }
+                });
+                slides.forEach(function (slide) {
+                    slide.classList.toggle('focused', slide === closestSlide);
+                });
+            }
+
             function onScroll() {
                 const rect = wrapper.getBoundingClientRect();
                 const totalScrollable = wrapper.offsetHeight - window.innerHeight;
                 const scrolled = -rect.top;
                 const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
                 const maxTranslate = track.scrollWidth - window.innerWidth;
-                track.style.transform = 'translateX(' + (-progress * maxTranslate) + 'px)';
+                currentTranslateX = -progress * maxTranslate;
+                track.style.transform = 'translateX(' + currentTranslateX + 'px)';
+                updateFocus();
             }
 
-            // Wait for images to load so we can measure their widths
             let imagesLoaded = 0;
             function imageReady() {
                 imagesLoaded++;
