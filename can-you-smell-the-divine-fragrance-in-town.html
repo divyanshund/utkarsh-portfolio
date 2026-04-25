@@ -197,6 +197,19 @@
         (function () {
             const wrapper = document.getElementById('scrollGallery');
             const track = document.getElementById('scrollGalleryTrack');
+            const imgs = track.querySelectorAll('img');
+
+            function init() {
+                // Center the first image by adding left padding equal to
+                // (viewport width - first image rendered width) / 2
+                const firstImg = imgs[0];
+                const firstImgWidth = firstImg.getBoundingClientRect().width;
+                const leftPad = Math.max(0, (window.innerWidth - firstImgWidth) / 2);
+                track.style.paddingLeft = leftPad + 'px';
+
+                setWrapperHeight();
+                onScroll();
+            }
 
             function setWrapperHeight() {
                 const overscroll = track.scrollWidth - window.innerWidth;
@@ -214,13 +227,9 @@
 
             // Wait for images to load so we can measure their widths
             let imagesLoaded = 0;
-            const imgs = track.querySelectorAll('img');
             function imageReady() {
                 imagesLoaded++;
-                if (imagesLoaded === imgs.length) {
-                    setWrapperHeight();
-                    onScroll();
-                }
+                if (imagesLoaded === imgs.length) init();
             }
             imgs.forEach(function (img) {
                 if (img.complete) {
@@ -233,8 +242,8 @@
 
             window.addEventListener('scroll', onScroll, { passive: true });
             window.addEventListener('resize', function () {
-                setWrapperHeight();
-                onScroll();
+                track.style.paddingLeft = '0px';
+                init();
             });
         })();
     </script>
