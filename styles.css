@@ -2666,13 +2666,21 @@ body.dark-mode .book-flip-shadow {
     height: 100vh;
     overflow: hidden;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+/* Section heading pinned inside the sticky gallery */
+.scroll-gallery-sticky .commissioned-section-heading {
+    flex-shrink: 0;
+    margin: 0;
+    padding: 80px 0 16px;
 }
 
 .scroll-gallery-track {
     display: flex;
     align-items: center;
-    height: 100%;
+    flex: 1;
     will-change: transform;
     transition: transform 0.05s linear;
 }
@@ -2685,7 +2693,7 @@ body.dark-mode .book-flip-shadow {
 }
 
 .scroll-gallery-slide img {
-    height: 85vh;
+    height: 72vh;
     width: auto;
     display: block;
     object-fit: contain;
