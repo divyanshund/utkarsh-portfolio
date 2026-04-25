@@ -25,6 +25,45 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Scroll-driven horizontal gallery */
+        .scroll-gallery-wrapper {
+            position: relative;
+            /* height is set by JS once images are measured */
+        }
+
+        .scroll-gallery-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .scroll-gallery-track {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            will-change: transform;
+            transition: transform 0.05s linear;
+        }
+
+        .scroll-gallery-slide {
+            flex-shrink: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .scroll-gallery-slide img {
+            height: 85vh;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            user-select: none;
+        }
+    </style>
 </head>
 <body class="dark-mode">
     <!-- Navigation -->
@@ -72,106 +111,71 @@
             </div>
         </section>
 
-        <!-- Project Images Gallery -->
-        <section class="project-gallery">
-            <!-- Two Column -->
-            <div class="gallery-row-2">
-                <div class="gallery-item">
-                    <img src="images/can-you-smell/2.webp" srcset="images/can-you-smell/2-640w.webp 640w, images/can-you-smell/2-1280w.webp 1280w, images/can-you-smell/2.webp 2400w" sizes="(max-width: 768px) 100vw, 412px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
+        <!-- Horizontal Scroll-Driven Gallery -->
+        <section class="scroll-gallery-wrapper" id="scrollGallery">
+            <div class="scroll-gallery-sticky">
+                <div class="scroll-gallery-track" id="scrollGalleryTrack">
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/2.webp" srcset="images/can-you-smell/2-640w.webp 640w, images/can-you-smell/2-1280w.webp 1280w, images/can-you-smell/2.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/3.webp" srcset="images/can-you-smell/3-640w.webp 640w, images/can-you-smell/3-1280w.webp 1280w, images/can-you-smell/3.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/4.webp" srcset="images/can-you-smell/4-640w.webp 640w, images/can-you-smell/4-1280w.webp 1280w, images/can-you-smell/4.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/5.webp" srcset="images/can-you-smell/5-640w.webp 640w, images/can-you-smell/5-1280w.webp 1280w, images/can-you-smell/5.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/6.webp" srcset="images/can-you-smell/6-640w.webp 640w, images/can-you-smell/6-1280w.webp 1280w, images/can-you-smell/6.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/7.webp" srcset="images/can-you-smell/7-640w.webp 640w, images/can-you-smell/7-1280w.webp 1280w, images/can-you-smell/7.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/8.webp" srcset="images/can-you-smell/8-640w.webp 640w, images/can-you-smell/8-1280w.webp 1280w, images/can-you-smell/8.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/9.webp" srcset="images/can-you-smell/9-640w.webp 640w, images/can-you-smell/9-1280w.webp 1280w, images/can-you-smell/9.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/10.webp" srcset="images/can-you-smell/10-640w.webp 640w, images/can-you-smell/10-1280w.webp 1280w, images/can-you-smell/10.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/11.webp" srcset="images/can-you-smell/11-640w.webp 640w, images/can-you-smell/11-1280w.webp 1280w, images/can-you-smell/11.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/12.webp" srcset="images/can-you-smell/12-640w.webp 640w, images/can-you-smell/12-1280w.webp 1280w, images/can-you-smell/12.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/13.webp" srcset="images/can-you-smell/13-640w.webp 640w, images/can-you-smell/13-1280w.webp 1280w, images/can-you-smell/13.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/14.webp" srcset="images/can-you-smell/14-640w.webp 640w, images/can-you-smell/14-1280w.webp 1280w, images/can-you-smell/14.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/15.webp" srcset="images/can-you-smell/15-640w.webp 640w, images/can-you-smell/15-1280w.webp 1280w, images/can-you-smell/15.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/16.webp" srcset="images/can-you-smell/16-640w.webp 640w, images/can-you-smell/16-1280w.webp 1280w, images/can-you-smell/16.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/17.webp" srcset="images/can-you-smell/17-640w.webp 640w, images/can-you-smell/17-1280w.webp 1280w, images/can-you-smell/17.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/18.webp" srcset="images/can-you-smell/18-640w.webp 640w, images/can-you-smell/18-1280w.webp 1280w, images/can-you-smell/18.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/19.webp" srcset="images/can-you-smell/19-640w.webp 640w, images/can-you-smell/19-1280w.webp 1280w, images/can-you-smell/19.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/20.webp" srcset="images/can-you-smell/20-640w.webp 640w, images/can-you-smell/20-1280w.webp 1280w, images/can-you-smell/20.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
+                    <div class="scroll-gallery-slide">
+                        <img src="images/can-you-smell/21.webp" srcset="images/can-you-smell/21-640w.webp 640w, images/can-you-smell/21-1280w.webp 1280w, images/can-you-smell/21.webp 2400w" alt="Can You Smell the Divine Fragrance in Town">
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="images/can-you-smell/3.webp" srcset="images/can-you-smell/3-640w.webp 640w, images/can-you-smell/3-1280w.webp 1280w, images/can-you-smell/3.webp 2400w" sizes="(max-width: 768px) 100vw, 412px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-                </div>
-            </div>
-
-            <!-- Full Width -->
-            <div class="gallery-full">
-                <img src="images/can-you-smell/4.webp" srcset="images/can-you-smell/4-640w.webp 640w, images/can-you-smell/4-1280w.webp 1280w, images/can-you-smell/4.webp 2400w" sizes="(max-width: 900px) 100vw, 854px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-            </div>
-
-            <!-- Full Width -->
-            <div class="gallery-full">
-                <img src="images/can-you-smell/5.webp" srcset="images/can-you-smell/5-640w.webp 640w, images/can-you-smell/5-1280w.webp 1280w, images/can-you-smell/5.webp 2400w" sizes="(max-width: 900px) 100vw, 854px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-            </div>
-
-            <!-- Two Column -->
-            <div class="gallery-row-2">
-                <div class="gallery-item">
-                    <img src="images/can-you-smell/6.webp" srcset="images/can-you-smell/6-640w.webp 640w, images/can-you-smell/6-1280w.webp 1280w, images/can-you-smell/6.webp 2400w" sizes="(max-width: 768px) 100vw, 412px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/can-you-smell/7.webp" srcset="images/can-you-smell/7-640w.webp 640w, images/can-you-smell/7-1280w.webp 1280w, images/can-you-smell/7.webp 2400w" sizes="(max-width: 768px) 100vw, 412px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-                </div>
-            </div>
-
-            <!-- Full Width -->
-            <div class="gallery-full">
-                <img src="images/can-you-smell/8.webp" srcset="images/can-you-smell/8-640w.webp 640w, images/can-you-smell/8-1280w.webp 1280w, images/can-you-smell/8.webp 2400w" sizes="(max-width: 900px) 100vw, 854px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-            </div>
-
-            <!-- Full Width -->
-            <div class="gallery-full">
-                <img src="images/can-you-smell/9.webp" srcset="images/can-you-smell/9-640w.webp 640w, images/can-you-smell/9-1280w.webp 1280w, images/can-you-smell/9.webp 2400w" sizes="(max-width: 900px) 100vw, 854px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-            </div>
-
-            <!-- Full Width -->
-            <div class="gallery-full">
-                <img src="images/can-you-smell/10.webp" srcset="images/can-you-smell/10-640w.webp 640w, images/can-you-smell/10-1280w.webp 1280w, images/can-you-smell/10.webp 2400w" sizes="(max-width: 900px) 100vw, 854px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-            </div>
-
-            <!-- Two Column -->
-            <div class="gallery-row-2">
-                <div class="gallery-item">
-                    <img src="images/can-you-smell/11.webp" srcset="images/can-you-smell/11-640w.webp 640w, images/can-you-smell/11-1280w.webp 1280w, images/can-you-smell/11.webp 2400w" sizes="(max-width: 768px) 100vw, 412px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/can-you-smell/12.webp" srcset="images/can-you-smell/12-640w.webp 640w, images/can-you-smell/12-1280w.webp 1280w, images/can-you-smell/12.webp 2400w" sizes="(max-width: 768px) 100vw, 412px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-                </div>
-            </div>
-
-            <!-- Full Width -->
-            <div class="gallery-full">
-                <img src="images/can-you-smell/13.webp" srcset="images/can-you-smell/13-640w.webp 640w, images/can-you-smell/13-1280w.webp 1280w, images/can-you-smell/13.webp 2400w" sizes="(max-width: 900px) 100vw, 854px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-            </div>
-
-            <!-- Full Width -->
-            <div class="gallery-full">
-                <img src="images/can-you-smell/14.webp" srcset="images/can-you-smell/14-640w.webp 640w, images/can-you-smell/14-1280w.webp 1280w, images/can-you-smell/14.webp 2400w" sizes="(max-width: 900px) 100vw, 854px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-            </div>
-
-            <!-- Two Column -->
-            <div class="gallery-row-2">
-                <div class="gallery-item">
-                    <img src="images/can-you-smell/15.webp" srcset="images/can-you-smell/15-640w.webp 640w, images/can-you-smell/15-1280w.webp 1280w, images/can-you-smell/15.webp 2400w" sizes="(max-width: 768px) 100vw, 412px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/can-you-smell/16.webp" srcset="images/can-you-smell/16-640w.webp 640w, images/can-you-smell/16-1280w.webp 1280w, images/can-you-smell/16.webp 2400w" sizes="(max-width: 768px) 100vw, 412px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-                </div>
-            </div>
-
-            <!-- Full Width -->
-            <div class="gallery-full">
-                <img src="images/can-you-smell/17.webp" srcset="images/can-you-smell/17-640w.webp 640w, images/can-you-smell/17-1280w.webp 1280w, images/can-you-smell/17.webp 2400w" sizes="(max-width: 900px) 100vw, 854px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-            </div>
-
-            <!-- Full Width -->
-            <div class="gallery-full">
-                <img src="images/can-you-smell/18.webp" srcset="images/can-you-smell/18-640w.webp 640w, images/can-you-smell/18-1280w.webp 1280w, images/can-you-smell/18.webp 2400w" sizes="(max-width: 900px) 100vw, 854px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-            </div>
-
-            <!-- Two Column -->
-            <div class="gallery-row-2">
-                <div class="gallery-item">
-                    <img src="images/can-you-smell/19.webp" srcset="images/can-you-smell/19-640w.webp 640w, images/can-you-smell/19-1280w.webp 1280w, images/can-you-smell/19.webp 2400w" sizes="(max-width: 768px) 100vw, 412px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/can-you-smell/20.webp" srcset="images/can-you-smell/20-640w.webp 640w, images/can-you-smell/20-1280w.webp 1280w, images/can-you-smell/20.webp 2400w" sizes="(max-width: 768px) 100vw, 412px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
-                </div>
-            </div>
-
-            <!-- Full Width -->
-            <div class="gallery-full">
-                <img src="images/can-you-smell/21.webp" srcset="images/can-you-smell/21-640w.webp 640w, images/can-you-smell/21-1280w.webp 1280w, images/can-you-smell/21.webp 2400w" sizes="(max-width: 900px) 100vw, 854px" alt="Can You Smell the Divine Fragrance in Town" loading="lazy">
             </div>
         </section>
 
@@ -189,5 +193,50 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        (function () {
+            const wrapper = document.getElementById('scrollGallery');
+            const track = document.getElementById('scrollGalleryTrack');
+
+            function setWrapperHeight() {
+                const overscroll = track.scrollWidth - window.innerWidth;
+                wrapper.style.height = (window.innerHeight + overscroll) + 'px';
+            }
+
+            function onScroll() {
+                const rect = wrapper.getBoundingClientRect();
+                const totalScrollable = wrapper.offsetHeight - window.innerHeight;
+                const scrolled = -rect.top;
+                const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
+                const maxTranslate = track.scrollWidth - window.innerWidth;
+                track.style.transform = 'translateX(' + (-progress * maxTranslate) + 'px)';
+            }
+
+            // Wait for images to load so we can measure their widths
+            let imagesLoaded = 0;
+            const imgs = track.querySelectorAll('img');
+            function imageReady() {
+                imagesLoaded++;
+                if (imagesLoaded === imgs.length) {
+                    setWrapperHeight();
+                    onScroll();
+                }
+            }
+            imgs.forEach(function (img) {
+                if (img.complete) {
+                    imageReady();
+                } else {
+                    img.addEventListener('load', imageReady);
+                    img.addEventListener('error', imageReady);
+                }
+            });
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', function () {
+                setWrapperHeight();
+                onScroll();
+            });
+        })();
+    </script>
 </body>
 </html>
