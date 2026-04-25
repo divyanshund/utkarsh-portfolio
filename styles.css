@@ -2654,3 +2654,59 @@ body.dark-mode .book-flip-shadow {
         font-size: 0.7rem;
     }
 }
+
+/* Scroll-to-top button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 36px;
+    right: 36px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 9000;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: opacity 0.35s ease, transform 0.35s ease, background 0.2s ease;
+    line-height: 1;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background: rgba(40, 40, 40, 0.9);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+body:not(.dark-mode) .scroll-to-top {
+    border-color: rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.8);
+    color: #222;
+}
+
+body:not(.dark-mode) .scroll-to-top:hover {
+    background: rgba(240, 240, 240, 0.95);
+}
+
+@media (max-width: 600px) {
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
+}

@@ -1000,3 +1000,31 @@ function initCursorGlow() {
 
     requestAnimationFrame(animate);
 }
+
+// ============================================
+// Scroll-to-top button (project pages only)
+// ============================================
+(function initScrollToTop() {
+    // Skip on the homepage and about page
+    const path = window.location.pathname;
+    const isHomePage = path === '/' || path.endsWith('index.html');
+    if (isHomePage) return;
+
+    const btn = document.createElement('button');
+    btn.className = 'scroll-to-top';
+    btn.setAttribute('aria-label', 'Scroll to top');
+    btn.innerHTML = '↑';
+    document.body.appendChild(btn);
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 300) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    }, { passive: true });
+
+    btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+})();
