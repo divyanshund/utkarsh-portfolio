@@ -21,6 +21,7 @@
     <meta name="twitter:image" content="https://utkarsh.studio/images/homepage/a.webp">
     
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preload" as="image" href="images/homepage/a.webp" imagesrcset="images/homepage/a-640w.webp 640w, images/homepage/a.webp 1280w" imagesizes="100vw" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -48,7 +49,7 @@
     <section class="hero" id="home">
         <!-- Central Photo Display -->
         <div class="photo-frame">
-            <img src="images/homepage/a.webp" srcset="images/homepage/a-640w.webp 640w, images/homepage/a.webp 1280w" sizes="100vw" alt="Photography" class="main-photo active" id="mainPhoto">
+            <img src="images/homepage/a.webp" srcset="images/homepage/a-640w.webp 640w, images/homepage/a.webp 1280w" sizes="100vw" alt="Photography" class="main-photo active" id="mainPhoto" fetchpriority="high">
         </div>
         
         <!-- Bottom Gradient Overlay (animates with text) -->
