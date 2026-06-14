@@ -2442,8 +2442,8 @@ body:not(.dark-mode) .cursor-glow {
 
 .book-flip {
     position: relative;
-    width: min(720px, 85vw);
-    aspect-ratio: 8 / 5;
+    height: min(80vh, 800px);
+    aspect-ratio: 3 / 4;
     perspective: 2000px;
     border-radius: 3px;
     overflow: visible;
@@ -2483,7 +2483,7 @@ body:not(.dark-mode) .cursor-glow {
 .book-leaf-front img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
 }
 
@@ -2623,7 +2623,8 @@ body.dark-mode .book-flip-shadow {
 
 @media (max-width: 768px) {
     .book-flip {
-        width: min(560px, 92vw);
+        height: min(75vh, 600px);
+        width: auto;
     }
 
     .book-flip-arrow {
