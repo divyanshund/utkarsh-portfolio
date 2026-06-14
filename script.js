@@ -70,6 +70,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize scattered gallery reveal
     initScatterGallery();
+
+    // Initialize horizontal scroll galleries (commissioned project pages)
+    initScrollGallery();
     
     // Initialize hero text reveal on scroll
     initHeroTextReveal();
@@ -708,6 +711,96 @@ function initScatterGallery() {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     onScroll();
+}
+
+// ============================================
+// Scroll-driven Horizontal Gallery (commissioned project pages)
+// Vertical scroll pans the track sideways. The layout is established
+// immediately from each image's reserved width/height aspect ratio, so the
+// gallery is scrollable before the images finish downloading and images can
+// load lazily into their reserved slots instead of blocking the whole view.
+// ============================================
+function initScrollGallery() {
+    const wrappers = document.querySelectorAll('.scroll-gallery-wrapper');
+    if (!wrappers.length) return;
+
+    const galleries = [];
+
+    function setup(wrapper) {
+        const track = wrapper.querySelector('.scroll-gallery-track');
+        const slides = wrapper.querySelectorAll('.scroll-gallery-slide');
+        const imgs = wrapper.querySelectorAll('img');
+        if (!track || !slides.length) return;
+
+        function centerFirstImage() {
+            const firstImg = imgs[0];
+            if (!firstImg) return;
+            const firstImgWidth = firstImg.getBoundingClientRect().width;
+            const leftPad = Math.max(0, (window.innerWidth - firstImgWidth) / 2);
+            track.style.paddingLeft = leftPad + 'px';
+        }
+
+        function setHeight() {
+            const overscroll = track.scrollWidth - window.innerWidth;
+            wrapper.style.height = (window.innerHeight + Math.max(0, overscroll)) + 'px';
+        }
+
+        function updateFocus(tx) {
+            const viewCenter = window.innerWidth / 2;
+            let closestSlide = null;
+            let closestDist = Infinity;
+            slides.forEach(function (slide) {
+                const center = slide.offsetLeft + slide.offsetWidth / 2 + tx;
+                const dist = Math.abs(center - viewCenter);
+                if (dist < closestDist) { closestDist = dist; closestSlide = slide; }
+            });
+            slides.forEach(function (slide) {
+                slide.classList.toggle('focused', slide === closestSlide);
+            });
+        }
+
+        function update() {
+            const totalScrollable = wrapper.offsetHeight - window.innerHeight;
+            const scrolled = -wrapper.getBoundingClientRect().top;
+            const progress = totalScrollable > 0
+                ? Math.max(0, Math.min(1, scrolled / totalScrollable))
+                : 0;
+            const maxTranslate = track.scrollWidth - window.innerWidth;
+            const translateX = -progress * maxTranslate;
+            track.style.transform = 'translateX(' + translateX + 'px)';
+            updateFocus(translateX);
+        }
+
+        function layout() {
+            centerFirstImage();
+            setHeight();
+            update();
+        }
+
+        // Lay out right away using the reserved aspect-ratio widths.
+        layout();
+
+        // Re-measure once each image's real dimensions are known (a no-op when
+        // they match the reserved ratio, but keeps things correct otherwise).
+        imgs.forEach(function (img) {
+            if (!(img.complete && img.naturalWidth > 0)) {
+                img.addEventListener('load', layout);
+                img.addEventListener('error', layout);
+            }
+        });
+
+        galleries.push({ layout: layout, update: update });
+    }
+
+    wrappers.forEach(setup);
+
+    window.addEventListener('scroll', function () {
+        galleries.forEach(function (g) { g.update(); });
+    }, { passive: true });
+
+    window.addEventListener('resize', function () {
+        galleries.forEach(function (g) { g.layout(); });
+    });
 }
 
 // ============================================

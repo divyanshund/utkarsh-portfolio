@@ -45,11 +45,11 @@
                 <div class="scroll-gallery-sticky">
                     <h3 class="commissioned-section-heading">FROM IRAN: A VISUAL TESTIMONY</h3>
                     <div class="scroll-gallery-track">
-                        <div class="scroll-gallery-slide"><img decoding="async" width="2400" height="621" src="images/Commissioned/5. From Iran/1.Immigration.webp" srcset="images/Commissioned/5. From Iran/1.Immigration-640w.webp 640w, images/Commissioned/5. From Iran/1.Immigration-1280w.webp 1280w, images/Commissioned/5. From Iran/1.Immigration.webp 2400w" alt="From Iran — Immigration"></div>
-                        <div class="scroll-gallery-slide"><img decoding="async" width="2400" height="749" src="images/Commissioned/5. From Iran/2.Women Prison.webp" srcset="images/Commissioned/5. From Iran/2.Women Prison-640w.webp 640w, images/Commissioned/5. From Iran/2.Women Prison-1280w.webp 1280w, images/Commissioned/5. From Iran/2.Women Prison.webp 2400w" alt="From Iran — Women Prison"></div>
-                        <div class="scroll-gallery-slide"><img decoding="async" width="2400" height="440" src="images/Commissioned/5. From Iran/3.Nasim Shomal.webp" srcset="images/Commissioned/5. From Iran/3.Nasim Shomal-640w.webp 640w, images/Commissioned/5. From Iran/3.Nasim Shomal-1280w.webp 1280w, images/Commissioned/5. From Iran/3.Nasim Shomal.webp 2400w" alt="From Iran — Nasim Shomal"></div>
-                        <div class="scroll-gallery-slide"><img decoding="async" width="2400" height="833" src="images/Commissioned/5. From Iran/4.Women Movement.webp" srcset="images/Commissioned/5. From Iran/4.Women Movement-640w.webp 640w, images/Commissioned/5. From Iran/4.Women Movement-1280w.webp 1280w, images/Commissioned/5. From Iran/4.Women Movement.webp 2400w" alt="From Iran — Women Movement"></div>
-                        <div class="scroll-gallery-slide"><img decoding="async" width="2400" height="577" src="images/Commissioned/5. From Iran/5.Parliament.webp" srcset="images/Commissioned/5. From Iran/5.Parliament-640w.webp 640w, images/Commissioned/5. From Iran/5.Parliament-1280w.webp 1280w, images/Commissioned/5. From Iran/5.Parliament.webp 2400w" alt="From Iran — Parliament"></div>
+                        <div class="scroll-gallery-slide"><img decoding="async" width="2400" height="621" src="images/Commissioned/5. From Iran/1.Immigration.webp" srcset="images/Commissioned/5. From Iran/1.Immigration-640w.webp 640w, images/Commissioned/5. From Iran/1.Immigration-1280w.webp 1280w, images/Commissioned/5. From Iran/1.Immigration.webp 2400w" sizes="(max-width: 768px) 90vw, 60vw" alt="From Iran — Immigration"></div>
+                        <div class="scroll-gallery-slide"><img loading="lazy" decoding="async" width="2400" height="749" src="images/Commissioned/5. From Iran/2.Women Prison.webp" srcset="images/Commissioned/5. From Iran/2.Women Prison-640w.webp 640w, images/Commissioned/5. From Iran/2.Women Prison-1280w.webp 1280w, images/Commissioned/5. From Iran/2.Women Prison.webp 2400w" sizes="(max-width: 768px) 90vw, 60vw" alt="From Iran — Women Prison"></div>
+                        <div class="scroll-gallery-slide"><img loading="lazy" decoding="async" width="2400" height="440" src="images/Commissioned/5. From Iran/3.Nasim Shomal.webp" srcset="images/Commissioned/5. From Iran/3.Nasim Shomal-640w.webp 640w, images/Commissioned/5. From Iran/3.Nasim Shomal-1280w.webp 1280w, images/Commissioned/5. From Iran/3.Nasim Shomal.webp 2400w" sizes="(max-width: 768px) 90vw, 60vw" alt="From Iran — Nasim Shomal"></div>
+                        <div class="scroll-gallery-slide"><img loading="lazy" decoding="async" width="2400" height="833" src="images/Commissioned/5. From Iran/4.Women Movement.webp" srcset="images/Commissioned/5. From Iran/4.Women Movement-640w.webp 640w, images/Commissioned/5. From Iran/4.Women Movement-1280w.webp 1280w, images/Commissioned/5. From Iran/4.Women Movement.webp 2400w" sizes="(max-width: 768px) 90vw, 60vw" alt="From Iran — Women Movement"></div>
+                        <div class="scroll-gallery-slide"><img loading="lazy" decoding="async" width="2400" height="577" src="images/Commissioned/5. From Iran/5.Parliament.webp" srcset="images/Commissioned/5. From Iran/5.Parliament-640w.webp 640w, images/Commissioned/5. From Iran/5.Parliament-1280w.webp 1280w, images/Commissioned/5. From Iran/5.Parliament.webp 2400w" sizes="(max-width: 768px) 90vw, 60vw" alt="From Iran — Parliament"></div>
                     </div>
                 </div>
             </div>
@@ -94,83 +94,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        (function () {
-            var galleries = [];
-
-            function initGallery(wrapper) {
-                var track = wrapper.querySelector('.scroll-gallery-track');
-                var slides = wrapper.querySelectorAll('.scroll-gallery-slide');
-                var imgs = wrapper.querySelectorAll('img');
-                var translateX = 0;
-
-                function centerFirstImage() {
-                    var firstImg = imgs[0];
-                    var firstImgWidth = firstImg.getBoundingClientRect().width;
-                    var leftPad = Math.max(0, (window.innerWidth - firstImgWidth) / 2);
-                    track.style.paddingLeft = leftPad + 'px';
-                }
-
-                function setHeight() {
-                    var overscroll = track.scrollWidth - window.innerWidth;
-                    wrapper.style.height = (window.innerHeight + overscroll) + 'px';
-                }
-
-                function updateFocus(tx) {
-                    var viewCenter = window.innerWidth / 2;
-                    var closestSlide = null;
-                    var closestDist = Infinity;
-                    slides.forEach(function (slide) {
-                        var center = slide.offsetLeft + slide.offsetWidth / 2 + tx;
-                        var dist = Math.abs(center - viewCenter);
-                        if (dist < closestDist) { closestDist = dist; closestSlide = slide; }
-                    });
-                    slides.forEach(function (slide) {
-                        slide.classList.toggle('focused', slide === closestSlide);
-                    });
-                }
-
-                function update() {
-                    var rect = wrapper.getBoundingClientRect();
-                    var totalScrollable = wrapper.offsetHeight - window.innerHeight;
-                    var scrolled = -rect.top;
-                    var progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
-                    var maxTranslate = track.scrollWidth - window.innerWidth;
-                    translateX = -progress * maxTranslate;
-                    track.style.transform = 'translateX(' + translateX + 'px)';
-                    updateFocus(translateX);
-                }
-
-                function init() {
-                    centerFirstImage();
-                    setHeight();
-                    update();
-                }
-
-                // Wait for all images in this gallery to load
-                var loaded = 0;
-                imgs.forEach(function (img) {
-                    function ready() { loaded++; if (loaded === imgs.length) init(); }
-                    if (img.complete) { ready(); }
-                    else { img.addEventListener('load', ready); img.addEventListener('error', ready); }
-                });
-
-                galleries.push({ wrapper: wrapper, track: track, slides: slides, imgs: imgs, init: init, update: update });
-            }
-
-            document.querySelectorAll('.scroll-gallery-wrapper').forEach(initGallery);
-
-            window.addEventListener('scroll', function () {
-                galleries.forEach(function (g) { g.update(); });
-            }, { passive: true });
-
-            window.addEventListener('resize', function () {
-                galleries.forEach(function (g) {
-                    g.track.style.paddingLeft = '0px';
-                    g.init();
-                });
-            });
-        })();
-    </script>
 </body>
 </html>
