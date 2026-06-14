@@ -15,8 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var leaves = Array.from(book.querySelectorAll('.book-leaf'));
     var totalPages = leaves.length;
-    var currentPage = 0;
-    var SCROLL_PER_PAGE = 200;
+    var currentPage = 0;       // leaves currently flipped (visual state)
+    var targetPage = 0;        // where the scroll/nav wants us to be
+    var stepTimer = null;      // drives sequential one-at-a-time flips
+    var STEP_MS = 170;         // base delay between consecutive page turns
+    var SCROLL_PER_PAGE = 260;
     var SCROLL_BUFFER = 150;
     var FLIP_DURATION = 800;
     var zIndexTimeout;
@@ -62,17 +65,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Core page flip ---
 
-    function setPage(pageIndex) {
-        pageIndex = Math.max(0, Math.min(totalPages - 1, pageIndex));
-        if (pageIndex === currentPage) return;
-
-        var oldPage = currentPage;
-        var forward = pageIndex > oldPage;
-        currentPage = pageIndex;
-
-        var lo = Math.min(oldPage, pageIndex);
-        var hi = Math.max(oldPage, pageIndex);
-
+    // Apply flipped classes for the current visual state and lift the single
+    // leaf that is actively turning above both page stacks.
+    function applyFlipState(animatingIndex) {
         for (var i = 0; i < totalPages; i++) {
             if (i < currentPage) {
                 leaves[i].classList.add('flipped');
@@ -80,9 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 leaves[i].classList.remove('flipped');
             }
 
-            // Boost z-index for actively flipping pages
-            if (i >= lo && i <= hi) {
-                leaves[i].style.zIndex = totalPages + (hi - i) + 1;
+            if (i === animatingIndex) {
+                leaves[i].style.zIndex = totalPages + 5;
             } else if (i < currentPage) {
                 leaves[i].style.zIndex = i + 1;
             } else if (i === currentPage) {
@@ -94,6 +88,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
         updateIndicator();
         updateArrows();
+    }
+
+    // Turn exactly one page toward the target, then schedule the next turn.
+    // This keeps fast scrolls from collapsing many pages into one instant flip.
+    function stepToward() {
+        stepTimer = null;
+        if (currentPage === targetPage) return;
+
+        var animatingIndex;
+        if (targetPage > currentPage) {
+            animatingIndex = currentPage;   // top-right leaf turns left
+            currentPage++;
+        } else {
+            currentPage--;
+            animatingIndex = currentPage;   // top-left leaf turns back right
+        }
+
+        applyFlipState(animatingIndex);
+
+        var pending = Math.abs(targetPage - currentPage);
+        if (pending > 0) {
+            // Catch up a little faster the further behind we are, so big
+            // jumps cascade as a quick riffle rather than dragging on.
+            var interval = Math.max(80, STEP_MS - pending * 10);
+            stepTimer = setTimeout(stepToward, interval);
+        }
+    }
+
+    function setPage(pageIndex) {
+        pageIndex = Math.max(0, Math.min(totalPages - 1, pageIndex));
+        if (pageIndex === targetPage) return;
+        targetPage = pageIndex;
+        if (!stepTimer) stepToward();
     }
 
     function updateIndicator() {
@@ -136,14 +163,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (prevBtn) {
         prevBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            if (currentPage > 0) scrollToPage(currentPage - 1);
+            if (targetPage > 0) scrollToPage(targetPage - 1);
         });
     }
 
     if (nextBtn) {
         nextBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            if (currentPage < totalPages - 1) scrollToPage(currentPage + 1);
+            if (targetPage < totalPages - 1) scrollToPage(targetPage + 1);
         });
     }
 
@@ -156,10 +183,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (e.key === 'ArrowRight') {
             e.preventDefault();
-            if (currentPage < totalPages - 1) scrollToPage(currentPage + 1);
+            if (targetPage < totalPages - 1) scrollToPage(targetPage + 1);
         } else if (e.key === 'ArrowLeft') {
             e.preventDefault();
-            if (currentPage > 0) scrollToPage(currentPage - 1);
+            if (targetPage > 0) scrollToPage(targetPage - 1);
         }
     });
 
@@ -195,10 +222,8 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        var targetPage = Math.round(flipScroll / SCROLL_PER_PAGE);
-        if (targetPage !== currentPage) {
-            setPage(targetPage);
-        }
+        var desiredPage = Math.round(flipScroll / SCROLL_PER_PAGE);
+        setPage(desiredPage);
 
         if (scrollHint) {
             scrollHint.style.opacity = scrollIntoSection > 30 ? '0' : '';
@@ -229,10 +254,10 @@ document.addEventListener('DOMContentLoaded', function() {
         var dy = e.changedTouches[0].clientY - touchStartY;
 
         if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-            if (dx < 0 && currentPage < totalPages - 1) {
-                scrollToPage(currentPage + 1);
-            } else if (dx > 0 && currentPage > 0) {
-                scrollToPage(currentPage - 1);
+            if (dx < 0 && targetPage < totalPages - 1) {
+                scrollToPage(targetPage + 1);
+            } else if (dx > 0 && targetPage > 0) {
+                scrollToPage(targetPage - 1);
             }
         }
     }, { passive: true });
@@ -240,8 +265,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Click on book to flip forward ---
 
     book.addEventListener('click', function() {
-        if (currentPage < totalPages - 1) {
-            scrollToPage(currentPage + 1);
+        if (targetPage < totalPages - 1) {
+            scrollToPage(targetPage + 1);
         }
     });
 
