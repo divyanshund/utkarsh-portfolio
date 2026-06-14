@@ -841,12 +841,38 @@ window.addEventListener('load', function() {
 function initLazyImageFadeIn() {
     const lazyImages = document.querySelectorAll('img[loading="lazy"]');
 
+    // Show a spinner only for images that are actually downloading and near the
+    // viewport, so off-screen lazy images don't animate spinners needlessly.
+    const spinnerObserver = ('IntersectionObserver' in window)
+        ? new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const img = entry.target;
+                obs.unobserve(img);
+                if (!(img.complete && img.naturalHeight > 0) && img.parentElement) {
+                    img.parentElement.classList.add('img-loading');
+                }
+            });
+        }, { rootMargin: '200px' })
+        : null;
+
+    function markLoaded(img) {
+        img.classList.add('img-loaded');
+        if (img.parentElement) img.parentElement.classList.remove('img-loading');
+        if (spinnerObserver) spinnerObserver.unobserve(img);
+    }
+
     lazyImages.forEach(img => {
         if (img.complete && img.naturalHeight > 0) {
             img.classList.add('img-loaded');
         } else {
-            img.addEventListener('load', () => img.classList.add('img-loaded'));
-            img.addEventListener('error', () => img.classList.add('img-loaded'));
+            img.addEventListener('load', () => markLoaded(img));
+            img.addEventListener('error', () => markLoaded(img));
+            if (spinnerObserver) {
+                spinnerObserver.observe(img);
+            } else if (img.parentElement) {
+                img.parentElement.classList.add('img-loading');
+            }
         }
     });
 }

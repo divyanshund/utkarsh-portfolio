@@ -31,6 +31,37 @@ img[loading="lazy"]:not(.img-loaded) {
     opacity: 0;
 }
 
+/* Loading spinner shown over an image's placeholder while it downloads */
+.img-loading {
+    position: relative;
+}
+
+.img-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+    border: 2px solid var(--accent-line);
+    border-top-color: var(--text-light);
+    border-radius: 50%;
+    animation: imgSpin 0.8s linear infinite;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes imgSpin {
+    to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .img-loading::after {
+        animation: none;
+    }
+}
+
 /* Navigation */
 .nav {
     position: fixed;
