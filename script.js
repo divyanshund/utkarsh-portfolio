@@ -3,26 +3,27 @@
 // ============================================
 const PHOTO_CHANGE_INTERVAL = 2000; // 2 seconds - easily adjustable
 
-// Photo URLs for the main slideshow
-const PHOTOS = [
-    'images/homepage/a.webp',
-    'images/homepage/b.webp',
-    'images/homepage/c.webp',
-    'images/homepage/d.webp',
-    'images/homepage/e.webp',
-    'images/homepage/f.webp',
-    'images/homepage/g.webp',
-    'images/homepage/h.webp',
-    'images/homepage/i.webp',
-    'images/homepage/j.webp',
-    'images/homepage/k.webp',
-    'images/homepage/l.webp',
-    'images/homepage/m.webp',
-    'images/homepage/n.webp',
-    'images/homepage/o.webp',
-    'images/homepage/p.webp',
-    'images/homepage/IMG_7114.webp'
-];
+// Photo bases for the main slideshow. Most have a -1280w variant; a/c/o only
+// have a -640w plus a small base file, so they fall back to the base.
+const PHOTO_BASES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'IMG_7114'];
+const PHOTO_NO_1280 = ['a', 'c', 'o'];
+
+// Build responsive sources so the slideshow never loads the multi-MB full-res
+// files. The largest candidate is the -1280w variant (or the small base file).
+const PHOTOS = PHOTO_BASES.map(function (base) {
+    var dir = 'images/homepage/';
+    var has1280 = PHOTO_NO_1280.indexOf(base) === -1;
+    if (has1280) {
+        return {
+            src: dir + base + '-1280w.webp',
+            srcset: dir + base + '-640w.webp 640w, ' + dir + base + '-1280w.webp 1280w'
+        };
+    }
+    return {
+        src: dir + base + '.webp',
+        srcset: dir + base + '-640w.webp 640w, ' + dir + base + '.webp 1280w'
+    };
+});
 
 // ============================================
 // Main Initialization
@@ -184,12 +185,25 @@ function initPhotoSlideshow() {
     if (!mainPhoto) return;
     
     let currentIndex = 0;
-    
+
+    // Warm the cache for the next photo only (not all 17 at once).
+    function preloadNext(index) {
+        const next = PHOTOS[(index + 1) % PHOTOS.length];
+        const img = new Image();
+        img.src = next.src;
+    }
+
     function changePhoto() {
         currentIndex = (currentIndex + 1) % PHOTOS.length;
-        mainPhoto.src = PHOTOS[currentIndex];
+        const photo = PHOTOS[currentIndex];
+        mainPhoto.srcset = photo.srcset;
+        mainPhoto.src = photo.src;
+        preloadNext(currentIndex);
     }
-    
+
+    // Prepare the photo following the initial hero frame.
+    preloadNext(currentIndex);
+
     // Change photo every interval (instant, no transition)
     setInterval(changePhoto, PHOTO_CHANGE_INTERVAL);
 }
@@ -823,17 +837,6 @@ function initHeroTextReveal() {
         });
     }
 }
-
-// ============================================
-// Preload Images
-// ============================================
-window.addEventListener('load', function() {
-    // Preload slideshow images for smooth transitions
-    PHOTOS.forEach(url => {
-        const img = new Image();
-        img.src = url;
-    });
-});
 
 // ============================================
 // Lazy Image Fade-In
