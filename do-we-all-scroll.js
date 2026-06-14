@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Preload images ---
 
     window.addEventListener('load', function() {
-        var images = book.querySelectorAll('.book-leaf-front img');
+        var images = book.querySelectorAll('.book-leaf-front img, .book-leaf-back img');
         images.forEach(function(img) {
             if (!img.complete) {
                 var preload = new Image();
