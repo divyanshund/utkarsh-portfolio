@@ -1660,6 +1660,84 @@ html {
     text-transform: lowercase;
 }
 
+/* Sources / further-reading links on project pages */
+.project-sources {
+    max-width: 760px;
+    margin: 100px auto 40px;
+    padding: 0 60px;
+}
+
+.project-sources-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-light);
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--accent-line);
+    letter-spacing: 0.3px;
+}
+
+.project-sources-list {
+    list-style: none;
+    counter-reset: source;
+    margin: 0;
+    padding: 0;
+}
+
+.project-sources-list li {
+    counter-increment: source;
+    margin-bottom: 22px;
+}
+
+.project-sources-list li:last-child {
+    margin-bottom: 0;
+}
+
+.project-sources-list a {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--text-gray);
+    transition: color 0.25s ease;
+}
+
+.project-sources-list a::before {
+    content: counter(source);
+    flex-shrink: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: var(--text-light);
+    opacity: 0.6;
+    min-width: 18px;
+}
+
+.project-sources-list .source-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s ease;
+}
+
+.project-sources-list .source-meta {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-light);
+    opacity: 0.7;
+    white-space: nowrap;
+}
+
+.project-sources-list a:hover .source-title {
+    border-bottom-color: var(--text-gray);
+}
+
+.project-sources-list a:hover .source-meta {
+    opacity: 1;
+}
+
 .project-footer {
     max-width: 1400px;
     margin: 80px auto 60px;
@@ -1819,6 +1897,15 @@ body.dark-mode .back-link:hover {
     .project-footer {
         margin: 60px auto 40px;
         padding: 0 20px;
+    }
+
+    .project-sources {
+        margin: 70px auto 30px;
+        padding: 0 24px;
+    }
+
+    .project-sources-list .source-meta {
+        display: none;
     }
 }
 
