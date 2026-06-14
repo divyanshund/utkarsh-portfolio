@@ -2656,11 +2656,11 @@ body.dark-mode .book-leaf-back {
     background: linear-gradient(
         to right,
         rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0.04) 35%,
-        rgba(0, 0, 0, 0.14) 48%,
-        rgba(0, 0, 0, 0.18) 50%,
-        rgba(0, 0, 0, 0.14) 52%,
-        rgba(0, 0, 0, 0.04) 65%,
+        rgba(0, 0, 0, 0.02) 35%,
+        rgba(0, 0, 0, 0.06) 48%,
+        rgba(0, 0, 0, 0.09) 50%,
+        rgba(0, 0, 0, 0.06) 52%,
+        rgba(0, 0, 0, 0.02) 65%,
         rgba(0, 0, 0, 0) 100%
     );
 }
@@ -2669,11 +2669,11 @@ body.dark-mode .book-flip::before {
     background: linear-gradient(
         to right,
         rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0.12) 35%,
-        rgba(0, 0, 0, 0.38) 48%,
-        rgba(0, 0, 0, 0.48) 50%,
-        rgba(0, 0, 0, 0.38) 52%,
-        rgba(0, 0, 0, 0.12) 65%,
+        rgba(0, 0, 0, 0.06) 35%,
+        rgba(0, 0, 0, 0.18) 48%,
+        rgba(0, 0, 0, 0.24) 50%,
+        rgba(0, 0, 0, 0.18) 52%,
+        rgba(0, 0, 0, 0.06) 65%,
         rgba(0, 0, 0, 0) 100%
     );
 }
