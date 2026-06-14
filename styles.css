@@ -1505,6 +1505,98 @@ html {
 .gallery-row-3 .gallery-item:nth-child(2) { transition-delay: 0.2s; }
 .gallery-row-3 .gallery-item:nth-child(3) { transition-delay: 0.3s; }
 
+/* Horizontal Scroll Gallery */
+.hscroll-section {
+    position: relative;
+    /* Tall outer container — its scrollable height controls how far the
+       track pans horizontally. Pace is computed in JS from this height. */
+    height: 420vh;
+    margin: 100px 0;
+}
+
+.hscroll-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hscroll-track {
+    position: relative;
+    width: 290vw;
+    height: 100vh;
+    will-change: transform;
+}
+
+.hscroll-item {
+    position: absolute;
+    left: var(--left);
+    top: var(--top);
+    margin: 0;
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+.hscroll-item.revealed {
+    opacity: 1;
+    transform: none;
+}
+
+.hscroll-item img {
+    display: block;
+    height: var(--h);
+    width: auto;
+    cursor: pointer;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+    transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+.hscroll-item img:hover {
+    transform: scale(1.03);
+    opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+    /* Horizontal scroll is awkward on touch — fall back to a vertical
+       stack that still reveals one image at a time on scroll. */
+    .hscroll-section {
+        height: auto;
+        margin: 60px 0;
+        padding: 0 23px;
+    }
+
+    .hscroll-sticky {
+        position: static;
+        height: auto;
+        overflow: visible;
+    }
+
+    .hscroll-track {
+        width: 100%;
+        height: auto;
+        transform: none !important;
+        display: flex;
+        flex-direction: column;
+        gap: 45px;
+    }
+
+    .hscroll-item {
+        position: static;
+        left: auto;
+        top: auto;
+        width: 100%;
+    }
+
+    .hscroll-item img {
+        height: auto;
+        width: 100%;
+    }
+}
+
 /* Credits Section */
 .project-credits {
     max-width: 1400px;

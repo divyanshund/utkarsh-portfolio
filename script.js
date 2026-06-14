@@ -66,6 +66,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize project gallery animations
     initProjectGalleryAnimations();
+
+    // Initialize scattered gallery reveal
+    initScatterGallery();
     
     // Initialize hero text reveal on scroll
     initHeroTextReveal();
@@ -639,6 +642,61 @@ function initProjectGalleryAnimations() {
 }
 
 // ============================================
+// Horizontal Scroll Gallery
+// Vertical scroll pans the track right; photos reveal one by one.
+// ============================================
+function initScatterGallery() {
+    const section = document.querySelector('.hscroll-section');
+
+    if (!section) return;
+
+    const sticky = section.querySelector('.hscroll-sticky');
+    const track = section.querySelector('.hscroll-track');
+    const items = Array.from(section.querySelectorAll('.hscroll-item'));
+
+    // Disable the horizontal-pan behaviour on small screens (CSS falls back
+    // to a vertical stack); just reveal items as they enter the viewport.
+    const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+
+    function revealVisible() {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        items.forEach(item => {
+            if (item.classList.contains('revealed')) return;
+            const r = item.getBoundingClientRect();
+            const inView = isMobile()
+                ? (r.top < vh * 0.85 && r.bottom > 0)
+                : (r.left < vw * 0.9 && r.right > 0);
+            if (inView) item.classList.add('revealed');
+        });
+    }
+
+    let ticking = false;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            if (!isMobile()) {
+                const scrollable = section.offsetHeight - sticky.offsetHeight;
+                const progress = scrollable > 0
+                    ? Math.min(Math.max(-section.getBoundingClientRect().top / scrollable, 0), 1)
+                    : 0;
+                const maxX = track.scrollWidth - sticky.offsetWidth;
+                track.style.transform = `translateX(${-progress * maxX}px)`;
+            } else {
+                track.style.transform = '';
+            }
+            revealVisible();
+            ticking = false;
+        });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+}
+
+// ============================================
 // Hero Text Reveal on First Scroll
 // ============================================
 function initHeroTextReveal() {
@@ -842,7 +900,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Gallery Lightbox
 // ============================================
 function initGalleryLightbox() {
-    const galleryImages = document.querySelectorAll('.gallery-full img, .gallery-item img');
+    const galleryImages = document.querySelectorAll('.gallery-full img, .gallery-item img, .hscroll-item img');
     
     if (galleryImages.length === 0) return;
     
