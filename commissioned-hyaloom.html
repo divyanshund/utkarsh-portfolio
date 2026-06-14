@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hyaloom Products by Utkarsh Singh - Commissioned Work">
+    <title>Hyaloom Products - Utkarsh Singh</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Hyaloom Products - Utkarsh Singh">
+    <meta property="og:description" content="Hyaloom Products by Utkarsh Singh - Commissioned Work">
+    <meta property="og:image" content="https://utkarsh.studio/images/Commissioned/6. Hyaloom/cover.webp">
+    <meta property="og:url" content="https://utkarsh.studio/commissioned-hyaloom.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Utkarsh Singh">
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-mode">
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="commissioned.html" class="nav-link back-link-nav">← back to commissioned</a>
+            <a href="index.html#home" class="nav-link">home</a>
+            <a href="index.html#work" class="nav-link">work</a>
+            <a href="about.html" class="nav-link">about</a>
+            <a href="index.html#contact" class="nav-link">contact me</a>
+        </div>
+    </nav>
+
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="toggle-text light-text">turn lights off</span>
+        <span class="toggle-text dark-text">turn lights on</span>
+    </button>
+
+    <!-- Project Content -->
+    <main class="project-page">
+        <section class="video-item">
+            <div class="scroll-gallery-wrapper">
+                <div class="scroll-gallery-sticky">
+                    <h3 class="commissioned-section-heading">HYALOOM PRODUCTS</h3>
+                    <div class="scroll-gallery-track">
+                        <div class="scroll-gallery-slide"><img src="images/Commissioned/6. Hyaloom/Hyaloom-new1.webp" srcset="images/Commissioned/6. Hyaloom/Hyaloom-new1-640w.webp 640w, images/Commissioned/6. Hyaloom/Hyaloom-new1-1280w.webp 1280w, images/Commissioned/6. Hyaloom/Hyaloom-new1.webp 2400w" alt="Hyaloom Products 1"></div>
+                        <div class="scroll-gallery-slide"><img src="images/Commissioned/6. Hyaloom/Hyaloom-new2.webp" srcset="images/Commissioned/6. Hyaloom/Hyaloom-new2-640w.webp 640w, images/Commissioned/6. Hyaloom/Hyaloom-new2-1280w.webp 1280w, images/Commissioned/6. Hyaloom/Hyaloom-new2.webp 2400w" alt="Hyaloom Products 2"></div>
+                        <div class="scroll-gallery-slide"><img src="images/Commissioned/6. Hyaloom/Hyaloom-new3.webp" srcset="images/Commissioned/6. Hyaloom/Hyaloom-new3-640w.webp 640w, images/Commissioned/6. Hyaloom/Hyaloom-new3-1280w.webp 1280w, images/Commissioned/6. Hyaloom/Hyaloom-new3.webp 2400w" alt="Hyaloom Products 3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back Link -->
+        <section class="project-footer">
+            <a href="commissioned.html" class="back-link">← back to commissioned work</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Utkarsh Singh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        (function () {
+            var galleries = [];
+
+            function initGallery(wrapper) {
+                var track = wrapper.querySelector('.scroll-gallery-track');
+                var slides = wrapper.querySelectorAll('.scroll-gallery-slide');
+                var imgs = wrapper.querySelectorAll('img');
+                var translateX = 0;
+
+                function centerFirstImage() {
+                    var firstImg = imgs[0];
+                    var firstImgWidth = firstImg.getBoundingClientRect().width;
+                    var leftPad = Math.max(0, (window.innerWidth - firstImgWidth) / 2);
+                    track.style.paddingLeft = leftPad + 'px';
+                }
+
+                function setHeight() {
+                    var overscroll = track.scrollWidth - window.innerWidth;
+                    wrapper.style.height = (window.innerHeight + overscroll) + 'px';
+                }
+
+                function updateFocus(tx) {
+                    var viewCenter = window.innerWidth / 2;
+                    var closestSlide = null;
+                    var closestDist = Infinity;
+                    slides.forEach(function (slide) {
+                        var center = slide.offsetLeft + slide.offsetWidth / 2 + tx;
+                        var dist = Math.abs(center - viewCenter);
+                        if (dist < closestDist) { closestDist = dist; closestSlide = slide; }
+                    });
+                    slides.forEach(function (slide) {
+                        slide.classList.toggle('focused', slide === closestSlide);
+                    });
+                }
+
+                function update() {
+                    var rect = wrapper.getBoundingClientRect();
+                    var totalScrollable = wrapper.offsetHeight - window.innerHeight;
+                    var scrolled = -rect.top;
+                    var progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
+                    var maxTranslate = track.scrollWidth - window.innerWidth;
+                    translateX = -progress * maxTranslate;
+                    track.style.transform = 'translateX(' + translateX + 'px)';
+                    updateFocus(translateX);
+                }
+
+                function init() {
+                    centerFirstImage();
+                    setHeight();
+                    update();
+                }
+
+                // Wait for all images in this gallery to load
+                var loaded = 0;
+                imgs.forEach(function (img) {
+                    function ready() { loaded++; if (loaded === imgs.length) init(); }
+                    if (img.complete) { ready(); }
+                    else { img.addEventListener('load', ready); img.addEventListener('error', ready); }
+                });
+
+                galleries.push({ wrapper: wrapper, track: track, slides: slides, imgs: imgs, init: init, update: update });
+            }
+
+            document.querySelectorAll('.scroll-gallery-wrapper').forEach(initGallery);
+
+            window.addEventListener('scroll', function () {
+                galleries.forEach(function (g) { g.update(); });
+            }, { passive: true });
+
+            window.addEventListener('resize', function () {
+                galleries.forEach(function (g) {
+                    g.track.style.paddingLeft = '0px';
+                    g.init();
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
