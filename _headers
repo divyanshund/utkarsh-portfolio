@@ -1,0 +1,15 @@
+# Netlify cache headers for static assets.
+# Images rarely change and have stable names, so cache them for a year.
+# A manual reload still revalidates because "immutable" is omitted.
+/images/*
+  Cache-Control: public, max-age=31536000
+
+# CSS/JS are unversioned, so use a short cache that picks up deploys quickly.
+/*.css
+  Cache-Control: public, max-age=86400
+/*.js
+  Cache-Control: public, max-age=86400
+
+# Vector assets
+/*.svg
+  Cache-Control: public, max-age=2592000
