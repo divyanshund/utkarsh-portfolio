@@ -2170,6 +2170,37 @@ body.dark-mode .commissioned-section-heading {
     opacity: 0.9;
 }
 
+/* Commissioned work items reusing the home "work" layout */
+.commissioned-works {
+    padding-top: 80px;
+}
+
+.commissioned-video .work-image {
+    aspect-ratio: 16 / 9;
+}
+
+.work-meta {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+}
+
+/* Play overlay sits on top of the video thumbnail inside a work item */
+.commissioned-video .work-image .video-play-overlay {
+    z-index: 2;
+}
+
+.work-image-link:hover .play-icon {
+    transform: scale(1.05);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.work-image-link:hover .play-text {
+    opacity: 1;
+}
+
 /* ============================================
    Video Sections
    ============================================ */
