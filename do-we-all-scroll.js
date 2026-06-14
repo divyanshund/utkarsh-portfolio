@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var leaves = Array.from(book.querySelectorAll('.book-leaf'));
     var totalPages = leaves.length;
+    var maxPage = totalPages;  // one flip beyond the last leaf reveals its back face
     var currentPage = 0;       // leaves currently flipped (visual state)
     var targetPage = 0;        // where the scroll/nav wants us to be
     var stepTimer = null;      // drives sequential one-at-a-time flips
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Layout ---
 
     function updateLayout() {
-        var scrollDistance = SCROLL_BUFFER + (totalPages - 1) * SCROLL_PER_PAGE;
+        var scrollDistance = SCROLL_BUFFER + maxPage * SCROLL_PER_PAGE;
         section.style.height = (scrollDistance + window.innerHeight) + 'px';
     }
 
@@ -88,6 +89,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         updateIndicator();
         updateArrows();
+        updateBookOffset();
+    }
+
+    // Centre the single visible page at the start (cover) and end (final back
+    // page); recentre the two-page spread for everything in between.
+    function updateBookOffset() {
+        book.classList.toggle('book-closed', currentPage === 0);
+        book.classList.toggle('book-ended', currentPage === maxPage);
     }
 
     // Turn exactly one page toward the target, then schedule the next turn.
@@ -117,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function setPage(pageIndex) {
-        pageIndex = Math.max(0, Math.min(totalPages - 1, pageIndex));
+        pageIndex = Math.max(0, Math.min(maxPage, pageIndex));
         if (pageIndex === targetPage) return;
         targetPage = pageIndex;
         if (!stepTimer) stepToward();
@@ -128,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentPage === 0) {
                 indicator.textContent = 'scroll to flip';
             } else {
-                indicator.textContent = (currentPage + 1) + ' / ' + totalPages;
+                indicator.textContent = currentPage + ' / ' + maxPage;
             }
         }
     }
@@ -142,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         if (nextBtn) {
-            if (currentPage === totalPages - 1) {
+            if (currentPage === maxPage) {
                 nextBtn.classList.add('disabled');
             } else {
                 nextBtn.classList.remove('disabled');
@@ -170,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (nextBtn) {
         nextBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            if (targetPage < totalPages - 1) scrollToPage(targetPage + 1);
+            if (targetPage < maxPage) scrollToPage(targetPage + 1);
         });
     }
 
@@ -183,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (e.key === 'ArrowRight') {
             e.preventDefault();
-            if (targetPage < totalPages - 1) scrollToPage(targetPage + 1);
+            if (targetPage < maxPage) scrollToPage(targetPage + 1);
         } else if (e.key === 'ArrowLeft') {
             e.preventDefault();
             if (targetPage > 0) scrollToPage(targetPage - 1);
@@ -215,9 +224,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        var maxScroll = (totalPages - 1) * SCROLL_PER_PAGE;
+        var maxScroll = maxPage * SCROLL_PER_PAGE;
         if (flipScroll > maxScroll) {
-            if (currentPage !== totalPages - 1) setPage(totalPages - 1);
+            if (currentPage !== maxPage) setPage(maxPage);
             ticking = false;
             return;
         }
@@ -254,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var dy = e.changedTouches[0].clientY - touchStartY;
 
         if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-            if (dx < 0 && targetPage < totalPages - 1) {
+            if (dx < 0 && targetPage < maxPage) {
                 scrollToPage(targetPage + 1);
             } else if (dx > 0 && targetPage > 0) {
                 scrollToPage(targetPage - 1);
@@ -265,7 +274,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Click on book to flip forward ---
 
     book.addEventListener('click', function() {
-        if (targetPage < totalPages - 1) {
+        if (targetPage < maxPage) {
             scrollToPage(targetPage + 1);
         }
     });
@@ -318,5 +327,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateIndicator();
     updateArrows();
+    updateBookOffset();
     requestAnimationFrame(onScroll);
 });

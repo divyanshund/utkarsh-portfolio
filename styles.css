@@ -2575,6 +2575,19 @@ body:not(.dark-mode) .cursor-glow {
     perspective: 2000px;
     border-radius: 3px;
     overflow: visible;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Closed book: only the right page is visible, so shift the whole book
+   right by half a page to centre that single page. Opening animates it
+   back so the two-page spread is centred. */
+.book-flip.book-closed {
+    transform: translateX(-25%);
+}
+
+/* Fully read: only the final left page remains, so shift left to centre it. */
+.book-flip.book-ended {
+    transform: translateX(25%);
 }
 
 /* Static left-page backdrop (transparent until a leaf is flipped onto it) */
