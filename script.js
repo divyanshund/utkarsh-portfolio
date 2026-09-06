@@ -724,6 +724,12 @@ function initScrollGallery() {
     const wrappers = document.querySelectorAll('.scroll-gallery-wrapper');
     if (!wrappers.length) return;
 
+    // On phones the desktop "vertical scroll pans sideways" interaction is
+    // awkward, so we fall back to a native, swipeable, scroll-snapping carousel
+    // (styled in CSS). This query decides which mode each gallery runs in and
+    // is re-evaluated whenever the viewport crosses the breakpoint.
+    const mq = window.matchMedia('(max-width: 768px)');
+
     const galleries = [];
 
     function setup(wrapper) {
@@ -732,6 +738,8 @@ function initScrollGallery() {
         const imgs = wrapper.querySelectorAll('img');
         if (!track || !slides.length) return;
 
+        const sticky = wrapper.querySelector('.scroll-gallery-sticky') || track.parentNode;
+
         // Metrics measured only during layout/resize/image-load — never on scroll.
         let slideCenters = [];   // each slide's center x at translateX = 0
         let wrapperTop = 0;      // wrapper top relative to the document
@@ -739,6 +747,55 @@ function initScrollGallery() {
         let maxTranslate = 0;
         let viewCenter = 0;
         let lastFocusIndex = -1;
+
+        // --- Mobile swipe affordances (slide counter + one-time swipe hint) ---
+        // Built once for every gallery but hidden on desktop via CSS, so they
+        // never affect the desktop layout.
+        const progressEl = document.createElement('div');
+        progressEl.className = 'scroll-gallery-progress';
+        const hintEl = document.createElement('div');
+        hintEl.className = 'scroll-gallery-hint';
+        hintEl.innerHTML = 'swipe <span class="swipe-arrow" aria-hidden="true">&rarr;</span>';
+        sticky.appendChild(progressEl);
+        sticky.appendChild(hintEl);
+
+        let hintDismissed = false;
+        let progressScheduled = false;
+
+        function updateProgress() {
+            const total = slides.length;
+            const slideW = track.clientWidth || 1;
+            let idx = Math.round(track.scrollLeft / slideW);
+            idx = Math.max(0, Math.min(total - 1, idx));
+            progressEl.textContent = (idx + 1) + ' / ' + total;
+        }
+
+        function onTrackScroll() {
+            if (!mq.matches || progressScheduled) return;
+            progressScheduled = true;
+            window.requestAnimationFrame(function () {
+                updateProgress();
+                if (!hintDismissed && track.scrollLeft > 8) {
+                    hintEl.classList.add('hidden');
+                    hintDismissed = true;
+                }
+                progressScheduled = false;
+            });
+        }
+
+        track.addEventListener('scroll', onTrackScroll, { passive: true });
+
+        // Clears every inline style the desktop scroll-pan writes so the CSS
+        // swipe carousel can take over cleanly on mobile.
+        function reset() {
+            track.style.transform = '';
+            track.style.paddingLeft = '';
+            wrapper.style.height = '';
+            if (lastFocusIndex >= 0 && slides[lastFocusIndex]) {
+                slides[lastFocusIndex].classList.remove('focused');
+            }
+            lastFocusIndex = -1;
+        }
 
         function centerFirstImage() {
             const firstImg = imgs[0];
@@ -784,6 +841,7 @@ function initScrollGallery() {
 
         // Scroll-time path: pure math + style writes, no layout reads.
         function update() {
+            if (mq.matches) return;   // mobile carousel is CSS/touch driven
             const scrolled = window.pageYOffset - wrapperTop;
             const progress = totalScrollable > 0
                 ? Math.max(0, Math.min(1, scrolled / totalScrollable))
@@ -794,6 +852,12 @@ function initScrollGallery() {
         }
 
         function layout() {
+            if (mq.matches) {
+                // Mobile: hand control to the CSS swipe carousel.
+                reset();
+                updateProgress();
+                return;
+            }
             centerFirstImage();
             setHeight();
             measure();
@@ -835,6 +899,17 @@ function initScrollGallery() {
     window.addEventListener('resize', function () {
         galleries.forEach(function (g) { g.layout(); });
     });
+
+    // Re-lay out whenever we cross the mobile/desktop breakpoint so the gallery
+    // switches between the scroll-pan and the swipe carousel cleanly.
+    function onBreakpointChange() {
+        galleries.forEach(function (g) { g.layout(); });
+    }
+    if (typeof mq.addEventListener === 'function') {
+        mq.addEventListener('change', onBreakpointChange);
+    } else if (typeof mq.addListener === 'function') {
+        mq.addListener(onBreakpointChange); // Safari < 14 fallback
+    }
 
     // rAF pauses while the tab is backgrounded, which can leave `ticking` stuck.
     // Reset and re-sync when the page becomes visible again.

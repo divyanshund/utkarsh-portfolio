@@ -2998,6 +2998,122 @@ body.dark-mode .book-flip-shadow {
     transform: scale(1);
 }
 
+/* Slide counter + swipe hint: mobile-only affordances for the swipe carousel.
+   Hidden by default so the desktop scroll-driven gallery is unaffected. */
+.scroll-gallery-progress,
+.scroll-gallery-hint {
+    display: none;
+}
+
+/* --- Mobile: turn the scroll-driven gallery into a native swipe carousel ---
+   On touch screens the vertical-scroll-pans-sideways interaction is awkward,
+   so we override it with a horizontal, scroll-snapping, swipeable track. All
+   rules live inside this media query, leaving the desktop gallery untouched. */
+@media (max-width: 768px) {
+    .scroll-gallery-wrapper {
+        /* Cancel the tall height JS reserves for the scroll-pan on desktop. */
+        height: auto !important;
+    }
+
+    .scroll-gallery-sticky {
+        position: static;
+        height: auto;
+        overflow: visible;
+        padding: 100px 0 24px;
+    }
+
+    .scroll-gallery-sticky .commissioned-section-heading {
+        padding: 0 20px 18px;
+        margin-bottom: 0;
+    }
+
+    .scroll-gallery-track {
+        display: flex;
+        flex: none;
+        align-items: center;
+        transform: none !important;
+        padding-left: 0 !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .scroll-gallery-track::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scroll-gallery-slide {
+        flex: 0 0 100%;
+        width: 100%;
+        height: auto;
+        scroll-snap-align: center;
+        justify-content: center;
+        padding: 0 12px;
+        box-sizing: border-box;
+    }
+
+    .scroll-gallery-slide img {
+        height: auto;
+        width: 100%;
+        max-height: 74vh;
+        object-fit: contain;
+        /* Always fully visible on mobile — no scroll-driven focus fade. */
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .scroll-gallery-progress {
+        display: block;
+        text-align: center;
+        margin: 18px auto 0;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        color: var(--text-light);
+        opacity: 0.75;
+    }
+
+    .scroll-gallery-hint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin: 8px auto 0;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 0.8rem;
+        letter-spacing: 1.5px;
+        text-transform: lowercase;
+        color: var(--text-light);
+        opacity: 0.65;
+        transition: opacity 0.4s ease;
+    }
+
+    .scroll-gallery-hint.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .scroll-gallery-hint .swipe-arrow {
+        display: inline-block;
+        animation: swipeNudge 1.4s ease-in-out infinite;
+    }
+}
+
+@media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+    .scroll-gallery-hint .swipe-arrow {
+        animation: none;
+    }
+}
+
+@keyframes swipeNudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
+}
+
 /* Scroll-to-top button */
 .scroll-to-top {
     position: fixed;
