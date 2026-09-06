@@ -682,10 +682,13 @@ body.dark-mode .decorative-frame {
 .work-item.do-we-all .work-image img {
     position: relative;
     z-index: 1;
-    width: auto;
+    /* Sized by width (not a % height) so it resolves reliably in Safari, where
+       a % max-height against an aspect-ratio parent is ignored and the portrait
+       cover overflows/crops. Because the card is a fixed 3/2 box, this width
+       yields the same ~10% top/bottom padding at every screen size. */
+    width: 44%;
     height: auto;
     max-width: 88%;
-    max-height: 82%;
     left: auto;
     top: auto;
     object-fit: contain;
