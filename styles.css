@@ -515,6 +515,7 @@ body.dark-mode .decorative-frame {
     position: relative;
     aspect-ratio: 21/9;
     overflow: hidden;
+    border-radius: 18px;
     background-color: var(--placeholder-bg);
     transition: transform 0.3s ease;
 }
