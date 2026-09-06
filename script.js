@@ -225,8 +225,8 @@ function initHeroScrim() {
 
     const SAMPLE = 24;               // tiny sampling canvas
     const SATURATION = 0.32;         // keep only a hint of the image's colour
-    const BRIGHTNESS = 0.5;          // scale the sampled colour down toward black
-    const MAX_LUMA = 42;             // hard cap so the scrim stays dark enough for text
+    const BRIGHTNESS = 0.42;         // scale the sampled colour down toward black
+    const MAX_LUMA = 32;             // hard cap so the scrim stays dark enough for text
 
     const canvas = document.createElement('canvas');
     canvas.width = SAMPLE;
