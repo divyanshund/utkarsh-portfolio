@@ -2291,6 +2291,21 @@ body.dark-mode .commissioned-section-heading {
     margin-bottom: 20px;
 }
 
+/* Attribution / credit line on commissioned work cards */
+.work-credit {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: var(--text-light);
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+    margin: 6px 0 0;
+}
+
+.work-credit strong {
+    font-weight: 500;
+    color: var(--text-gray);
+}
+
 /* Play overlay sits on top of the video thumbnail inside a work item */
 .commissioned-video .work-image .video-play-overlay {
     z-index: 2;
