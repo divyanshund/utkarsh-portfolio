@@ -779,6 +779,7 @@ body.dark-mode .work-image-link:hover .work-image {
     margin-bottom: 20px;
     color: var(--text-gray);
     letter-spacing: 0.5px;
+    text-transform: lowercase;
 }
 
 .work-description {
@@ -2256,7 +2257,7 @@ body.dark-mode .commissioned-filter-btn:hover {
     font-size: 14px;
     font-weight: 400;
     color: #888;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 2px;
     margin-bottom: 60px;
     text-align: center;
