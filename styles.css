@@ -3036,14 +3036,17 @@ body.dark-mode .book-flip-shadow {
 }
 
 @media (max-width: 768px) {
+    /* Size the two-page spread by WIDTH so it always fits the viewport (sizing
+       by height made it ~1.5x as wide as the screen and overflowed). */
     .book-flip {
-        height: min(55vh, 400px);
-        width: auto;
+        height: auto;
+        width: min(88vw, 460px);
+        aspect-ratio: 3 / 2;
     }
 
     .book-flip-arrow {
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
     }
 
     .book-flip-arrow svg {
@@ -3051,12 +3054,14 @@ body.dark-mode .book-flip-shadow {
         height: 16px;
     }
 
+    /* Tuck the arrows just inside the page edges instead of floating outside,
+       so they stay on-screen (swipe + tap-to-turn also work on touch). */
     .book-flip-arrow-left {
-        left: -48px;
+        left: 6px;
     }
 
     .book-flip-arrow-right {
-        right: -48px;
+        right: 6px;
     }
 
     .book-flip-indicator {
