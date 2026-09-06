@@ -659,6 +659,39 @@ body.dark-mode .decorative-frame {
     object-position: center top;
 }
 
+/* 'Do We All Breathe the Same' — show the full (portrait) cover reduced and
+   centered, with the rest of the frame filled by a blurred copy of it. */
+.work-item.do-we-all .work-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.work-item.do-we-all .work-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('images/do-we-all/magazine copy_lines-640w.webp');
+    background-size: cover;
+    background-position: center;
+    filter: blur(24px) saturate(1.05);
+    transform: scale(1.25);
+    z-index: 0;
+}
+
+.work-item.do-we-all .work-image img {
+    position: relative;
+    z-index: 1;
+    width: auto;
+    height: auto;
+    max-width: 88%;
+    max-height: 82%;
+    left: auto;
+    top: auto;
+    object-fit: contain;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
 .work-image img {
     width: 110%; /* Slightly larger to allow for parallax movement */
     height: 110%;
