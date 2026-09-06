@@ -252,7 +252,7 @@ function initScrollAnimations() {
     workItems.forEach((item, index) => {
         item.style.opacity = '0';
         item.style.transform = 'translateY(20px)';
-        item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        item.style.transition = 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.4s ease, border-color 0.4s ease';
         item.style.transitionDelay = `${index * 0.08}s`;
         observer.observe(item);
     });
@@ -578,6 +578,10 @@ function initWorkImageParallax() {
     
     function updateParallax() {
         workImages.forEach(workImage => {
+            // Skip cards where the image is centered/contained on a blurred
+            // backdrop — the parallax shift would break the intended padding.
+            if (workImage.closest('.blur-fill')) return;
+
             const rect = workImage.getBoundingClientRect();
             const windowHeight = window.innerHeight;
             
