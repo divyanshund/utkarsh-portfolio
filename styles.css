@@ -1450,8 +1450,8 @@ html {
     margin-bottom: 60px;
     background-color: var(--placeholder-bg);
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(20px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
 .gallery-full.visible {
@@ -1475,8 +1475,8 @@ html {
     gap: 30px;
     margin-bottom: 60px;
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(20px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
 .gallery-row-2.visible,

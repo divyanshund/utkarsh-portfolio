@@ -643,8 +643,8 @@ function initProjectGalleryAnimations() {
     if (galleryElements.length === 0) return;
     
     const observerOptions = {
-        threshold: 0.05,
-        rootMargin: '0px 0px 200px 0px' // Trigger 200px before entering viewport
+        threshold: 0,
+        rootMargin: '0px 0px 500px 0px' // Start the reveal well before the block enters view
     };
     
     const observer = new IntersectionObserver(function(entries) {
@@ -656,8 +656,10 @@ function initProjectGalleryAnimations() {
         });
     }, observerOptions);
     
-    galleryElements.forEach((element, index) => {
-        element.style.transitionDelay = `${index * 0.05}s`;
+    galleryElements.forEach((element) => {
+        // No position-based transition delay: with many blocks on a project
+        // page it accumulates into a noticeable lag before each image reveals
+        // as you scroll. Row items still get a small stagger via CSS.
         observer.observe(element);
     });
 }
