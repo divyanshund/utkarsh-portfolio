@@ -580,7 +580,7 @@ function initWorkImageParallax() {
         workImages.forEach(workImage => {
             // Skip cards where the image is centered/contained on a blurred
             // backdrop — the parallax shift would break the intended padding.
-            if (workImage.closest('.do-we-all')) return;
+            if (workImage.closest('.blur-fill')) return;
 
             const rect = workImage.getBoundingClientRect();
             const windowHeight = window.innerHeight;
