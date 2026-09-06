@@ -617,22 +617,27 @@ body.dark-mode .decorative-frame {
 .works-container {
     max-width: 1400px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 120px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 44px;
 }
 
 .work-item {
     display: flex;
-    gap: 80px;
-    align-items: center;
+    flex-direction: column;
+    background: var(--off-white);
+    border: 1px solid var(--accent-line);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.06);
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
-.work-item:nth-child(even) {
-    flex-direction: row-reverse;
+.work-item:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.13);
+    border-color: var(--text-light);
 }
 
 .work-item.visible {
@@ -644,61 +649,14 @@ body.dark-mode .decorative-frame {
     position: relative;
     overflow: hidden;
     aspect-ratio: 3/2;
+    width: 100%;
     background-color: var(--placeholder-bg);
-    box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.08),
-        0 8px 20px rgba(0, 0, 0, 0.04);
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    transition: outline-color 0.3s ease;
-    will-change: outline-color;
 }
 
-/* Specific aspect ratio for 'The Man Who Knows' image to show full width */
-.work-item.man-who-knows .work-image {
-    aspect-ratio: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
+/* Portrait covers show from the top so faces/subjects aren't cropped out */
+.work-item.till-we-breathe .work-image img,
 .work-item.man-who-knows .work-image img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    position: static;
-    left: auto;
-    top: auto;
-}
-
-/* Specific aspect ratio for 'Till We All Breathe The Same' image to show full photo */
-.work-item.till-we-breathe .work-image {
-    aspect-ratio: 2550 / 3150;
-}
-
-.work-item.till-we-breathe .work-image img {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    object-position: center;
-}
-
-/* Show full height for 'Do We All Breathe the Same' cover image */
-.work-item.do-we-all .work-image {
-    aspect-ratio: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.work-item.do-we-all .work-image img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    position: static;
-    left: auto;
-    top: auto;
+    object-position: center top;
 }
 
 .work-image img {
@@ -719,7 +677,7 @@ body.dark-mode .decorative-frame {
 
 .work-details {
     flex: 1;
-    padding: 0 20px;
+    padding: 26px 28px 28px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -759,8 +717,9 @@ body.dark-mode .decorative-frame {
 }
 
 .work-image-link {
-    flex: 1.2;
+    flex: 0 0 auto;
     display: block;
+    width: 100%;
     text-decoration: none;
 }
 
@@ -774,12 +733,14 @@ body.dark-mode .work-image-link:hover .work-image {
 
 .work-title {
     font-family: 'Playfair Display', serif;
-    font-size: 2rem;
+    font-size: 1.45rem;
     font-weight: 400;
-    margin-bottom: 20px;
+    margin-bottom: 0;
     color: var(--text-gray);
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+    line-height: 1.25;
     text-transform: lowercase;
+    margin-bottom: 18px;
 }
 
 .work-description {
@@ -801,38 +762,34 @@ body.dark-mode .work-image-link:hover .work-image {
 }
 
 .work-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1rem;
-    color: var(--white);
+    color: var(--text-gray);
     text-decoration: none;
     text-transform: lowercase;
-    padding: 12px 30px;
-    border: 1px solid var(--text-gray);
-    background: var(--text-gray);
-    transition: all 0.3s ease;
-    margin-top: 25px;
     letter-spacing: 0.5px;
+    margin-top: auto;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--accent-line);
+    transition: color 0.3s ease, border-color 0.3s ease, gap 0.3s ease;
+}
+
+.work-link::after {
+    content: '→';
+    transition: transform 0.3s ease;
 }
 
 .work-link:hover {
-    background: transparent;
     color: var(--text-gray);
     border-color: var(--text-gray);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-body.dark-mode .work-link {
-    background: #ffffff;
-    color: #000000;
-    border-color: #ffffff;
-}
-
-body.dark-mode .work-link:hover {
-    background: transparent;
-    color: #ffffff;
-    border-color: #ffffff;
+.work-link:hover::after {
+    transform: translateX(4px);
 }
 
 /* Contact Section */
@@ -1140,30 +1097,11 @@ body.dark-mode .work-link:hover {
     }
     
     .works-container {
-        gap: 80px;
-    }
-    
-    .work-item {
-        flex-direction: column !important;
-        gap: 40px;
-    }
-    
-    .work-image-link {
-        width: 100%;
-    }
-    
-    .work-image {
-        width: 100%;
-    }
-    
-    .work-details {
-        padding: 0;
-        text-align: center;
-        align-items: center;
+        gap: 32px;
     }
 
-    .work-tags {
-        justify-content: center;
+    .work-details {
+        padding: 22px 22px 24px;
     }
     
     .commissioned-grid {
@@ -1271,6 +1209,11 @@ body.dark-mode .work-link:hover {
     .section-title {
         font-size: 1.8rem;
         margin-bottom: 40px;
+    }
+
+    .works-container {
+        grid-template-columns: 1fr;
+        gap: 28px;
     }
     
     .works-grid {
