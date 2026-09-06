@@ -732,6 +732,14 @@ function initScrollGallery() {
         const imgs = wrapper.querySelectorAll('img');
         if (!track || !slides.length) return;
 
+        // Metrics measured only during layout/resize/image-load — never on scroll.
+        let slideCenters = [];   // each slide's center x at translateX = 0
+        let wrapperTop = 0;      // wrapper top relative to the document
+        let totalScrollable = 0;
+        let maxTranslate = 0;
+        let viewCenter = 0;
+        let lastFocusIndex = -1;
+
         function centerFirstImage() {
             const firstImg = imgs[0];
             if (!firstImg) return;
@@ -745,27 +753,41 @@ function initScrollGallery() {
             wrapper.style.height = (window.innerHeight + Math.max(0, overscroll)) + 'px';
         }
 
-        function updateFocus(tx) {
-            const viewCenter = window.innerWidth / 2;
-            let closestSlide = null;
-            let closestDist = Infinity;
-            slides.forEach(function (slide) {
-                const center = slide.offsetLeft + slide.offsetWidth / 2 + tx;
-                const dist = Math.abs(center - viewCenter);
-                if (dist < closestDist) { closestDist = dist; closestSlide = slide; }
-            });
-            slides.forEach(function (slide) {
-                slide.classList.toggle('focused', slide === closestSlide);
+        // Cache every layout-dependent value up front so the scroll path can run
+        // without forcing synchronous reflows.
+        function measure() {
+            const rect = wrapper.getBoundingClientRect();
+            wrapperTop = rect.top + window.pageYOffset;
+            totalScrollable = wrapper.offsetHeight - window.innerHeight;
+            maxTranslate = Math.max(0, track.scrollWidth - window.innerWidth);
+            viewCenter = window.innerWidth / 2;
+            slideCenters = Array.prototype.map.call(slides, function (slide) {
+                return slide.offsetLeft + slide.offsetWidth / 2;
             });
         }
 
+        function updateFocus(tx) {
+            let closestIndex = 0;
+            let closestDist = Infinity;
+            for (let i = 0; i < slideCenters.length; i++) {
+                const dist = Math.abs(slideCenters[i] + tx - viewCenter);
+                if (dist < closestDist) { closestDist = dist; closestIndex = i; }
+            }
+            if (closestIndex !== lastFocusIndex) {
+                if (lastFocusIndex >= 0 && slides[lastFocusIndex]) {
+                    slides[lastFocusIndex].classList.remove('focused');
+                }
+                if (slides[closestIndex]) slides[closestIndex].classList.add('focused');
+                lastFocusIndex = closestIndex;
+            }
+        }
+
+        // Scroll-time path: pure math + style writes, no layout reads.
         function update() {
-            const totalScrollable = wrapper.offsetHeight - window.innerHeight;
-            const scrolled = -wrapper.getBoundingClientRect().top;
+            const scrolled = window.pageYOffset - wrapperTop;
             const progress = totalScrollable > 0
                 ? Math.max(0, Math.min(1, scrolled / totalScrollable))
                 : 0;
-            const maxTranslate = track.scrollWidth - window.innerWidth;
             const translateX = -progress * maxTranslate;
             track.style.transform = 'translateX(' + translateX + 'px)';
             updateFocus(translateX);
@@ -774,6 +796,7 @@ function initScrollGallery() {
         function layout() {
             centerFirstImage();
             setHeight();
+            measure();
             update();
         }
 
@@ -794,12 +817,32 @@ function initScrollGallery() {
 
     wrappers.forEach(setup);
 
-    window.addEventListener('scroll', function () {
-        galleries.forEach(function (g) { g.update(); });
-    }, { passive: true });
+    // Batch scroll updates into a single rAF so we never run more often than the
+    // browser paints, and reads/writes stay grouped to avoid layout thrashing.
+    let ticking = false;
+    function onScroll() {
+        if (!ticking) {
+            window.requestAnimationFrame(function () {
+                galleries.forEach(function (g) { g.update(); });
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     window.addEventListener('resize', function () {
         galleries.forEach(function (g) { g.layout(); });
+    });
+
+    // rAF pauses while the tab is backgrounded, which can leave `ticking` stuck.
+    // Reset and re-sync when the page becomes visible again.
+    document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible') {
+            ticking = false;
+            galleries.forEach(function (g) { g.update(); });
+        }
     });
 }
 

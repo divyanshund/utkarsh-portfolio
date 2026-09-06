@@ -2971,7 +2971,8 @@ body.dark-mode .book-flip-shadow {
     align-items: center;
     flex: 1;
     will-change: transform;
-    transition: transform 0.05s linear;
+    /* No transition: the transform is driven directly by scroll position, so a
+       transition here would lag behind and cause micro-stutter. */
 }
 
 .scroll-gallery-slide {
