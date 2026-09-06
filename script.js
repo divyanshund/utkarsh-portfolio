@@ -55,6 +55,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize navigation scroll effect
     initNavScroll();
+
+    // Initialize the mobile hamburger menu
+    initMobileNav();
     
     // Initialize repelling text effect
     initRepellingText();
@@ -365,6 +368,61 @@ function initNavScroll() {
     // Show theme toggle on non-hero pages immediately
     if (!hero && themeToggle) {
         themeToggle.classList.add('visible');
+    }
+}
+
+// ============================================
+// Mobile Hamburger Menu
+// The desktop nav is a single centered row of links which overflows small
+// screens, so on mobile we inject a hamburger button (no per-page HTML edits)
+// that toggles the links into a full-screen overlay. Purely additive: the
+// button is hidden by CSS on desktop and the overlay styles are mobile-only.
+// ============================================
+function initMobileNav() {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const navContent = nav.querySelector('.nav-content');
+    if (!navContent) return;
+
+    if (!navContent.id) navContent.id = 'primaryNav';
+
+    const toggle = document.createElement('button');
+    toggle.className = 'nav-toggle';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-label', 'Open menu');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-controls', navContent.id);
+    toggle.innerHTML = '<span></span><span></span><span></span>';
+    nav.appendChild(toggle);
+
+    function setOpen(open) {
+        document.body.classList.toggle('nav-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
+    toggle.addEventListener('click', function () {
+        setOpen(!document.body.classList.contains('nav-open'));
+    });
+
+    // Close the menu after tapping a link so navigation/anchors feel natural.
+    navContent.addEventListener('click', function (e) {
+        if (e.target.closest('.nav-link')) setOpen(false);
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+            setOpen(false);
+        }
+    });
+
+    // Never leave the menu stuck open when growing back to desktop width.
+    const mq = window.matchMedia('(max-width: 768px)');
+    function onChange() { if (!mq.matches) setOpen(false); }
+    if (typeof mq.addEventListener === 'function') {
+        mq.addEventListener('change', onChange);
+    } else if (typeof mq.addListener === 'function') {
+        mq.addListener(onChange);
     }
 }
 
