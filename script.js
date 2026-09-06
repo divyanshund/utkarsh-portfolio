@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize photo slideshow
     initPhotoSlideshow();
+
+    // Tint the hero text scrim from the current photo
+    initHeroScrim();
     
     // Initialize scroll animations for gallery items
     initScrollAnimations();
@@ -209,6 +212,66 @@ function initPhotoSlideshow() {
 
     // Change photo every interval (instant, no transition)
     setInterval(changePhoto, PHOTO_CHANGE_INTERVAL);
+}
+
+// ============================================
+// Hero Scrim Tint — derive a subtle colour from each slideshow photo
+// so the text scrim blends with the image instead of a flat black gradient.
+// ============================================
+function initHeroScrim() {
+    const hero = document.querySelector('.hero');
+    const mainPhoto = document.getElementById('mainPhoto');
+    if (!hero || !mainPhoto) return;
+
+    const SAMPLE = 24;               // tiny sampling canvas
+    const SATURATION = 0.32;         // keep only a hint of the image's colour
+    const BRIGHTNESS = 0.5;          // scale the sampled colour down toward black
+    const MAX_LUMA = 42;             // hard cap so the scrim stays dark enough for text
+
+    const canvas = document.createElement('canvas');
+    canvas.width = SAMPLE;
+    canvas.height = SAMPLE;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    if (!ctx) return;
+
+    const clamp = (v) => Math.max(0, Math.min(255, Math.round(v)));
+
+    function computeScrim() {
+        if (!mainPhoto.naturalWidth) return;
+        let r = 0, g = 0, b = 0, n = 0;
+        try {
+            ctx.drawImage(mainPhoto, 0, 0, SAMPLE, SAMPLE);
+            // Sample the lower ~45% of the frame — that's where the text sits.
+            const startY = Math.floor(SAMPLE * 0.55);
+            const data = ctx.getImageData(0, startY, SAMPLE, SAMPLE - startY).data;
+            for (let i = 0; i < data.length; i += 4) {
+                r += data[i]; g += data[i + 1]; b += data[i + 2]; n++;
+            }
+        } catch (e) {
+            return; // e.g. a tainted canvas — keep the CSS fallback
+        }
+        if (!n) return;
+        r /= n; g /= n; b /= n;
+
+        // Desaturate toward luminance so the tint is subtle, not vivid.
+        const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        r = luma + (r - luma) * SATURATION;
+        g = luma + (g - luma) * SATURATION;
+        b = luma + (b - luma) * SATURATION;
+
+        // Darken, then cap brightness so light images still get a usable scrim.
+        r *= BRIGHTNESS; g *= BRIGHTNESS; b *= BRIGHTNESS;
+        const outLuma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        if (outLuma > MAX_LUMA) {
+            const k = MAX_LUMA / outLuma;
+            r *= k; g *= k; b *= k;
+        }
+
+        hero.style.setProperty('--hero-scrim', clamp(r) + ', ' + clamp(g) + ', ' + clamp(b));
+    }
+
+    mainPhoto.addEventListener('load', computeScrim);
+    if (mainPhoto.complete && mainPhoto.naturalWidth) computeScrim();
 }
 
 // ============================================
