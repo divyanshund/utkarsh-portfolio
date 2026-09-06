@@ -199,6 +199,18 @@ body.dark-mode .nav.scrolled .nav-link:hover {
     z-index: 1100;
 }
 
+/* Enlarge the touch target to ~44px without changing the 30x22 icon so the
+   hamburger is comfortable to tap on mobile. */
+.nav-toggle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 46px;
+    height: 46px;
+}
+
 .nav-toggle span {
     position: absolute;
     left: 0;
@@ -1391,6 +1403,21 @@ body.dark-mode .work-image-link:hover .work-image {
     
     .card-title {
         font-size: 2.5rem;
+    }
+
+    /* Extend the "see more" tap area to a comfortable height without moving
+       its underline/arrow, so the small text link is easy to hit on mobile. */
+    .work-link {
+        position: relative;
+    }
+
+    .work-link::before {
+        content: '';
+        position: absolute;
+        top: -11px;
+        bottom: -11px;
+        left: -6px;
+        right: -10px;
     }
     
     .portfolio-sections {
@@ -3047,6 +3074,17 @@ body.dark-mode .book-flip-shadow {
     .book-flip-arrow {
         width: 36px;
         height: 36px;
+    }
+
+    /* Keep the compact 36px circle but widen the tap target to ~44px. */
+    .book-flip-arrow::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 44px;
+        height: 44px;
     }
 
     .book-flip-arrow svg {
